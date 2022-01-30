@@ -29,7 +29,6 @@ theme = 'bilberry-hugo-theme'
   # Enable / Disable MathJax
   enable_mathjax    = false
 
-  
   # Media configuration
     # let hugo automatically resize and crop your images to the correct sizes
     # NB: When enabled the image files get renamed by adding additional information,
@@ -100,7 +99,7 @@ theme = 'bilberry-hugo-theme'
     socialMediaLinks = [
       { link = "https://www.linkedin.com/in/satya-s-b52717178/", icon = "fab fa-linkedin" },
       { link = "https://github.com/SatyaSasank", icon = "fab fa-github" },           
-      { email = "kssasank43@gmail.com", icon = "fas fa-envelope" },   
+      { link = "mailto:kssasank43@gmail.com", icon = "fas fa-envelope" },   
     ]
 
     # credits line configuration
