@@ -1,4 +1,0 @@
-[submodule "CodeBlue/public"]
-	path = CodeBlue/public
-	url = https://github.com/SatyaSasank/public.git
-	branch = main
