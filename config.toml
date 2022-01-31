@@ -2,7 +2,8 @@ baseURL = 'https://satyasasank.github.io/public/'
 languageCode = 'en-us'
 title = 'CodeBlue'
 theme = 'bilberry-hugo-theme'
-
+paginate = 2
+canonifyurls = true
 
 # Enable / Disable open link with a new tab.
 [blackfriday]
