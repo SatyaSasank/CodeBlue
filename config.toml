@@ -25,7 +25,7 @@ canonifyurls = true
   keywords = "Computational Fluid Dynamics, linux, OpenFOAM, ANSYS, ANSA, Converge, python programming, Matlab/Octave"
 
   # How many articles should be displayed at once?
-  paginate = 7
+  # paginate = 7
 
   # Enable / Disable MathJax
   enable_mathjax    = false
