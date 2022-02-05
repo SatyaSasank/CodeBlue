@@ -1,4 +1,4 @@
-baseURL = 'https://satyasasank.github.io/'
+baseURL = 'https://satyasasank.github.io/CodeBlue'
 languageCode = 'en-us'
 title = 'CodeBlue'
 theme = 'bilberry-hugo-theme'
