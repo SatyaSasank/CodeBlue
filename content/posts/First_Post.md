@@ -309,20 +309,20 @@ Results
 The plots for different species will be generated
 
 plots for O2 species
-(o2.png)
-(o21.png)
-(o22.png)
+(o2.png "")
+(o21.png "")
+(o22.png "")
 
 folders will be created for each species
-(folder.png)
+(folder.png "")
 
 Each folder will have 3 images 1) plot of cpVst 2)plot of sVst 3) plot of hVst
-(https://sklc-tinymce-2021.s3.amazonaws.com/2020/10/mceclip2_1603263876.png)
-(plots2,png)
+(https://sklc-tinymce-2021.s3.amazonaws.com/2020/10/mceclip2_1603263876.png "")
+(plots2.png "")
 
 The command window showing the molecular mass of each species
-(mm1.png)
-(mm2.png)
+(mm1.png "")
+(mm2.png "")
 
 5.CONCLUSION:
 
