@@ -13,7 +13,7 @@ The aim of this project is to simulate the flow around an FSAE car in converge.
 
 OBJECTIVES OF THE PROJECT:
 
-*Clean up the geometry.      
+*Clean up the geometry.        
 *Flag the parts as separate boundaries.  
 *Create a virtual wind tunnel.  
 *Run the simulation for two different types of Races.  
@@ -284,10 +284,10 @@ From the above results, the following conclusions have been made.
 
 *The underbody was offering an additional push force to the car. This result is impractical and could be the cause of poor grid size.  
 *The body was offering a downforce which is good. But the underbody again offers heavy lift this should practically make the car fly which is not desirable. This result could also be an error because of the change in mesh size.  
-*From the converge drag force plot, it is observed that at 2s and 3s there is a spike in the values of forces. This is the place where the grid changes because of grid scaling. This could indicate that the solution is grid-dependent.   
-*The Pressure contour suggests that the wings are providing some downforce but the bar graph shows that this downforce is not sufficient. A change in wing design should improve the downforce.   
+*From the converge drag force plot, it is observed that at 2s and 3s there is a spike in the values of forces. This is the place where the grid changes because of grid scaling. This could indicate that the solution is grid-dependent.     
+*The Pressure contour suggests that the wings are providing some downforce but the bar graph shows that this downforce is not sufficient.      
 *The Y-plus on the body is greater than 600 which means the grid size taken is not sufficient to keep it under 100.  
-*Because of the less computational power and restricted cell count. It will be hard to conclude anything based on this grid size.   
+*Because of the less computational power and restricted cell count. It will be hard to conclude anything based on this grid size. But this project demonstrates the various steps involved in an aerodynamic analysis   
 
 
  
