@@ -5,4 +5,8 @@ The objectives of this project are
 To solve the equations that govern the flow through a supersonic nozzle for both conservative and non conservative forms.
 To find the differences between them by comparing their solutions.
 Steady-state distribution of primitive variables inside the nozzle. Time-wise variation of the primitive variables.
-Variation of Mass flow rate distribution inside the nozzle at different time steps during the time-marching process.</description></item></channel></rss>
+Variation of Mass flow rate distribution inside the nozzle at different time steps during the time-marching process.</description></item><item><title>Parsing NASA thermodynamic data using MATLAB</title><link>https://satyasasank.github.io/CodeBlue/posts/first_post/</link><pubDate>Wed, 26 Jan 2022 12:24:29 +0530</pubDate><guid>https://satyasasank.github.io/CodeBlue/posts/first_post/</guid><description>AIM:
+The aim of this project is to write a MATLAB program that can read a file that contains thermodynamic data in a polynomial format (eg. files from CHEMKIN II).
+NASA thermodynamic data
+OBJECTIVES OF THE PROJECT:
+The above file contains a set of compounds for which a set of coefficients are given. These coefficients are used in the above equation to get the values for Cp, enthalpy, and entropy. Each compound or gas contains 14 coefficient and the first 7 coefficients are to be used if the temperature are high and the next 7 coefficients are to be used if the temperatures are low.</description></item></channel></rss>
