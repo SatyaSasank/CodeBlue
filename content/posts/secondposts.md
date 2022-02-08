@@ -7,6 +7,7 @@ categories: [Matlab]
 tags: [CFD, MacCormac Method]
 toc: false
 author: "Satya Sasank"
+useMath : true
 ---
 AIM:
 
