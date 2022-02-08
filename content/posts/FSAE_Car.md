@@ -1,7 +1,6 @@
 ---
 title: "FSAE_Car"
 date: 2022-02-08T15:12:25+05:30
-draft: true
 
 categories: [Converge 3.0]
 tags: [CFD, Aerodynamics]
