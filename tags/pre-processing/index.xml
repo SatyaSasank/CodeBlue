@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pre-Processing on CodeBlue</title><link>https://satyasasank.github.io/CodeBlue/tags/pre-processing/</link><description>Recent content in Pre-Processing on CodeBlue</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 Feb 2022 19:32:12 +0530</lastBuildDate><atom:link href="https://satyasasank.github.io/CodeBlue/tags/pre-processing/index.xml" rel="self" type="application/rss+xml"/><item><title>CFD meshing of a Tesla Cyber truck</title><link>https://satyasasank.github.io/CodeBlue/posts/cfd_meshing_of_a_tesla_cyber_truck/</link><pubDate>Tue, 08 Feb 2022 19:32:12 +0530</pubDate><guid>https://satyasasank.github.io/CodeBlue/posts/cfd_meshing_of_a_tesla_cyber_truck/</guid><description>AIM:
+The aim of this project is to pre-process the tesla cyber truck and mesh it. The CAD model of which can be found here.
+OBJECTIVES:
+For the given model, check and solve all geometrical errors and Assign appropriate PIDs. Perform meshing with the suitable Target length and element Quality criteria.
+PROCEDURE:
+We start with importing the file.
+The geometry is filled with single cons to eliminate these we use the Topo option.</description></item></channel></rss>
