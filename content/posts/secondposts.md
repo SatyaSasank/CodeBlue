@@ -4,7 +4,7 @@ date: 2022-02-08T10:52:03+05:30
 
 
 categories: [Matlab]
-tags: [CFD]
+tags: [CFD, MacCormac Method]
 toc: false
 author: "Satya Sasank"
 ---
@@ -34,25 +34,25 @@ we assume that the flow is quasi 1D i.e the flow is only along the x-axis and an
 
 To simulate the flow we need to do the following steps
 
-1. Mesh Generation/Meshing is the process of divinding a continuous geometry into discrete geometric cells. Each cell is seperated by a node. These nodes form The Grid.
+1.Mesh Generation/Meshing is the process of divinding a continuous geometry into discrete geometric cells. Each cell is seperated by a node. These nodes form The Grid.
 
-2. Discretisation is the process of converting the above PDEs into algebraic equations
+2.Discretisation is the process of converting the above PDEs into algebraic equations
 
-3. Solving the discretised PDEs. Based on the type of PDEs different methods are chosen. The type of PDE in our case is hyperbolic so we are using the Mac Cormac method
+3.Solving the discretised PDEs. Based on the type of PDEs different methods are chosen. The type of PDE in our case is hyperbolic so we are using the Mac Cormac method
 
 MacCormac Method is an explicit finite difference technique which is second order accurate for both space and time. It is easy to work with and the solutions obtained are stable. The procedure is as follows
 
-1. Predictor step: Here we use the numerical method to calculate the required derivatives using the forward differencing scheme.
+1.Predictor step: Here we use the numerical method to calculate the required derivatives using the forward differencing scheme.
 
-2. Solution update: We add the change obtained in the above step to the original variable.
+2.Solution update: We add the change obtained in the above step to the original variable.
 
-3. Primitive Variables: (Only for conservative form )For the conservative form we calculate the primitive variables from the solution vectors, flux vectors and source terms.
+3.Primitive Variables: (Only for conservative form )For the conservative form we calculate the primitive variables from the solution vectors, flux vectors and source terms.
 
-4. Corrector Step: We use the numerical method to calculate the same derivatives we calculated in the first step again using the backward differencing scheme.
+4.Corrector Step: We use the numerical method to calculate the same derivatives we calculated in the first step again using the backward differencing scheme.
 
-5. Calculating the average: We take the average of derivatives we obtained in step 1 and step 4.
+5.Calculating the average: We take the average of derivatives we obtained in step 1 and step 4.
 
-6. Final solution update: we add the final change we calculated in step 5 to the original variable. This would be the final answer.
+6.Final solution update: we add the final change we calculated in step 5 to the original variable. This would be the final answer.
 
 Now we know the method we get to know the equations required. To simulate the supersonic flow we solve the flow equations of both the forms i.e.,
 
@@ -60,7 +60,7 @@ Non Conservative form:-
 
 There are three main equations for
 
-Continuity   : `{∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}`
+Continuity   : ${∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}$
 
 Momentum : `ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x}`
 
@@ -773,7 +773,7 @@ we take the mean of values at the throat section i.e where the area is equal to 
 
 16th node for 31 grid points and 31st node for 61 grid points.
 
-![](images/contable.png)
+![](/images/contable.png)
 
 The above values are precise to two digits after the decimal we can say that the solution is grid independent. If all the four digits after the decimal are not precise then the solution becomes grid dependent.
 
