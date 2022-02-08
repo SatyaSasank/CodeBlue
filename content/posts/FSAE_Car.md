@@ -1,5 +1,5 @@
 ---
-title: "FSAE_Car"
+title: "FSAE Car Project"
 date: 2022-02-08T15:12:25+05:30
 
 categories: [Converge 3.0]
@@ -13,10 +13,10 @@ The aim of this project is to simulate the flow around an FSAE car in converge.
 
 OBJECTIVES OF THE PROJECT:
 
-Clean up the geometry     
-Flag the parts as separate boundaries
-Create a virtual wind tunnel
-Run the simulation for two different types of Races
+*Clean up the geometry     
+*Flag the parts as separate boundaries
+*Create a virtual wind tunnel
+*Run the simulation for two different types of Races
 
 Race-1 
 
@@ -37,8 +37,8 @@ The Formula SAE is a student design competition organized by SAE international. 
 
 The car for our project is this [one](https://drive.google.com/drive/folders/1RHH6qC3BRMcH_rkYizZMvQxWGwteg06b?usp=sharing).
 
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (176)_1620966605.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (177) - Copy_1620968213.png) 
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(176)_1620966605.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(177)-Copy_1620968213.png) 
 
 We import the STL file into Converge.
 
@@ -52,7 +52,7 @@ We use the boundary fence to construct boundary fences around parts that are to 
 
 And we flag the boundaries as
 
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (181)_1620976282.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(181)_1620976282.png)
 
 Now to create the wind tunnel. We know that the wind tunnel must have at least 5 times the characteristic length in front of the body and at least 10 times the length behind the body. A height of at least twice the characteristic length above and beside the body.
 
@@ -68,7 +68,7 @@ z = 2.5 m
 
 To create the wind tunnel, We first create the vertices. For the vertices, we take the bottom of the tires so that the bottom of the tires should align with the bottom of the wind tunnel.
 
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/InkedScreenshot (182)_LI_1620982074.jpg)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/InkedScreenshot%20(182)_LI_1620982074.jpg)
 
 In the above picture, we deleted the bottom portion of the tires using the angle method.
 
@@ -76,20 +76,20 @@ All the points on the red circle are lying on the same plane. This plane which i
 
 We first create the vertices for the wind tunnel using the wind tunnel dimensions and the location of the tire bottom and then patch these vertices using the ordered vertex method to form a wind tunnel.
 
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (183)_1620983200.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(183)_1620983200.png)
 
 Once the wind tunnel is created we flag the inlet and outlet boundaries. Now once we check for errors we should see all green in the diagnosis toolbar.
 
 For different race conditions, we need to tilt the model in different angles as follows
 
 20 deg
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (193)_1620999424.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(193)_1620999424.png)
 
 45 deg
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (194)_1620999441.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(194)_1620999441.png)
 
 80 deg
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (195)_1620999456.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(195)_1620999456.png)
 
 We have to be careful while rotating the models because the triangles below the models tend to overlap. When this happens we need to delete the triangles that are overlapped and reconstruct those triangles. After reconstructing we need to check the diagnosis toolbar again for errors. Once all the checks are green we can follow the below procedure for different race tracks.
 
@@ -102,15 +102,15 @@ Gas simulations, Global transport properties remain the default values. N2 and O
 In the Run parameters, we select a transient solver. This is because the converge's steady-state solver gives inaccurate and gives results that are physically not possible.
 
 the settings will be as follows
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (184)_1620991121.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (185)_1620991178.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(184)_1620991121.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(185)_1620991178.png)
 
 
 All the boundaries will be given the Law of wall condition.
 
 except for the wind tunnel. The wind tunnel inlet will have the same velocity as the region
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (186)_1620991394.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (187)_1620991473.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(186)_1620991394.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(187)_1620991473.png)
 
 
 The above conditions are for race 2 for race 1 the velocity will be changed to 12.5m/s in both inlet and region 0.
@@ -124,18 +124,18 @@ In the Grid, control select Fixed embedding, Grid scaling options, and press ok.
 In the Grid Control > Base Grid > set the x, y, z sizes to 0.3m in all the directions and click ok. with the fixed embedding enabled this is the closest we can get without crossing the 500000 cell limit.
 
 For the fixed embedding we insert two types of embeddings one for the boundaries and another box type
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (188)_1620993371.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (189)_1620993388.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(188)_1620993371.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(189)_1620993388.png)
 
 We give the same embedding for all the boundaries.
 
 The grid scaling will be given based on a file and the inputs are as follows
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (190)_1620993816.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(190)_1620993816.png)
 
 
 We then set the output file settings as follows. we can choose to select any additional variable that we need in post variable selection such as vorticity and set the output files as follows
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (192)_1620994083.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (191)_1620994067.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(192)_1620994083.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(191)_1620994067.png)
 
 
 Once all the setup is done we do the final validation. Once every tab is green we export the files using the export input files option.  
@@ -163,29 +163,29 @@ In the input file directory, a new folder will be created with the name "output"
 
 Once this is done we open the results in paraview. We reduce the opacity of the side walls to see FSAE car inside the wind tunnel.
 
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (207)_1621017302.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(207)_1621017302.png)
 
 We can see that each boundary has been assigned with different colors. We then take a slice of this with Y-axis as the normal. This would cut the FSAE car in symmetric and we can observe the mesh using the surface-with-edges option. The below pictures are captured using the clip option since paraview was crashing upon slicing the geometry.
 
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (204)_1621017323.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (205)_1621017336.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (206)_1621017358.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(204)_1621017323.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(205)_1621017336.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(206)_1621017358.png)
  
 
 Instead of solid color, we can set it to velocity and pressure to see contours like these
 
 Velocity
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (197)_1621017426.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (198)_1621017441.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (199)_1621017460.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(197)_1621017426.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(198)_1621017441.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(199)_1621017460.png)
 
 Pressure
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (200)_1621017493.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (201)_1621017513.png)
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (202)_1621017534.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(200)_1621017493.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(201)_1621017513.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(202)_1621017534.png)
 
 Y plus
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot (203)_1621017560.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(203)_1621017560.png)
 
 If we use the converge's line plotting module to plot the lift and drag for all the parts it would show up like this
 
