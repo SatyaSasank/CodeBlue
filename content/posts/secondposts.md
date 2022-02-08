@@ -1,12 +1,12 @@
 ---
 title: "1D Supersonic Nozzle flow simulation using MacCormac Method"
 date: 2022-02-08T10:52:03+05:30
-draft: true
 
-categories: []
-tags: []
+
+categories: [Matlab]
+tags: [CFD]
 toc: false
-author: ""
+author: "Satya Sasank"
 ---
 AIM:
 
