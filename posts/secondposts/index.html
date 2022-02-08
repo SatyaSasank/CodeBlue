@@ -103,14 +103,12 @@ CodeBlue
 <p>Now we know the method we get to know the equations required. To simulate the supersonic flow we solve the flow equations of both the forms i.e.,</p>
 <p>Non Conservative form:-</p>
 <p>There are three main equations for</p>
-<p>Continuity   : $${∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}$$</p>
-<p>Momentum : <code>ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x}</code></p>
+<p>Continuity  : [{∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}]</p>
+<p>Momentum : (ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x})</p>
 <p>Energy       : <code>ρ {∂ e} / {∂ t} + ρ v {∂ e} / {∂ x} = − p {∂ v} / {∂ x} − pv {ln A} / {∂ x}</code></p>
 <p>We non dimensionalise the given equations to ease our matlab programming. So new terms are</p>
-<pre tabindex=0><code class=language-math data-lang=math>
-`x ' = {x} / {L}`;`v ' = {v} / (underset0a)`;`T' = {T} / {{L} / underset0a}`; `A ' = {A} / A ^ {0}`
-
-</code></pre><p>Non dimensionalised equations are</p>
+<p><code>x ' = {x} / {L}</code>;<code>v ' = {v} / (underset0a)</code>;<code>T' = {T} / {{L} / underset0a}</code>; <code>A ' = {A} / A ^ {0}</code></p>
+<p>Non dimensionalised equations are</p>
 <p>Continuity   : <code>{∂ ρ '}/ {∂ t '} = − ρ ' {∂ v '} / {∂ x '} − ρ ' v ' {∂ (ln A ' )} / {∂ x '} − v ' {∂ ρ '} / {∂ x '}</code></p>
 <p>Momentum :<code>{∂ v '} / {∂ t '} = − v ' {∂ v '} / {∂ x '} − {1} / {γ} ({∂ T '} / {∂ x '} + {T '} / {ρ '} {∂ ρ '} / {∂ x '} )</code></p>
 <p>Energy       : <code>{∂ T '} / {∂ t '} = − v {∂ T '} / {∂ x '} − (γ − 1 ) T ' ({∂ v '} / {∂ x '} + v ' {∂ (ln A ' )} / {∂ x '} )</code></p>
