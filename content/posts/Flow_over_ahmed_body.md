@@ -13,13 +13,13 @@ This project aims to simulate the flow over Ahmed body in Ansys Fluent.
 
 OBJECTIVES OF THE PROJECT:
 
-*Generate Velocity and pressure contours.
+*Generate Velocity and pressure contours.  
 
-*Calculate the drag coefficient plot for a refined case.
+*Calculate the drag coefficient plot for a refined case.  
 
-*Generate the vector plot clearly showing the wake region. 
+*Generate the vector plot clearly showing the wake region.   
 
-*Perform the grid independency test and evaluate the values of drag and lift with each case. 
+*Perform the grid independency test and evaluate the values of drag and lift with each case.    
 
 THEORY
 
@@ -61,7 +61,7 @@ Now we create another box around the ahmed body, This box will be used for mesh 
 
 Once created the geometry should like this
 
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot(257)_1623415152.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(257)_1623415152.png)
 
 Meshing
 
@@ -72,7 +72,7 @@ Now we open the Ansys mesher. Here we first start by naming the boundaries as.
 
 The second box created is for refining the mesh hence we select the mutizone mesh. If we inspect the geometry we can see that the legs of the ahmed body lost their cylindrical shape. This is due to coarse size of the mesh. To regain the shape we use face sizing at the legs. In order to give the refinement we use the edge sizing option to refine the mesh inside the refinement zone. To capture the effects at the car wall we give inflation layers at the car wall. Upon meshing the geometry will look like this.
 
-![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot (260)_1623478493.png)
+![](https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(260)_1623478493.png)
 
 Case setup
 
@@ -144,8 +144,8 @@ GRID SIZE 0.04 m
 
 CONCLUSION:
 
-*From the Velocity contour, it is observed that after passing through the geometry there is a region where recirculation happens this region is called as wake region. Due to this low pressure, the air at the front tries to come back which causes the Pressure drag.
-*On reducing the grid size the Cd and Cl values increases by some extent implying the solution is grid dependent. But the minor increase indicates that by the next lower size the solution may stabilise and become grid dependent.
+*From the Velocity contour, it is observed that after passing through the geometry there is a region where recirculation happens this region is called as wake region. Due to this low pressure, the air at the front tries to come back which causes the Pressure drag.  
+*On reducing the grid size the Cd and Cl values increases by some extent implying the solution is grid dependent. But the minor increase indicates that by the next lower size the solution may stabilise and become grid dependent.  
 
 REFERENCES:
 
