@@ -79,7 +79,7 @@ Case setup
 
 For this project we use a steady state solver. And since the velocity is less to be worried about mach number we use a pressure based solver. This is an external flow hence we use a K Omega SST model to solve for turbulence. The fluid is taken as air and the properties are default. The boundaries are set as follows.
 
-![](images/ahmedbodyTable.png)
+![](/images/ahmedbodyTable.png)
 
 Before we proceed to initialisation we need to take care of the reference values. This is important and incorrect reference values will lead to improper drag and lift values.
 
