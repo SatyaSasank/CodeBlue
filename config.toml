@@ -2,7 +2,7 @@ baseURL = 'https://satyasasank.github.io/CodeBlue'
 languageCode = 'en-us'
 title = 'CodeBlue'
 theme = 'bilberry-hugo-theme'
-paginate = 4
+paginate = 2
 canonifyurls = true
 
 # Enable / Disable open link with a new tab.
