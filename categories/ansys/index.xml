@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ansys on CodeBlue</title><link>https://satyasasank.github.io/CodeBlue/categories/ansys/</link><description>Recent content in Ansys on CodeBlue</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 Feb 2022 16:08:18 +0530</lastBuildDate><atom:link href="https://satyasasank.github.io/CodeBlue/categories/ansys/index.xml" rel="self" type="application/rss+xml"/><item><title>Flow over ahmed body</title><link>https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/</link><pubDate>Tue, 08 Feb 2022 16:08:18 +0530</pubDate><guid>https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/</guid><description>AIM:
+This project aims to simulate the flow over Ahmed body in Ansys Fluent.
+OBJECTIVES OF THE PROJECT:
+*Generate Velocity and pressure contours.
+*Calculate the drag coefficient plot for a refined case.
+*Generate the vector plot clearly showing the wake region. *Perform the grid independency test and evaluate the values of drag and lift with each case. THEORY
+What is an Ahmed body?
+The Ahmed body is a geometric shape first proposed by S.</description></item></channel></rss>

@@ -1,7 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CFD on CodeBlue</title><link>https://satyasasank.github.io/CodeBlue/tags/cfd/</link><description>Recent content in CFD on CodeBlue</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 Feb 2022 15:12:25 +0530</lastBuildDate><atom:link href="https://satyasasank.github.io/CodeBlue/tags/cfd/index.xml" rel="self" type="application/rss+xml"/><item><title>FSAE_Car</title><link>https://satyasasank.github.io/CodeBlue/posts/fsae_car/</link><pubDate>Tue, 08 Feb 2022 15:12:25 +0530</pubDate><guid>https://satyasasank.github.io/CodeBlue/posts/fsae_car/</guid><description>AIM:
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CFD on CodeBlue</title><link>https://satyasasank.github.io/CodeBlue/tags/cfd/</link><description>Recent content in CFD on CodeBlue</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 Feb 2022 16:08:18 +0530</lastBuildDate><atom:link href="https://satyasasank.github.io/CodeBlue/tags/cfd/index.xml" rel="self" type="application/rss+xml"/><item><title>Flow over ahmed body</title><link>https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/</link><pubDate>Tue, 08 Feb 2022 16:08:18 +0530</pubDate><guid>https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/</guid><description>AIM:
+This project aims to simulate the flow over Ahmed body in Ansys Fluent.
+OBJECTIVES OF THE PROJECT:
+*Generate Velocity and pressure contours.
+*Calculate the drag coefficient plot for a refined case.
+*Generate the vector plot clearly showing the wake region. *Perform the grid independency test and evaluate the values of drag and lift with each case. THEORY
+What is an Ahmed body?
+The Ahmed body is a geometric shape first proposed by S.</description></item><item><title>FSAE Car Project</title><link>https://satyasasank.github.io/CodeBlue/posts/fsae_car/</link><pubDate>Tue, 08 Feb 2022 15:12:25 +0530</pubDate><guid>https://satyasasank.github.io/CodeBlue/posts/fsae_car/</guid><description>AIM:
 The aim of this project is to simulate the flow around an FSAE car in converge.
 OBJECTIVES OF THE PROJECT:
-Clean up the geometry Flag the parts as separate boundaries Create a virtual wind tunnel Run the simulation for two different types of Races
+*Clean up the geometry *Flag the parts as separate boundaries *Create a virtual wind tunnel *Run the simulation for two different types of Races
 Race-1 Racing track conditions - Lot of turns Average lap speeds - 45kmph 70% turns at 45 degrees 20% turns at 80 degrees 10% turns at 20 degrees</description></item><item><title>1D Supersonic Nozzle flow simulation using MacCormac Method</title><link>https://satyasasank.github.io/CodeBlue/posts/secondposts/</link><pubDate>Tue, 08 Feb 2022 10:52:03 +0530</pubDate><guid>https://satyasasank.github.io/CodeBlue/posts/secondposts/</guid><description>AIM:
 Aim of this project is to simulate Isentropic flow through a quasi 1D subsonic-supersonic nozzle.
 OBJECTIVES :
