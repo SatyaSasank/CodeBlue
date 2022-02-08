@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CFD on CodeBlue</title><link>https://satyasasank.github.io/CodeBlue/tags/cfd/</link><description>Recent content in CFD on CodeBlue</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 Feb 2022 10:52:03 +0530</lastBuildDate><atom:link href="https://satyasasank.github.io/CodeBlue/tags/cfd/index.xml" rel="self" type="application/rss+xml"/><item><title>1D Supersonic Nozzle flow simulation using MacCormac Method</title><link>https://satyasasank.github.io/CodeBlue/posts/secondposts/</link><pubDate>Tue, 08 Feb 2022 10:52:03 +0530</pubDate><guid>https://satyasasank.github.io/CodeBlue/posts/secondposts/</guid><description>AIM:
+Aim of this project is to simulate Isentropic flow through a quasi 1D subsonic-supersonic nozzle.
+OBJECTIVES :
+The objectives of this project are
+To solve the equations that govern the flow through a supersonic nozzle for both conservative and non conservative forms.
+To find the differences between them by comparing their solutions.
+Steady-state distribution of primitive variables inside the nozzle. Time-wise variation of the primitive variables.
+Variation of Mass flow rate distribution inside the nozzle at different time steps during the time-marching process.</description></item></channel></rss>

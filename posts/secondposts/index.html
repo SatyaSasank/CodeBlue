@@ -1,0 +1,819 @@
+<!doctype html><html class=no-js lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=siteBaseUrl content="https://satyasasank.github.io/CodeBlue">
+<meta name=author content="Satya Sasank">
+<meta name=description content="Satya Sasank's Blog">
+<meta name=keywords content="Computational Fluid Dynamics,linux,OpenFOAM,ANSYS,ANSA,Converge,python programming,Matlab/Octave">
+<meta name=generator content="Hugo 0.92.1">
+<title>
+1D Supersonic Nozzle flow simulation using MacCormac Method | CodeBlue
+</title>
+<meta name=description content="1D Supersonic Nozzle flow simulation using MacCormac Method - Satya Sasank's Blog">
+<meta itemprop=name content="1D Supersonic Nozzle flow simulation using MacCormac Method">
+<meta itemprop=description content="1D Supersonic Nozzle flow simulation using MacCormac Method - Satya Sasank's Blog">
+<meta property="og:title" content="1D Supersonic Nozzle flow simulation using MacCormac Method">
+<meta property="og:description" content="1D Supersonic Nozzle flow simulation using MacCormac Method - Satya Sasank's Blog">
+<meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
+<meta property="og:url" content="https://satyasasank.github.io/CodeBlue/posts/secondposts/">
+<meta property="og:site_name" content="CodeBlue">
+<meta property="og:type" content="article">
+<script src=https://satyasasank.github.io/CodeBlue/modernizr-simple.js></script>
+<link href=https://satyasasank.github.io/CodeBlue/posts/secondposts/ rel=alternate type=application/rss+xml title=CodeBlue>
+<link href=https://satyasasank.github.io/CodeBlue/posts/secondposts/ rel=feed type=application/rss+xml title=CodeBlue>
+<link rel=canonical href=https://satyasasank.github.io/CodeBlue/posts/secondposts/>
+<link rel=stylesheet href=https://satyasasank.github.io/CodeBlue/theme.css>
+</head>
+<body class=bilberry-hugo-theme>
+<nav>
+<div class=container>
+<ul class=topnav>
+<li><a href=https://satyasasank.github.io/CodeBlue/page/about-bilberry/>About Bilberry</a></li>
+<li><a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Github</a></li>
+</ul>
+</div>
+</nav>
+<header>
+<div class=container>
+<div class=logo>
+<a href=https://satyasasank.github.io/CodeBlue/ class=logo>
+<img src=https://satyasasank.github.io/CodeBlue/images/profile.jpg alt>
+<span class=overlay><i class="fa fa-home"></i></span>
+</a>
+</div>
+<div class=titles>
+<h3 class=title>
+<a href=https://satyasasank.github.io/CodeBlue/>
+CodeBlue
+</a>
+</h3>
+<span class=subtitle>Welcome to my blog!</span>
+</div>
+<div class=toggler>
+<i class="fa fa-bars" aria-hidden=true></i>
+</div>
+</div>
+</div>
+</header>
+<div class="main container">
+<div class="article-wrapper u-cf single">
+<a class=bubble href=https://satyasasank.github.io/CodeBlue/posts/secondposts/>
+<i class="fas fa-fw fa-pencil-alt"></i>
+</a>
+<article class="default article">
+<div class=content>
+<h1 class=article-title>
+<a href=https://satyasasank.github.io/CodeBlue/posts/secondposts/>
+1D Supersonic Nozzle flow simulation using MacCormac Method
+</a>
+</h1>
+<div class=meta>
+<span class="date moment">2022-02-08</span>
+<span class=categories>
+<a href=https://satyasasank.github.io/CodeBlue/categories/matlab/>Matlab</a>
+</span>
+<span class=author>
+<a href=https://satyasasank.github.io/CodeBlue/author/satya-sasank/>Satya Sasank</a>
+</span>
+</div>
+<p>AIM:</p>
+<p>Aim of this project is to simulate Isentropic flow through a quasi 1D subsonic-supersonic nozzle.</p>
+<p>OBJECTIVES :</p>
+<p>The objectives of this project are</p>
+<p>To solve the equations that govern the flow through a supersonic nozzle for both conservative and non conservative forms.</p>
+<p>To find the differences between them by comparing their solutions.</p>
+<p>Steady-state distribution of primitive variables inside the nozzle. Time-wise variation of the primitive variables.</p>
+<p>Variation of Mass flow rate distribution inside the nozzle at different time steps during the time-marching process.</p>
+<p>Comparison of Normalized mass flow rate distributions of both forms. Perform a grid independence test on the solution.</p>
+<p>THEORY:</p>
+<p>we assume that the flow is quasi 1D i.e the flow is only along the x-axis and any change in flow along y-axis is negligible. (Taken from CFD Basics by John Anderson)</p>
+<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/01/nozzleoriginal_1611218883.png alt></p>
+<p>To simulate the flow we need to do the following steps</p>
+<ol>
+<li>
+<p>Mesh Generation/Meshing is the process of divinding a continuous geometry into discrete geometric cells. Each cell is seperated by a node. These nodes form The Grid.</p>
+</li>
+<li>
+<p>Discretisation is the process of converting the above PDEs into algebraic equations</p>
+</li>
+<li>
+<p>Solving the discretised PDEs. Based on the type of PDEs different methods are chosen. The type of PDE in our case is hyperbolic so we are using the Mac Cormac method</p>
+</li>
+</ol>
+<p>MacCormac Method is an explicit finite difference technique which is second order accurate for both space and time. It is easy to work with and the solutions obtained are stable. The procedure is as follows</p>
+<ol>
+<li>
+<p>Predictor step: Here we use the numerical method to calculate the required derivatives using the forward differencing scheme.</p>
+</li>
+<li>
+<p>Solution update: We add the change obtained in the above step to the original variable.</p>
+</li>
+<li>
+<p>Primitive Variables: (Only for conservative form )For the conservative form we calculate the primitive variables from the solution vectors, flux vectors and source terms.</p>
+</li>
+<li>
+<p>Corrector Step: We use the numerical method to calculate the same derivatives we calculated in the first step again using the backward differencing scheme.</p>
+</li>
+<li>
+<p>Calculating the average: We take the average of derivatives we obtained in step 1 and step 4.</p>
+</li>
+<li>
+<p>Final solution update: we add the final change we calculated in step 5 to the original variable. This would be the final answer.</p>
+</li>
+</ol>
+<p>Now we know the method we get to know the equations required. To simulate the supersonic flow we solve the flow equations of both the forms i.e.,</p>
+<p>Non Conservative form:-</p>
+<p>There are three main equations for</p>
+<p>Continuity   : <code>{∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}</code></p>
+<p>Momentum : <code>ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x}</code></p>
+<p>Energy       : <code>ρ {∂ e} / {∂ t} + ρ v {∂ e} / {∂ x} = − p {∂ v} / {∂ x} − pv {ln A} / {∂ x}</code></p>
+<p>We non dimensionalise the given equations to ease our matlab programming. So new terms are</p>
+<p><code>x ' = {x} / {L}</code>;<code>v ' = {v} / (underset0a)</code>;<code>T' = {T} / {{L} / underset0a}</code>; <code>A ' = {A} / A ^ {0}</code></p>
+<p>Non dimensionalised equations are</p>
+<p>Continuity   : <code>{∂ ρ '}/ {∂ t '} = − ρ ' {∂ v '} / {∂ x '} − ρ ' v ' {∂ (ln A ' )} / {∂ x '} − v ' {∂ ρ '} / {∂ x '}</code></p>
+<p>Momentum :<code>{∂ v '} / {∂ t '} = − v ' {∂ v '} / {∂ x '} − {1} / {γ} ({∂ T '} / {∂ x '} + {T '} / {ρ '} {∂ ρ '} / {∂ x '} )</code></p>
+<p>Energy       : <code>{∂ T '} / {∂ t '} = − v {∂ T '} / {∂ x '} − (γ − 1 ) T ' ({∂ v '} / {∂ x '} + v ' {∂ (ln A ' )} / {∂ x '} )</code></p>
+<p>Conservative form:-</p>
+<p>The non dimensionalised equations are</p>
+<p>Continuity : <code>{∂ ρ ' A '} / {∂ t} + {∂ ρ ' A ' v '} / {∂ x '} = 0</code></p>
+<p>Momentum : <code>{∂ ρ ' A ' v '}/ {∂ t '} + {∂(ρ ' A ' v ' ^ {2} + ({1} / {γ} ) p ' A ' )} / {∂ x '} = − ({1} / {γ}) p ' {∂ A '} / {∂ x '}</code></p>
+<p>Energy : <code>{∂ (ρ ' ({T} / (γ − 1 )} + ({γ} / {2}) v ' ^ {2} ) A ') / {∂ t '} + {∂ (ρ ' ({T} / {(γ − 1 )} + ({γ} / {2} ) v ' ^ {2} ) A ' + p ' A ' v ' )}/ {∂ x '} = 0</code></p>
+<p>The above equations cant be programmed into MATLAB, So we break the above equation into Flux terms and solution vectors</p>
+<p>Flux Term:-</p>
+<p><code>F 1 = ρ ' A ' v '</code></p>
+<p><code>F 2 = ρ ' A ' v ' ^ {2} + {1} / {γ} p ' A '</code></p>
+<p><code>F 3 = ρ ' ({T} / { (γ − 1 )} + {γ}/ {2} v ' ^ {2} ) v ' A ' + p ' A ' v '</code></p>
+<p> Solution Vectors:-</p>
+<p><code>U 1 = ρ ' A '</code></p>
+<p><code>U 2 = ρ ' A ' v '</code></p>
+<p><code>U 3 = ρ ({T} / {γ − 1} + {γ} / {2} v ' ^ {2} ) A '</code></p>
+<p>Source Term:-</p>
+<p><code>J 2 = {1} / {γ} p {∂ A '} / {∂ x '}</code> </p>
+<p>These equations are now used to solve a problem by providing some inputs, intial conditions and boundary conditions. These are different for conservative and non conservative. A common quantity that doesnt change with the conservative and non conservative form is the profile of the nozzle. This is defined using the area of the nozzle. For this project the area is taken in the form of a parabolic curve which is denoted by</p>
+<p><code>A = 1 + 2.2 (x − 1.5 ) ^ {2}</code> </p>
+<p>The throat of the nozzle is at x = 1.5 the convergent section occurs at x &lt; 1.5 and the divergent section occurs at x > 1.5. The curve would look like this (Image courtesy CFD Basics by John D Anderson)</p>
+<p> 
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/01/parabolicnozzle_1611218911.png alt></p>
+<p>We try to simulate the program for a time of 1400 timesteps and the length of the nozzle is taken as 3 units which is divided into 31 nodes. The timestep provided is such that it satisfies the CFL criteria. If the timestep provided doesnt satisfy the CFL criteria the solution will blow up.</p>
+<p>For conservative form the inputs are</p>
+<p>Initial conditions:</p>
+<p>For <code>0 ⩽ x ⩽ 0.5``ρ ' = 1.0 , T ' = 1.0</code></p>
+<p>For <code>0.5 ⩽ x ⩽ 1.5``ρ ' = 1.0 − 0.366(x ' − 0.5) ; T ' = 1.0 − 0.167(x ' − 0.5)</code></p>
+<p>For <code>1.5 ⩽ x ⩽ 3.5``ρ ' = 0.634 − 0.3879 (x ' − 1.5 ) ; T ' = 0.833 − 0.3507 (x ' − 1.5)</code></p>
+<p> <code>v ' = U 2 = {0.59} / {(ρ ' A ')} ; p ' = ρ ' T ' ; M = {v '} / {sqrt {(T)}}</code></p>
+<p>Boundary conditions:</p>
+<p>Inlet:</p>
+<p> <code>U 1 (1) = ρ' (1 ) ∗ a' (1) ;</code></p>
+<p><code>U 2 (1) = 2 ∗ U2(2) - U2(3)</code></p>
+<p><code>U 3 (1 ) = U 1 (1 ) ∗ ({T (1)} / {(γ − 1)} + {γ} / {2} ∗ v (1) ^ {2}) ;</code></p>
+<p> <code>v 1(1 ) = {U 2 (1 )} / {U 1 (1 )} ;</code></p>
+<p> Outlet:</p>
+<p> <code>U 1 (n ) = 2 ∗ U 1 (n − 1 ) − U 1 (n − 2 ) ;</code></p>
+<p><code>U 2 (n ) = 2 ∗ U 2 (n − 1 ) − U 2 (n − 2 ) ;</code> </p>
+<p> <code>U 3 (n ) = 2 ∗ U 3 (n-1 ) − U 3 (n-2 ) ;</code></p>
+<p>If everything is in place the code for the conservative form should look like this</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab>
+<span style=color:#75715e>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span style=color:#75715e>%%%%%%%%%%%%%%%%%%%%% CONSERVATIVE FORM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span style=color:#75715e>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+<span style=color:#66d9ef>function</span>  [x, a, mfr, v_c, v_throat, rho_c, rho_throat, T_c, T_throat, p_c, p_throat, M_c , M_throat] = <span style=color:#a6e22e>conserfunc</span>(n,x,dx,gamma,nt)
+
+<span style=color:#75715e>%The programming from here on is referenced from CFD Basics by John D Anderson, Jr. </span>
+
+rho_c = ones(<span style=color:#ae81ff>1</span>,n);
+T_c = <span style=color:#ae81ff>300</span><span style=color:#f92672>*</span>ones(<span style=color:#ae81ff>1</span>,n);
+
+<span style=color:#75715e>%Intial Conditions</span>
+<span style=color:#66d9ef>for</span> i =<span style=color:#ae81ff>1</span>:n 
+   <span style=color:#66d9ef>if</span> (x(i) <span style=color:#f92672>&gt;</span>= <span style=color:#ae81ff>0</span> <span style=color:#f92672>&amp;&amp;</span> x(i) <span style=color:#f92672>&lt;</span>= <span style=color:#ae81ff>0.5</span>) 
+       rho_c(i) = <span style=color:#ae81ff>1</span>;
+       T_c(i) = <span style=color:#ae81ff>1</span>;
+              
+   <span style=color:#66d9ef>elseif</span> (x(i) <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.5</span> <span style=color:#f92672>&amp;&amp;</span> x(i) <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>1.5</span>)
+       rho_c(i) = <span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.366</span><span style=color:#f92672>*</span>(x(i) <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.5</span>);      
+       T_c(i) = <span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.167</span><span style=color:#f92672>*</span>(x(i)<span style=color:#f92672>-</span><span style=color:#ae81ff>0.5</span>);
+          
+   <span style=color:#66d9ef>elseif</span> (x(i) <span style=color:#f92672>&gt;</span>= <span style=color:#ae81ff>1.5</span> <span style=color:#f92672>&amp;&amp;</span> x(i) <span style=color:#f92672>&lt;</span>= <span style=color:#ae81ff>3.5</span>)
+       rho_c(i) = <span style=color:#ae81ff>0.634</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.3879</span><span style=color:#f92672>*</span>(x(i) <span style=color:#f92672>-</span> <span style=color:#ae81ff>1.5</span>);
+       T_c(i) = <span style=color:#ae81ff>0.833</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.3507</span><span style=color:#f92672>*</span>(x(i) <span style=color:#f92672>-</span> <span style=color:#ae81ff>1.5</span>);
+       
+   <span style=color:#66d9ef>end</span>     
+<span style=color:#66d9ef>end</span>
+
+a = <span style=color:#ae81ff>1</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>2.2</span><span style=color:#f92672>*</span>(x<span style=color:#f92672>-</span><span style=color:#ae81ff>1.5</span>)<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>;<span style=color:#75715e>%(Area) same as the non conservative form since </span>
+<span style=color:#75715e>%area profile is same as a parabolic nozzle for both the forms</span>
+
+<span style=color:#75715e>%to find out the throat section</span>
+N = find(a<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#75715e>%Initial velocity is taken according to the initial conditions specified in the book </span>
+v_c = <span style=color:#ae81ff>0.59</span><span style=color:#f92672>./</span>(rho_c<span style=color:#f92672>.*</span>a);
+    
+<span style=color:#75715e>%The non dimensional conservative form of equations are expressed in terms</span>
+<span style=color:#75715e>%of solution vectors and flux terms</span>
+
+<span style=color:#75715e>%SOLUTION VECTORS</span>
+U1 = rho_c<span style=color:#f92672>.*</span>a;
+
+U2 = rho_c<span style=color:#f92672>.*</span>a<span style=color:#f92672>.*</span>v_c;
+
+U3 = rho_c<span style=color:#f92672>.*</span>a<span style=color:#f92672>.*</span>((T_c<span style=color:#f92672>/</span>(gamma <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>+</span>(gamma<span style=color:#f92672>*</span><span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>(v_c<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>)));
+
+<span style=color:#75715e>%FLUX VECTORS</span>
+F1 = U2;
+
+F2 = ((U2<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>./</span>U1)<span style=color:#f92672>+</span>((gamma<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>/</span>gamma)<span style=color:#f92672>*</span>(U3 <span style=color:#f92672>-</span> (gamma<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>(U2<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>./</span>U1);
+
+F3 = ((gamma<span style=color:#f92672>*</span>U2<span style=color:#f92672>.*</span>U3)<span style=color:#f92672>./</span>(U1)) <span style=color:#f92672>-</span> ((gamma<span style=color:#f92672>*</span>(gamma<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>((U2<span style=color:#f92672>.^</span><span style=color:#ae81ff>3</span>)<span style=color:#f92672>./</span>(U1<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>));
+
+
+<span style=color:#75715e>%outer time loop</span>
+<span style=color:#66d9ef>for</span> k = <span style=color:#ae81ff>1</span>:nt
+    <span style=color:#75715e>%initiation of Uold values</span>
+    U1_old = U1;
+    
+    U2_old = U2;
+    
+    U3_old = U3;
+    
+    <span style=color:#75715e>%time step number is dependent on courant number </span>
+    <span style=color:#75715e>%we gave the inputs such that CFL criteria is satisfied C*dx/dt &lt;= 0.5 ; </span>
+    dt = min(<span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>dx<span style=color:#f92672>./</span>(v_c<span style=color:#f92672>+</span>sqrt(T_c)));
+
+    <span style=color:#75715e>%predictor step        </span>
+    <span style=color:#66d9ef>for</span> j = <span style=color:#ae81ff>2</span>:n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+        
+        F1(j) = U2(j);
+
+        F2(j) = ((U2(j)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>/</span>U1(j))<span style=color:#f92672>+</span>((gamma<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>/</span>gamma)<span style=color:#f92672>*</span>(U3(j) <span style=color:#f92672>-</span> (gamma<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>(U2(j)^<span style=color:#ae81ff>2</span><span style=color:#f92672>/</span>U1(j)));
+
+        F3(j) = ((gamma<span style=color:#f92672>*</span>U2(j)<span style=color:#f92672>*</span>U3(j))<span style=color:#f92672>/</span>(U1(j))) <span style=color:#f92672>-</span> (gamma<span style=color:#f92672>*</span>(gamma<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>(U2(j)^<span style=color:#ae81ff>3</span><span style=color:#f92672>/</span>U1(j)^<span style=color:#ae81ff>2</span>);
+
+        dF1_dx(j) = (F1(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>F1(j))<span style=color:#f92672>/</span>dx;
+        
+        dF2_dx(j) = (F2(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>F2(j))<span style=color:#f92672>/</span>dx;
+        
+        dF3_dx(j) = (F3(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>F3(j))<span style=color:#f92672>/</span>dx;
+        
+        dadx(j) = (a(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>a(j))<span style=color:#f92672>/</span>dx ;
+        
+        J2(j) = (<span style=color:#ae81ff>1</span><span style=color:#f92672>/</span>gamma)<span style=color:#f92672>*</span>rho_c(j)<span style=color:#f92672>*</span>T_c(j)<span style=color:#f92672>*</span>dadx(j);
+
+        <span style=color:#75715e>%solving for continuity equation</span>
+        dU1_dt_p(j) = <span style=color:#f92672>-</span>dF1_dx(j);
+        
+        <span style=color:#75715e>%solving for momentum equation </span>
+        dU2_dt_p(j) = <span style=color:#f92672>-</span>dF2_dx(j)<span style=color:#f92672>+</span>J2(j);   
+        
+        <span style=color:#75715e>%solving for energy equation</span>
+        dU3_dt_p(j) = <span style=color:#f92672>-</span>dF3_dx(j);
+        
+        <span style=color:#75715e>%solution update </span>
+        U1(j) = U1(j) <span style=color:#f92672>+</span> dU1_dt_p(j)<span style=color:#f92672>*</span>dt;<span style=color:#75715e>%updating velocity   </span>
+        
+        U2(j) = U2(j) <span style=color:#f92672>+</span> dU2_dt_p(j)<span style=color:#f92672>*</span>dt;<span style=color:#75715e>%updating Temperature   </span>
+        
+        U3(j) = U3(j) <span style=color:#f92672>+</span> dU3_dt_p(j)<span style=color:#f92672>*</span>dt;<span style=color:#75715e>%Updating density</span>
+        
+    <span style=color:#66d9ef>end</span>
+    
+    <span style=color:#75715e>%Decoding Primitive variables from U1, U2 and U3</span>
+    rho_c = U1<span style=color:#f92672>./</span>a;
+       
+    v_c = U2<span style=color:#f92672>./</span>U1;
+       
+    T_c = (gamma <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>((U3<span style=color:#f92672>./</span>U1)<span style=color:#f92672>-</span>(gamma<span style=color:#f92672>*</span><span style=color:#ae81ff>0.5</span><span style=color:#f92672>.*</span>(v_c<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>)));
+    
+    <span style=color:#75715e>%calculating the predicted values of flux terms  </span>
+    F1 = U2;    
+
+    F2 = ((U2<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>./</span>U1)<span style=color:#f92672>+</span>((gamma<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>/</span>gamma)<span style=color:#f92672>*</span>(U3 <span style=color:#f92672>-</span> ((gamma<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>((U2<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>./</span>U1)));
+
+    F3 = ((gamma<span style=color:#f92672>*</span>U2<span style=color:#f92672>.*</span>U3)<span style=color:#f92672>./</span>(U1)) <span style=color:#f92672>-</span> ((gamma<span style=color:#f92672>*</span>(gamma<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>((U2<span style=color:#f92672>.^</span><span style=color:#ae81ff>3</span>)<span style=color:#f92672>./</span>(U1<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>)));
+     
+    <span style=color:#75715e>%corrector step</span>
+    <span style=color:#66d9ef>for</span> j = <span style=color:#ae81ff>2</span>:n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+        
+        dF1_dx(j) = (F1(j)<span style=color:#f92672>-</span>F1(j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>/</span>dx;
+        
+        dF2_dx(j) = (F2(j)<span style=color:#f92672>-</span>F2(j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>/</span>dx;
+        
+        dF3_dx(j) = (F3(j)<span style=color:#f92672>-</span>F3(j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>/</span>dx;
+        
+        dadx(j) = (a(j)<span style=color:#f92672>-</span>a(j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>/</span>dx ;
+        
+        J2(j) = (<span style=color:#ae81ff>1</span><span style=color:#f92672>/</span>gamma)<span style=color:#f92672>*</span>rho_c(j)<span style=color:#f92672>*</span>T_c(j)<span style=color:#f92672>*</span>dadx(j);
+       
+        <span style=color:#75715e>%solving for continuity equation</span>
+        dU1_dt_c(j) = <span style=color:#f92672>-</span>dF1_dx(j) ;
+        
+        <span style=color:#75715e>%solving for momentum equation </span>
+        dU2_dt_c(j) = <span style=color:#f92672>-</span>dF2_dx(j)<span style=color:#f92672>+</span>J2(j);
+        
+        <span style=color:#75715e>%solving for energy equation</span>
+        dU3_dt_c(j) = <span style=color:#f92672>-</span>dF3_dx(j);
+        
+    <span style=color:#66d9ef>end</span>
+    
+    <span style=color:#75715e>%avg of predictor and corrector</span>
+    
+    dU1_dt = <span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>(dU1_dt_p <span style=color:#f92672>+</span> dU1_dt_c);
+    
+    dU2_dt = <span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>(dU2_dt_p <span style=color:#f92672>+</span> dU2_dt_c);
+    
+    dU3_dt = <span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>(dU3_dt_p <span style=color:#f92672>+</span> dU3_dt_c);
+    
+    <span style=color:#75715e>%final solution update </span>
+    
+    <span style=color:#66d9ef>for</span> i = <span style=color:#ae81ff>2</span>:n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+        
+        U1(i) = U1_old(i) <span style=color:#f92672>+</span> (dU1_dt(i)<span style=color:#f92672>*</span>dt);
+        
+        U2(i) = U2_old(i) <span style=color:#f92672>+</span> (dU2_dt(i)<span style=color:#f92672>*</span>dt);
+        
+        U3(i) = U3_old(i) <span style=color:#f92672>+</span> (dU3_dt(i)<span style=color:#f92672>*</span>dt)  ;
+    <span style=color:#66d9ef>end</span>
+    
+    <span style=color:#75715e>%Applying the boundary conditions </span>
+    <span style=color:#75715e>%inlet</span>
+    U1(<span style=color:#ae81ff>1</span>) = rho_c(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>a(<span style=color:#ae81ff>1</span>);
+
+    U2(<span style=color:#ae81ff>1</span>) = <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>U2(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>-</span>U2(<span style=color:#ae81ff>3</span>);
+
+    U3(<span style=color:#ae81ff>1</span>) = U1(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>((T_c(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>/</span>(gamma <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>+</span>(gamma<span style=color:#f92672>*</span><span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>(v_c(<span style=color:#ae81ff>1</span>)^<span style=color:#ae81ff>2</span>)));
+    
+    v_c(<span style=color:#ae81ff>1</span>) = U2(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>/</span>U1(<span style=color:#ae81ff>1</span>);
+
+    <span style=color:#75715e>%outlet</span>
+    U1(n) = <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>U1(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>U1(n<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>);
+
+    U2(n) = <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>U2(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>U2(n<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>);
+
+    U3(n) = <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>U3(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>U3(n<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>);
+    
+    <span style=color:#75715e>%primitive variables</span>
+    
+    rho_c = U1<span style=color:#f92672>./</span>a;
+    
+    v_c = U2<span style=color:#f92672>./</span>U1;
+    
+    T_c = (gamma <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>((U3<span style=color:#f92672>./</span>U1)<span style=color:#f92672>-</span>(gamma<span style=color:#f92672>*</span><span style=color:#ae81ff>0.5</span><span style=color:#f92672>.*</span>(v_c<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>)));
+    
+    <span style=color:#75715e>%calculating the properties</span>
+    
+    p_c = rho_c<span style=color:#f92672>.*</span>T_c;<span style=color:#75715e>% Pressure  </span>
+        
+    M_c = v_c<span style=color:#f92672>./</span>sqrt(T_c) ;<span style=color:#75715e>% Mach number </span>
+    
+    mfr = rho_c<span style=color:#f92672>.*</span>a<span style=color:#f92672>.*</span>v_c;<span style=color:#75715e>% Mass Flow Rate</span>
+    
+    <span style=color:#75715e>%Paraneter values at the throat section</span>
+    
+    rho_throat(k) = rho_c(N); <span style=color:#75715e>%density</span>
+    
+    v_throat(k) = v_c(N); <span style=color:#75715e>%velocity</span>
+    
+    T_throat(k) = T_c(N); <span style=color:#75715e>%Temperature</span>
+    
+    M_throat(k) = M_c(N); <span style=color:#75715e>%Machnumver</span>
+    
+    p_throat(k) = p_c(N); <span style=color:#75715e>%Pressure</span>
+    
+    figure(<span style=color:#ae81ff>1</span>)
+    <span style=color:#66d9ef>if</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>50</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>100</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>200</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>600</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>800</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>1000</span>
+        plot(x,mfr)
+        hold on
+    xlabel(<span style=color:#e6db74>&#39;Non dimensionalised &#34;X&#34;&#39;</span>)    
+    ylabel(<span style=color:#e6db74>&#39;Mass Flow rate&#39;</span>)
+    legend(<span style=color:#e6db74>&#39;1st timestep&#39;</span>,<span style=color:#e6db74>&#39;50th timestep&#39;</span>,<span style=color:#e6db74>&#39;100th timestep&#39;</span>,<span style=color:#e6db74>&#39;200th timestep&#39;</span>,<span style=color:#e6db74>&#39;600th timestep&#39;</span>,<span style=color:#e6db74>&#39;800th timestep&#39;</span>,<span style=color:#e6db74>&#39;1000th timestep&#39;</span>)
+    grid on
+    title(<span style=color:#e6db74>&#39;Conservation analysis Mass flow rate at different timesteps&#39;</span>)
+    <span style=color:#66d9ef>end</span>
+<span style=color:#66d9ef>end</span>  
+    
+<span style=color:#66d9ef>end</span>    
+</code></pre></div><p>For Non conservative form the inputs are</p>
+<p>Initial conditions:</p>
+<p><code>rho = 1 - 0.3146∗ x</code> </p>
+<p><code>T = 1- 0.2314∗ x</code></p>
+<p><code>v = (0.1 + 1.09∗ x)∗ sqrt T</code></p>
+<p> Boundary conditions:</p>
+<p>Inlet:</p>
+<p><code>v (1 ) = 2 ∗ v (2 ) − v (3 ) ;</code> </p>
+<p> Outlet:</p>
+<p><code>rho (n ) = 2 ∗ rho (n-1 ) − rho (n-2 ) ;</code></p>
+<p><code>T (n ) = 2 ∗ T (n-1 ) − T (n-2 ) ;</code></p>
+<p> <code>v (n ) = 2 ∗ v (n-1 ) − v (n-2 ) ;</code></p>
+<p> If everything is in place the code for the conservative form should look like this</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab><span style=color:#75715e>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span style=color:#75715e>%%%%%%%%%%%%%%%%% NON CONSERVATIVE FORM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span style=color:#75715e>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+<span style=color:#66d9ef>function</span> [x, a, mfr, v_nc, v_throat, rho_nc, rho_throat, T_nc, T_throat, p_nc, p_throat, M_nc, M_throat] = <span style=color:#a6e22e>nonconserfunc</span>(n,x,dx,gamma,nt)
+
+<span style=color:#75715e>%Providing inputs </span>
+<span style=color:#75715e>%Since all the inputs are converted into non dimensionalised form  </span>
+<span style=color:#75715e>%They are expressed in the form of x</span>
+
+rho_nc = <span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.3146</span><span style=color:#f92672>*</span>x;<span style=color:#75715e>%(density)</span>
+
+T_nc = <span style=color:#ae81ff>1</span><span style=color:#f92672>-</span><span style=color:#ae81ff>0.2314</span><span style=color:#f92672>*</span>x;<span style=color:#75715e>%(Temperature)</span>
+
+v_nc = (<span style=color:#ae81ff>0.1</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1.09</span><span style=color:#f92672>*</span>x)<span style=color:#f92672>.*</span>T_nc<span style=color:#f92672>.^</span><span style=color:#ae81ff>0.5</span>;<span style=color:#75715e>%(Velocity)</span>
+
+a = <span style=color:#ae81ff>1</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>2.2</span><span style=color:#f92672>*</span>(x<span style=color:#f92672>-</span><span style=color:#ae81ff>1.5</span>)<span style=color:#f92672>.^</span><span style=color:#ae81ff>2</span>;<span style=color:#75715e>%(Area)</span>
+
+
+
+<span style=color:#75715e>%time step number is dependent on courant number </span>
+<span style=color:#75715e>%we gave the inputs such that CFL criteria is satisfied C*dx/dt &lt;= 0.5 ; </span>
+dt = <span style=color:#ae81ff>0.01</span>;<span style=color:#75715e>%min(0.5*dx./(v_nc+sqrt(T_nc)));</span>
+
+<span style=color:#75715e>%To get better results we calculate the values at the throat section</span>
+<span style=color:#75715e>%seperately</span>
+N = find(a<span style=color:#f92672>==</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#75715e>%outer time step loop</span>
+<span style=color:#66d9ef>for</span> k = <span style=color:#ae81ff>1</span>:nt
+    
+    <span style=color:#75715e>%we save the old values here</span>
+    rho_old = rho_nc;
+
+    v_old = v_nc;
+
+    T_old = T_nc;
+    
+    <span style=color:#75715e>%predictor step        </span>
+    <span style=color:#66d9ef>for</span> j = <span style=color:#ae81ff>2</span>:n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+        
+        dvdx = (v_nc(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>v_nc(j))<span style=color:#f92672>/</span>dx;
+        
+        drhodx =(rho_nc(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>rho_nc(j))<span style=color:#f92672>/</span>dx; 
+        
+        dTdx = (T_nc(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>-</span>T_nc(j))<span style=color:#f92672>/</span>dx;
+        
+        dlog_adx = (log(a(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>-</span>log(a(j)))<span style=color:#f92672>/</span>dx ;
+        
+        <span style=color:#75715e>%solving for continuity equation</span>
+        drho_dt_p(j) = <span style=color:#f92672>-</span>rho_nc(j)<span style=color:#f92672>*</span>(dvdx) <span style=color:#f92672>-</span>rho_nc(j)<span style=color:#f92672>*</span>v_nc(j)<span style=color:#f92672>*</span>dlog_adx <span style=color:#f92672>-</span> v_nc(j)<span style=color:#f92672>*</span>drhodx ;
+        
+        <span style=color:#75715e>%solving for momentum equation </span>
+        dv_dt_p(j) = <span style=color:#f92672>-</span>v_nc(j)<span style=color:#f92672>*</span>(dvdx)<span style=color:#f92672>-</span> (<span style=color:#ae81ff>1</span><span style=color:#f92672>/</span>gamma)<span style=color:#f92672>*</span>(dTdx<span style=color:#f92672>+</span>((T_nc(j)<span style=color:#f92672>/</span>rho_nc(j))<span style=color:#f92672>*</span>(drhodx)));   
+        
+        <span style=color:#75715e>%solving for energy equation</span>
+        dT_dt_p(j) = <span style=color:#f92672>-</span>v_nc(j)<span style=color:#f92672>*</span>dTdx<span style=color:#f92672>-</span> (gamma <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>(T_nc(j))<span style=color:#f92672>*</span>(dvdx <span style=color:#f92672>+</span> v_nc(j)<span style=color:#f92672>*</span>(dlog_adx));
+        
+        <span style=color:#75715e>%solution update </span>
+        v_nc(j) = v_old(j) <span style=color:#f92672>+</span> dv_dt_p(j)<span style=color:#f92672>*</span>dt;<span style=color:#75715e>%updating velocity   </span>
+        
+        T_nc(j) = T_old(j) <span style=color:#f92672>+</span> dT_dt_p(j)<span style=color:#f92672>*</span>dt;<span style=color:#75715e>%updating Temperature   </span>
+        
+        rho_nc(j) = rho_old(j) <span style=color:#f92672>+</span> drho_dt_p(j)<span style=color:#f92672>*</span>dt;<span style=color:#75715e>%Updating density</span>
+    <span style=color:#66d9ef>end</span>
+    
+    <span style=color:#75715e>%corrector step</span>
+    <span style=color:#66d9ef>for</span> j = <span style=color:#ae81ff>2</span>:n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+        
+        dvdx = (v_nc(j)<span style=color:#f92672>-</span>v_nc(j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>/</span>dx;
+        
+        drhodx =(rho_nc(j)<span style=color:#f92672>-</span>rho_nc(j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>/</span>dx; 
+        
+        dTdx = (T_nc(j)<span style=color:#f92672>-</span>T_nc(j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))<span style=color:#f92672>/</span>dx;
+        
+        dlog_adx = (log(a(j))<span style=color:#f92672>-</span>log(a(j<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)))<span style=color:#f92672>/</span>dx ;
+        
+        <span style=color:#75715e>%solving for continuity equation</span>
+        drho_dt_c(j) = <span style=color:#f92672>-</span>rho_nc(j)<span style=color:#f92672>*</span>(dvdx) <span style=color:#f92672>-</span>rho_nc(j)<span style=color:#f92672>*</span>v_nc(j)<span style=color:#f92672>*</span>dlog_adx <span style=color:#f92672>-</span> v_nc(j)<span style=color:#f92672>*</span>drhodx ;
+        
+        <span style=color:#75715e>%solving for momentum equation </span>
+        dv_dt_c(j) = <span style=color:#f92672>-</span>v_nc(j)<span style=color:#f92672>*</span>(dvdx)<span style=color:#f92672>-</span> (<span style=color:#ae81ff>1</span><span style=color:#f92672>/</span>gamma)<span style=color:#f92672>*</span>(dTdx<span style=color:#f92672>+</span>((T_nc(j)<span style=color:#f92672>/</span>rho_nc(j))<span style=color:#f92672>*</span>(drhodx)));   
+        
+        <span style=color:#75715e>%solving for energy equation</span>
+        dT_dt_c(j) = <span style=color:#f92672>-</span>v_nc(j)<span style=color:#f92672>*</span>(dTdx)<span style=color:#f92672>-</span> (gamma <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>(T_nc(j))<span style=color:#f92672>*</span>(dvdx <span style=color:#f92672>+</span> v_nc(j)<span style=color:#f92672>*</span>(dlog_adx));
+        
+    <span style=color:#66d9ef>end</span>
+    
+    <span style=color:#75715e>%avg of predictor and corrector</span>
+    
+    dv_dt = <span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>(dv_dt_p <span style=color:#f92672>+</span> dv_dt_c);
+    
+    drho_dt = <span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>(drho_dt_p <span style=color:#f92672>+</span> drho_dt_c);
+    
+    dT_dt = <span style=color:#ae81ff>0.5</span><span style=color:#f92672>*</span>(dT_dt_p <span style=color:#f92672>+</span> dT_dt_c);
+    
+    <span style=color:#75715e>%final solution update </span>
+    
+    <span style=color:#66d9ef>for</span> i = <span style=color:#ae81ff>2</span>:n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>
+        
+        v_nc(i) = v_old(i) <span style=color:#f92672>+</span> dv_dt(i)<span style=color:#f92672>*</span>dt;
+        
+        rho_nc(i) = rho_old(i) <span style=color:#f92672>+</span> drho_dt(i)<span style=color:#f92672>*</span>dt;
+        
+        T_nc(i) = T_old(i) <span style=color:#f92672>+</span> dT_dt(i)<span style=color:#f92672>*</span>dt;
+        
+    <span style=color:#66d9ef>end</span>
+    
+    <span style=color:#75715e>%Apply the boundary conditions </span>
+    <span style=color:#75715e>%inlet</span>
+    v_nc(<span style=color:#ae81ff>1</span>) = <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>v_nc(<span style=color:#ae81ff>2</span>) <span style=color:#f92672>-</span> v_nc(<span style=color:#ae81ff>3</span>);
+           
+    <span style=color:#75715e>%outlet</span>
+    v_nc(n) = <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>v_nc(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>-</span> v_nc(n<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>);
+    
+    rho_nc(n) = <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>rho_nc(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>-</span> rho_nc(n<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>);
+    
+    T_nc(n) = <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span>T_nc(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>-</span> T_nc(n<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>);
+    
+    <span style=color:#75715e>%calculating the properties</span>
+    
+    p_nc = rho_nc<span style=color:#f92672>.*</span>T_nc; <span style=color:#75715e>% Pressure</span>
+        
+    M_nc = v_nc<span style=color:#f92672>./</span>(T_nc<span style=color:#f92672>.^</span><span style=color:#ae81ff>0.5</span>) ; <span style=color:#75715e>% Mach Number      </span>
+    
+    mfr = rho_nc<span style=color:#f92672>.*</span>a<span style=color:#f92672>.*</span>v_nc; <span style=color:#75715e>% Mass Flow Rate</span>
+    
+    <span style=color:#75715e>%Parameter value at the throat section</span>
+    
+    rho_throat(k) = rho_nc(N); <span style=color:#75715e>%Density</span>
+    
+    v_throat(k) = v_nc(N); <span style=color:#75715e>%Velocity</span>
+    
+    T_throat(k) = T_nc(N); <span style=color:#75715e>%Temperature</span>
+    
+    M_throat(k) = M_nc(N); <span style=color:#75715e>%Mach number</span>
+    
+    p_throat(k) = p_nc(N); <span style=color:#75715e>%Pressure</span>
+    
+    figure(<span style=color:#ae81ff>2</span>)
+    <span style=color:#66d9ef>if</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>50</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>100</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>200</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>600</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>800</span>
+        plot(x,mfr)
+        hold on
+    <span style=color:#66d9ef>elseif</span> k <span style=color:#f92672>==</span> <span style=color:#ae81ff>1000</span>
+        plot(x,mfr)
+        hold on
+    xlabel(<span style=color:#e6db74>&#39;Non dimensionalised &#34;X&#34;&#39;</span>)    
+    ylabel(<span style=color:#e6db74>&#39;Mass Flow rate&#39;</span>)
+    legend(<span style=color:#e6db74>&#39;1st timestep&#39;</span>,<span style=color:#e6db74>&#39;50th timestep&#39;</span>,<span style=color:#e6db74>&#39;100th timestep&#39;</span>,<span style=color:#e6db74>&#39;200th timestep&#39;</span>,<span style=color:#e6db74>&#39;600th timestep&#39;</span>,<span style=color:#e6db74>&#39;800th timestep&#39;</span>,<span style=color:#e6db74>&#39;1000th timestep&#39;</span>)
+    grid on
+    title(<span style=color:#e6db74>&#39;Non Conservation analysis Mass flow rate at different timesteps&#39;</span>)
+    <span style=color:#66d9ef>end</span>
+    
+<span style=color:#66d9ef>end</span>
+
+<span style=color:#66d9ef>end</span>
+</code></pre></div><p>Along with everything mentioned above we also calculate the mach number over the entire non dimensional distance.Now we call the two functions into a main program which will provide the data we need. If everything is in place the main program should look like this</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab>clear 
+close all
+clc
+
+<span style=color:#75715e>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span style=color:#75715e>%%% SOLVING THE 1D SUPERSONIC NOZZLE FLOW EQUATIONS USING THE MACCORMAC METHOD %%%%%% </span>
+<span style=color:#75715e>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+<span style=color:#75715e>% inputs </span>
+n = <span style=color:#ae81ff>31</span>;
+x = linspace(<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>3</span>,n);
+dx = x(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>-</span>x(<span style=color:#ae81ff>1</span>);
+gamma = <span style=color:#ae81ff>1.4</span>;
+
+<span style=color:#75715e>%defining time steps </span>
+nt = <span style=color:#ae81ff>1400</span>;
+wt = linspace(<span style=color:#ae81ff>1</span>,nt,nt);
+
+<span style=color:#75715e>%calling the conservative form function</span>
+[x, a, mfr_c, v_c, v_cthroat, rho_c, rho_cthroat, T_c, T_cthroat, p_c, p_cthroat, M_c , M_cthroat] = conserfunc(n,x,dx,gamma,nt);
+<span style=color:#75715e>%calling the non conservative form function</span>
+[x, a, mfr_nc, v_nc, v_ncthroat, rho_nc, rho_ncthroat, T_nc, T_ncthroat, p_nc, p_ncthroat, M_nc , M_ncthroat] = nonconserfunc(n,x,dx,gamma,nt);
+
+<span style=color:#75715e>%from the book</span>
+mfr_a = <span style=color:#ae81ff>0.579</span><span style=color:#f92672>*</span>ones(<span style=color:#ae81ff>1</span>,n);
+
+<span style=color:#75715e>%for the grid dependecy test</span>
+<span style=color:#75715e>%conservative terms</span>
+pcmean = mean(p_cthroat);
+rhocmean = mean(rho_cthroat);
+Tcmean = mean(T_cthroat);
+Mc_mean = mean(M_cthroat);
+
+<span style=color:#75715e>%Nonconservative terms</span>
+pncmean = mean(p_ncthroat);
+rhoncmean = mean(rho_ncthroat);
+Tncmean = mean(T_ncthroat);
+Mnc_mean = mean(M_ncthroat);
+
+<span style=color:#75715e>%plotting </span>
+<span style=color:#75715e>% Parameters change with X axis</span>
+figure(<span style=color:#ae81ff>3</span>)
+
+subplot(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>)
+grid on
+plot(x,rho_nc,<span style=color:#e6db74>&#39;b&#39;</span>,<span style=color:#e6db74>&#39;linewidth&#39;</span>,<span style=color:#ae81ff>4</span>)  
+hold on 
+plot(x,rho_c,<span style=color:#e6db74>&#39;color&#39;</span>,<span style=color:#e6db74>&#39;r&#39;</span>,<span style=color:#e6db74>&#39;linewidth&#39;</span>,<span style=color:#ae81ff>2</span>)
+ylabel(<span style=color:#e6db74>&#39;Density&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>)
+
+subplot(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>)
+grid on 
+plot(x,T_nc,<span style=color:#e6db74>&#39;b&#39;</span>,<span style=color:#e6db74>&#39;linewidth&#39;</span>,<span style=color:#ae81ff>4</span>)
+hold on
+plot(x,T_c,<span style=color:#e6db74>&#39;color&#39;</span>,<span style=color:#e6db74>&#39;r&#39;</span>,<span style=color:#e6db74>&#39;linewidth&#39;</span>,<span style=color:#ae81ff>2</span>)
+ylabel(<span style=color:#e6db74>&#39;Temperature&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>)
+
+subplot(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>3</span>)
+grid on 
+plot(x,p_nc,<span style=color:#e6db74>&#39;b&#39;</span>,<span style=color:#e6db74>&#39;linewidth&#39;</span>,<span style=color:#ae81ff>4</span>)
+hold on 
+plot(x,p_c,<span style=color:#e6db74>&#39;color&#39;</span>,<span style=color:#e6db74>&#39;r&#39;</span>,<span style=color:#e6db74>&#39;linewidth&#39;</span>,<span style=color:#ae81ff>2</span>)
+ylabel(<span style=color:#e6db74>&#39;Pressure&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>)
+
+subplot(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>4</span>)
+grid on 
+plot(x,M_nc,<span style=color:#e6db74>&#39;b&#39;</span>,<span style=color:#e6db74>&#39;linewidth&#39;</span>,<span style=color:#ae81ff>4</span>)
+hold on 
+plot(x,M_c,<span style=color:#e6db74>&#39;color&#39;</span>,<span style=color:#e6db74>&#39;r&#39;</span>,<span style=color:#e6db74>&#39;linewidth&#39;</span>,<span style=color:#ae81ff>2</span>)
+ylabel(<span style=color:#e6db74>&#39;Mach number&#39;</span>)
+xlabel(<span style=color:#e6db74>&#39;X&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>)
+
+<span style=color:#75715e>%Throat parameters</span>
+figure(<span style=color:#ae81ff>4</span>)
+subplot(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>1</span>)
+grid on
+plot(wt,rho_ncthroat)  
+hold on 
+plot(wt,rho_cthroat)
+ylabel(<span style=color:#e6db74>&#39;Density&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>)
+title(<span style=color:#e6db74>&#39;Variation of flow properties with timestep at throat&#39;</span>)
+
+subplot(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>)
+grid on 
+plot(wt,T_ncthroat)
+hold on
+plot(wt,T_cthroat)
+ylabel(<span style=color:#e6db74>&#39;Temperature&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>)
+
+subplot(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>3</span>)
+grid on 
+plot(wt,p_ncthroat)
+hold on 
+plot(wt,p_cthroat)
+ylabel(<span style=color:#e6db74>&#39;Pressure&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>)
+
+subplot(<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>4</span>)
+grid on 
+plot(wt,M_ncthroat)
+hold on 
+plot(wt,M_cthroat)
+ylabel(<span style=color:#e6db74>&#39;Mach number&#39;</span>)
+xlabel(<span style=color:#e6db74>&#39;Time Step&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>)
+
+<span style=color:#75715e>%Mass flow rate comparision</span>
+figure(<span style=color:#ae81ff>5</span>)
+grid on 
+plot(x,mfr_nc)
+hold on
+plot(x,mfr_c)
+plot(x,mfr_a)
+xlabel(<span style=color:#e6db74>&#39;Non-Dimensionalised distance&#39;</span>)
+ylabel(<span style=color:#e6db74>&#39;Mass Flow Rate&#39;</span>)
+legend(<span style=color:#e6db74>&#39;Non conservative&#39;</span>,<span style=color:#e6db74>&#39;conservative&#39;</span>,<span style=color:#e6db74>&#39;Exact analytical solution&#39;</span>)
+title(<span style=color:#e6db74>&#39;Comparision for Conservative and Non-conservative Mass Flow Rate&#39;</span>)
+
+<span style=color:#75715e>%For ease of extraction of data a table has been created</span>
+figure(<span style=color:#ae81ff>6</span>)
+set(gcf,<span style=color:#e6db74>&#39;position&#39;</span>,[<span style=color:#ae81ff>20</span> <span style=color:#ae81ff>20</span> <span style=color:#ae81ff>700</span> <span style=color:#ae81ff>120</span>])
+col = {<span style=color:#e6db74>&#39;Grid points&#39;</span>,<span style=color:#e6db74>&#39;Pressure&#39;</span>,<span style=color:#e6db74>&#39;Density&#39;</span>,<span style=color:#e6db74>&#39;Temperature&#39;</span>,<span style=color:#e6db74>&#39;Machnumber&#39;</span>};
+row = {<span style=color:#e6db74>&#39;Conservative&#39;</span>,<span style=color:#e6db74>&#39;Non Conservative&#39;</span>};
+dat = {n,pcmean,rhocmean,Tcmean,Mc_mean;n,pncmean,rhoncmean,Tncmean,Mnc_mean};
+uitable(<span style=color:#e6db74>&#39;columnname&#39;</span>,col,<span style=color:#e6db74>&#39;rowname&#39;</span>,row,<span style=color:#e6db74>&#39;Data&#39;</span>,dat,<span style=color:#e6db74>&#39;columnwidth&#39;</span>,{<span style=color:#ae81ff>100</span>},<span style=color:#e6db74>&#39;position&#39;</span>,[<span style=color:#ae81ff>15</span> <span style=color:#ae81ff>15</span> <span style=color:#ae81ff>680</span> <span style=color:#ae81ff>100</span>]);
+</code></pre></div><p>we get the following graphs once we run the program.</p>
+<p>RESULTS</p>
+<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/01/flowpropx_1611218946.jpg alt></p>
+<p>OBSERVATION</p>
+<p>In the above figure we can see how the variables change over the non dimensionalied distance. We can observe that at the throat section i.e., at x’ = 1.5 the mach number seems to increase indicating the flow is changing from subsonic to supersonic over the nozzle. Also all the remaining variables change as they would over a nozzle in a practical situation. The pressure is compensated for an increase in velocity.</p>
+<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/01/nonconstime_1611218974.jpg alt>  
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/01/constime_1611218990.jpg alt></p>
+<p>OBSERVATION</p>
+<p>From the above graphs we can observe that the mass flowrate tends to stabilise from 600th timestep and at 1000th timestep it is completely stable. Also we can observe that the Non conservative mass flow rate has more deviation than the conservative timestep this might be due to the reason that the control volume is moving in conservative.</p>
+<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/01/compconnoncon_1611219014.jpg alt></p>
+<p>OBSERVATION</p>
+<p>From the above graph it is observed that the mass flow rate for both the process are very much near to analytical solution. The Non Conservative mass flow rate is deviating more than the conservative mass flow rate hence in a study about mass flow rate the conservative form is much more reliable than the non conservative form.</p>
+<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/01/flowproptime_1611219047.jpg alt></p>
+<p>OBSERVATION</p>
+<p>From the above graph we can say that both conservative and non conservative forms have deviations in the beginning of the time marching. But the conservative form had relatively less deviations compared to non conservative flow. Over the time both have converged into a single exact solution.</p>
+<p>GRID INDEPENDENCE TEST:</p>
+<p>This is an important test we conduct to know if the solution relies on the grid size or not. If the solution relies on the grid size then the solution cannot be trusted.</p>
+<p>we take the mean of values at the throat section i.e where the area is equal to 1</p>
+<p>16th node for 31 grid points and 31st node for 61 grid points.</p>
+<p><img src=images/contable.png alt></p>
+<p>The above values are precise to two digits after the decimal we can say that the solution is grid independent. If all the four digits after the decimal are not precise then the solution becomes grid dependent.</p>
+<p>CONCLUSION:</p>
+<p>From the above data we can conclude that the Conservative form is much more accurate and reliable than non conservative form. In order for us to achieve more accurate results with the non conservative the timesteps must be increased.</p>
+</div>
+<div class=footer>
+<div class=tags>
+<i class="fa fa-tags"></i>
+<div class=links>
+<a href=https://satyasasank.github.io/CodeBlue/tags/cfd/>CFD</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div id=comments-container>
+</div>
+</div>
+<footer>
+<div class=container>
+<div class=recent-posts>
+<strong>Latest posts</strong>
+<ul>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/secondposts/>1D Supersonic Nozzle flow simulation using MacCormac Method</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/first_post/>Parsing NASA thermodynamic data using MATLAB </a>
+</li>
+</ul>
+</div>
+<div class=categories>
+<a href=https://satyasasank.github.io/CodeBlue/categories/><strong>Categories</strong></a>
+<ul>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/categories/matlab>Matlab
+(1)</a>
+</li>
+</ul>
+</div>
+<div class=right>
+<div class=external-profiles>
+<strong>Social media</strong>
+<a href=https://www.linkedin.com/in/satya-s-b52717178/ target=_blank><i class="fab fa-linkedin"></i></a>
+<a href=https://github.com/SatyaSasank target=_blank><i class="fab fa-github"></i></a>
+<a href=mailto:kssasank43@gmail.com target=_blank><i class="fas fa-envelope"></i></a>
+</div>
+<div class=archive>
+<a href=https://satyasasank.github.io/CodeBlue/archive/><strong>Archive</strong></a>
+</div>
+</div>
+</div>
+</footer>
+<div class=credits>
+<div class=container>
+<div class=copyright>
+<a href=https://github.com/satyasasank target=_blank>
+&copy;
+2022
+Satya Sasank
+</a>
+</div>
+<div class=author>
+<a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Powered by Bilberry Hugo Theme</a>
+</div>
+</div>
+</div>
+<script type=text/javascript src=https://satyasasank.github.io/CodeBlue/theme.js></script>
+</body>
+</html>
