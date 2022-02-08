@@ -61,7 +61,7 @@ Non Conservative form:-
 
 There are three main equations for
 
-Continuity  : \[{∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}\]
+Continuity  : `${∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}$`
 
 Momentum : \(ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x}\)
 
