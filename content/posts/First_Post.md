@@ -1,6 +1,12 @@
 ---
 title: "Parsing NASA thermodynamic data using MATLAB "
 date: 2022-01-26T12:24:29+05:30
+
+categories: [Matlab]
+tags: [File Parsing ]
+toc: false
+author: "Satya Sasank"
+useMath : true
 ---
 AIM:
 
