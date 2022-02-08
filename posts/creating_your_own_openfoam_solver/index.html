@@ -1,0 +1,371 @@
+<!doctype html><html class=no-js lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=siteBaseUrl content="https://satyasasank.github.io/CodeBlue">
+<meta name=author content="Satya Sasank">
+<meta name=description content="Satya Sasank's Blog">
+<meta name=keywords content="Computational Fluid Dynamics,linux,OpenFOAM,ANSYS,ANSA,Converge,python programming,Matlab/Octave">
+<meta name=generator content="Hugo 0.92.1">
+<title>
+Creating your own OpenFOAM solver | CodeBlue
+</title>
+<meta name=description content="Creating your own OpenFOAM solver - Satya Sasank's Blog">
+<meta itemprop=name content="Creating your own OpenFOAM solver">
+<meta itemprop=description content="Creating your own OpenFOAM solver - Satya Sasank's Blog">
+<meta property="og:title" content="Creating your own OpenFOAM solver">
+<meta property="og:description" content="Creating your own OpenFOAM solver - Satya Sasank's Blog">
+<meta property="og:image" content="https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?size=200">
+<meta property="og:url" content="https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/">
+<meta property="og:site_name" content="CodeBlue">
+<meta property="og:type" content="article">
+<script src=https://satyasasank.github.io/CodeBlue/modernizr-simple.js></script>
+<link href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/ rel=alternate type=application/rss+xml title=CodeBlue>
+<link href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/ rel=feed type=application/rss+xml title=CodeBlue>
+<link rel=canonical href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/>
+<link rel=stylesheet href=https://satyasasank.github.io/CodeBlue/theme.css>
+</head>
+<body class=bilberry-hugo-theme>
+<nav>
+<div class=container>
+<ul class=topnav>
+<li><a href=https://satyasasank.github.io/CodeBlue/page/about-bilberry/>About Bilberry</a></li>
+<li><a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Github</a></li>
+</ul>
+</div>
+</nav>
+<header>
+<div class=container>
+<div class=logo>
+<a href=https://satyasasank.github.io/CodeBlue/ class=logo>
+<img src=https://satyasasank.github.io/CodeBlue/images/profile.jpg alt>
+<span class=overlay><i class="fa fa-home"></i></span>
+</a>
+</div>
+<div class=titles>
+<h3 class=title>
+<a href=https://satyasasank.github.io/CodeBlue/>
+CodeBlue
+</a>
+</h3>
+<span class=subtitle>Welcome to my blog!</span>
+</div>
+<div class=toggler>
+<i class="fa fa-bars" aria-hidden=true></i>
+</div>
+</div>
+</div>
+</header>
+<div class="main container">
+<div class="article-wrapper u-cf single">
+<a class=bubble href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/>
+<i class="fas fa-fw fa-pencil-alt"></i>
+</a>
+<article class="default article">
+<div class=content>
+<h1 class=article-title>
+<a href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/>
+Creating your own OpenFOAM solver
+</a>
+</h1>
+<div class=meta>
+<span class="date moment">2022-02-08</span>
+<span class=categories>
+<a href=https://satyasasank.github.io/CodeBlue/categories/openfoam/>OpenFOAM</a>
+</span>
+<span class=author>
+<a href=https://satyasasank.github.io/CodeBlue/author/satya-sasank/>Satya Sasank</a>
+</span>
+</div>
+<p>AIM:</p>
+<p>The aim of this project is to create a custom solver in OpenFOAM that solves a transport equation for a scalar named s.</p>
+<p>OBJECTIVES:</p>
+<p>The solver must be modified from icoFoam which is present in $FOAM/applications/solvers/incompressible/icoFoam.
+The case should be a scalar quantity &rsquo;s' that is being transported by velocity u and the transport equation is represented by <code>{del u }/{del t } + nabla. (us) = 0</code>
+The case must be modified from $FOAM_TUTORIALS/incompressible/icoFoam/cavity.</p>
+<p>PROCEDURE:</p>
+<p>$FOAM/applications/solvers/incompressible/icoFoam and $FOAM_TUTORIALS/incompressible/icoFoam/cavity to this directory. We rename these folders to scalarFoam and scalarCavity. Our objective here is to add the scalar transport equation to the solver. So we first start by making changes in the solver.</p>
+<p>scalarFoam.c</p>
+<p>we first go into the scalarFoam and rename the icoFoam.c to scalarFoam.c. Now in the scalarFoam.c we need to add the scalar transport equation of s. we can do this by adding the following piece of code at the end of the PISO loop.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>fvScalarMatrix sEqn
+        {
+            fvm<span style=color:#f92672>::</span>ddt(s)
+            <span style=color:#f92672>+</span> fvm<span style=color:#f92672>::</span>div(phi,s)
+            
+        };
+        sEqn.relax();
+        sEqn.solve();
+</code></pre></div><p>In the above piece of code, we are solving for a scalar &rsquo;s' and the solution is to be stored in a fvScalarMatrix called sEqn. Inside this, we are defining the transport equation. The first term indicates the time derivative and the second term indicates the convection term.</p>
+<p>Finally, we add the necessary relaxations and solve the equation. In the above equation, we have defined a new variable called s. We need to define this variable, We can do this by creating a file for s in the 0 folder of the case directory.</p>
+<p>S</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>/*--------------------------------*- C++ -*----------------------------------*
+</span><span style=color:#75715e>| =========                 |                                                 |
+</span><span style=color:#75715e>|       /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+</span><span style=color:#75715e>|      /   O peration     | Version:  v2012                                 |
+</span><span style=color:#75715e>|     /    A nd           | Website:  www.openfoam.com                      |
+</span><span style=color:#75715e>|    /     M anipulation  |                                                 |
+</span><span style=color:#75715e>*---------------------------------------------------------------------------*/</span>
+FoamFile
+{
+    version     <span style=color:#ae81ff>2.0</span>;
+    format      ascii;
+    <span style=color:#66d9ef>class</span>       <span style=color:#a6e22e>volScalarField</span>;
+    location    <span style=color:#e6db74>&#34;0&#34;</span>;
+    object      s;
+}
+<span style=color:#75715e>// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+</span><span style=color:#75715e></span>
+dimensions      [<span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span> <span style=color:#ae81ff>0</span>];
+
+
+internalField   uniform <span style=color:#ae81ff>0</span>;
+
+boundaryField
+{
+    movingWall
+    {
+        type            zeroGradient;
+    }
+    fixedWalls
+    {
+        type            zeroGradient;
+    }
+    frontAndBack
+    {
+        type            empty;
+    }
+}
+
+
+<span style=color:#75715e>// ************************************************************************* //
+</span></code></pre></div><p>The above file is created by copying the pressure file and making the necessary changes. Here the dimensions of the scalar can be anything but for this project, the same dimensions of time are used. Now we need to tell OpenFOAM that s is defined here. For that, we add the following piece of code to the createFields.H</p>
+<p>createFields.H</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>Info<span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;Reading field sn&#34;</span> <span style=color:#f92672>&lt;&lt;</span> endl;
+volScalarField <span style=color:#a6e22e>s</span>
+(
+    IOobject
+    (
+        <span style=color:#e6db74>&#34;s&#34;</span>,
+        runTime.timeName(),
+        mesh,
+        IOobject<span style=color:#f92672>::</span>MUST_READ,
+        IOobject<span style=color:#f92672>::</span>AUTO_WRITE
+    ),
+    mesh
+);
+</code></pre></div><p>Now our solver is ready we need to compile it for that we make the following changes.</p>
+<p>We go into the make folder and files and modify them as shown</p>
+<p>files</p>
+<p>scalarFoam.C</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>EXE <span style=color:#f92672>=</span> <span style=color:#960050;background-color:#1e0010>$</span>(FOAM_USER_APPBIN)<span style=color:#f92672>/</span>scalarFoam
+</code></pre></div><p>The options file must not be changed since it contains the libraries required. Once this is done we open a terminal in the scalarFoam folder and run wmake. This will compile the solver.</p>
+<p>Now we must tell OpenFoam what kind of schemes to use for solving s. For that we goto fvSchemes</p>
+<p>fvSchemes</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>divSchemes
+{
+    <span style=color:#66d9ef>default</span>         none;
+    div(phi,U)      Gauss linear;
+    div(phi,s)      Gauss upwind;
+}
+</code></pre></div><p>Now we need to specify what kind of solver to be used for solving s. </p>
+<p>fvSolution</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>s
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       <span style=color:#ae81ff>1e-05</span>;
+        relTol          <span style=color:#ae81ff>0</span>;
+    }
+</code></pre></div><p>We cant use the same exact solver we used for solving p. This is because PCG is meant for symmetrical, PBiCG is meant for asymmetrical matrices, and smoothsolver for either of those.</p>
+<p>We shall now specify a non-uniform initial condition for the s. The default field values set the default value of the fields, i.e. the value the field takes unless specified otherwise in the regions sub-dictionary. That sub-dictionary contains a list of subdictionaries containing field values that override the defaults in a specified region. The region creates a set of points, cells, or faces based on some topological constraint. Here, boxToCell creates a bounding box within a vector minimum and maximum to define the set of cells of the water region. This will be done by running the set fields utility. It requires a setFieldsDict dictionary, located in the system directory, whose entries for this case are shown below.</p>
+<p>The following piece of code will be stored in a file called setFields and will be stored in the system folder.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#75715e>/*--------------------------------*- C++ -*----------------------------------*
+</span><span style=color:#75715e>| =========                 |                                                 |
+</span><span style=color:#75715e>|       /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+</span><span style=color:#75715e>|      /   O peration     | Version:  v2012                                 |
+</span><span style=color:#75715e>|     /    A nd           | Website:  www.openfoam.com                      |
+</span><span style=color:#75715e>|    /     M anipulation  |                                                 |
+</span><span style=color:#75715e>*---------------------------------------------------------------------------*/</span>
+FoamFile
+{
+    version     <span style=color:#ae81ff>2.0</span>;
+    format      ascii;
+    <span style=color:#66d9ef>class</span>       <span style=color:#a6e22e>dictionary</span>;
+    location    <span style=color:#e6db74>&#34;system&#34;</span>;
+    object      setFieldsDict;
+}
+<span style=color:#75715e>// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+</span><span style=color:#75715e></span>
+defaultFieldValues
+(
+    volScalarFieldValue s <span style=color:#ae81ff>0</span>
+);
+
+regions
+(
+    sphereToCell
+    {
+        centre (<span style=color:#ae81ff>0.05</span> <span style=color:#ae81ff>0.05</span> <span style=color:#ae81ff>0</span>);
+        radius <span style=color:#ae81ff>0.03</span>; 
+
+        fieldValues
+        (
+            volScalarFieldValue s <span style=color:#ae81ff>1</span>
+        );
+    }
+);
+
+
+<span style=color:#75715e>// ************************************************************************* //
+</span></code></pre></div><p>This is taken from the dambreak problem and is configured for the scalar s</p>
+<p>Once this is done we are ready to run the simulation</p>
+<p>Before that, we need to make some changes in the time step and mesh size </p>
+<p>In the blockmeshdict file, we set the grading as follows</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>blocks
+(
+    hex (<span style=color:#ae81ff>0</span> <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>2</span> <span style=color:#ae81ff>3</span> <span style=color:#ae81ff>4</span> <span style=color:#ae81ff>5</span> <span style=color:#ae81ff>6</span> <span style=color:#ae81ff>7</span>) (<span style=color:#ae81ff>100</span> <span style=color:#ae81ff>100</span> <span style=color:#ae81ff>1</span>) simpleGrading (<span style=color:#ae81ff>1</span> <span style=color:#ae81ff>1</span> <span style=color:#ae81ff>1</span>)
+);
+</code></pre></div><p> Also in the controlDict file, the time size is given as follows. </p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++>application     scalarFoam;
+
+startFrom       startTime;
+
+startTime       <span style=color:#ae81ff>0</span>;
+
+stopAt          endTime;
+
+endTime         <span style=color:#ae81ff>2</span>;
+
+deltaT          <span style=color:#ae81ff>0.0005</span>;
+</code></pre></div><p>The objective of this simulation is to observe the change in the scalar field s with time, in the cavity setup.</p>
+<p>Now that everything is setup we execute the following commands</p>
+<p>blockMesh</p>
+<p>checkMesh</p>
+<p>setFields</p>
+<p>scalarFoam</p>
+<p>paraFoam</p>
+<p>This will open ParaView and the results will be as shown.</p>
+<p>RESULTS:</p>
+<p>at t = 0
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634920915.jpg alt></p>
+<p>at t = 0.1s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921112.jpg alt></p>
+<p>at t = 0.2s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921128.jpg alt></p>
+<p>at t = 0.3s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921143.jpg alt></p>
+<p>at t = 0.4s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921167.jpg alt></p>
+<p>at t = 0.5s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921182.jpg alt></p>
+<p>at t = 0.6s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921204.jpg alt></p>
+<p>at t = 0.7s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921215.jpg alt></p>
+<p>at t = 0.8s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921234.jpg alt></p>
+<p>at t = 0.9s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921250.jpg alt></p>
+<p>at t = 1s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921268.jpg alt></p>
+<p>at t = 2s
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/10/ScalarCavity_1634921281.jpg alt></p>
+<p>CONCLUSION:</p>
+<p>In the final time step, we can see that how the scalar quantity has dispersed in the domain due to the presence of velocity. Since we have considered only the convection term and not the diffusion term we cannot observe the diffusion of the scalar in our domain.</p>
+</div>
+<div class=footer>
+<div class=tags>
+<i class="fa fa-tags"></i>
+<div class=links>
+<a href=https://satyasasank.github.io/CodeBlue/tags/openfoam-development/>OpenFOAM development</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div id=comments-container>
+</div>
+</div>
+<footer>
+<div class=container>
+<div class=recent-posts>
+<strong>Latest posts</strong>
+<ul>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/optimization/>Optimization of a function through genetic algorithm</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/>Creating your own OpenFOAM solver</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/cfd_meshing_of_a_tesla_cyber_truck/>CFD meshing of a Tesla Cyber truck</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/>Flow over ahmed body</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/fsae_car/>FSAE Car Project</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/secondposts/>1D Supersonic Nozzle flow simulation using MacCormac Method</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/posts/first_post/>Parsing NASA thermodynamic data using MATLAB </a>
+</li>
+</ul>
+</div>
+<div class=categories>
+<a href=https://satyasasank.github.io/CodeBlue/categories/><strong>Categories</strong></a>
+<ul>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/categories/matlab>Matlab
+(3)</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/categories/ansa>Ansa
+(1)</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/categories/ansys>Ansys
+(1)</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/categories/converge-3.0>Converge 3.0
+(1)</a>
+</li>
+<li>
+<a href=https://satyasasank.github.io/CodeBlue/categories/openfoam>Openfoam
+(1)</a>
+</li>
+</ul>
+</div>
+<div class=right>
+<div class=external-profiles>
+<strong>Social media</strong>
+<a href=https://www.linkedin.com/in/satya-s-b52717178/ target=_blank><i class="fab fa-linkedin"></i></a>
+<a href=https://github.com/SatyaSasank target=_blank><i class="fab fa-github"></i></a>
+<a href=mailto:kssasank43@gmail.com target=_blank><i class="fas fa-envelope"></i></a>
+</div>
+<div class=archive>
+<a href=https://satyasasank.github.io/CodeBlue/archive/><strong>Archive</strong></a>
+</div>
+</div>
+</div>
+</footer>
+<div class=credits>
+<div class=container>
+<div class=copyright>
+<a href=https://github.com/satyasasank target=_blank>
+&copy;
+2022
+Satya Sasank
+</a>
+</div>
+<div class=author>
+<a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Powered by Bilberry Hugo Theme</a>
+</div>
+</div>
+</div>
+<script type=text/javascript src=https://satyasasank.github.io/CodeBlue/theme.js></script>
+</body>
+</html>
