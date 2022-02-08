@@ -90,42 +90,20 @@ CodeBlue
 <p>we assume that the flow is quasi 1D i.e the flow is only along the x-axis and any change in flow along y-axis is negligible. (Taken from CFD Basics by John Anderson)</p>
 <p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/01/nozzleoriginal_1611218883.png alt></p>
 <p>To simulate the flow we need to do the following steps</p>
-<ol>
-<li>
-<p>Mesh Generation/Meshing is the process of divinding a continuous geometry into discrete geometric cells. Each cell is seperated by a node. These nodes form The Grid.</p>
-</li>
-<li>
-<p>Discretisation is the process of converting the above PDEs into algebraic equations</p>
-</li>
-<li>
-<p>Solving the discretised PDEs. Based on the type of PDEs different methods are chosen. The type of PDE in our case is hyperbolic so we are using the Mac Cormac method</p>
-</li>
-</ol>
+<p>1.Mesh Generation/Meshing is the process of divinding a continuous geometry into discrete geometric cells. Each cell is seperated by a node. These nodes form The Grid.</p>
+<p>2.Discretisation is the process of converting the above PDEs into algebraic equations</p>
+<p>3.Solving the discretised PDEs. Based on the type of PDEs different methods are chosen. The type of PDE in our case is hyperbolic so we are using the Mac Cormac method</p>
 <p>MacCormac Method is an explicit finite difference technique which is second order accurate for both space and time. It is easy to work with and the solutions obtained are stable. The procedure is as follows</p>
-<ol>
-<li>
-<p>Predictor step: Here we use the numerical method to calculate the required derivatives using the forward differencing scheme.</p>
-</li>
-<li>
-<p>Solution update: We add the change obtained in the above step to the original variable.</p>
-</li>
-<li>
-<p>Primitive Variables: (Only for conservative form )For the conservative form we calculate the primitive variables from the solution vectors, flux vectors and source terms.</p>
-</li>
-<li>
-<p>Corrector Step: We use the numerical method to calculate the same derivatives we calculated in the first step again using the backward differencing scheme.</p>
-</li>
-<li>
-<p>Calculating the average: We take the average of derivatives we obtained in step 1 and step 4.</p>
-</li>
-<li>
-<p>Final solution update: we add the final change we calculated in step 5 to the original variable. This would be the final answer.</p>
-</li>
-</ol>
+<p>1.Predictor step: Here we use the numerical method to calculate the required derivatives using the forward differencing scheme.</p>
+<p>2.Solution update: We add the change obtained in the above step to the original variable.</p>
+<p>3.Primitive Variables: (Only for conservative form )For the conservative form we calculate the primitive variables from the solution vectors, flux vectors and source terms.</p>
+<p>4.Corrector Step: We use the numerical method to calculate the same derivatives we calculated in the first step again using the backward differencing scheme.</p>
+<p>5.Calculating the average: We take the average of derivatives we obtained in step 1 and step 4.</p>
+<p>6.Final solution update: we add the final change we calculated in step 5 to the original variable. This would be the final answer.</p>
 <p>Now we know the method we get to know the equations required. To simulate the supersonic flow we solve the flow equations of both the forms i.e.,</p>
 <p>Non Conservative form:-</p>
 <p>There are three main equations for</p>
-<p>Continuity   : <code>{∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}</code></p>
+<p>Continuity   : ${∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}$</p>
 <p>Momentum : <code>ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x}</code></p>
 <p>Energy       : <code>ρ {∂ e} / {∂ t} + ρ v {∂ e} / {∂ x} = − p {∂ v} / {∂ x} − pv {ln A} / {∂ x}</code></p>
 <p>We non dimensionalise the given equations to ease our matlab programming. So new terms are</p>
@@ -747,7 +725,7 @@ uitable(<span style=color:#e6db74>&#39;columnname&#39;</span>,col,<span style=co
 <p>This is an important test we conduct to know if the solution relies on the grid size or not. If the solution relies on the grid size then the solution cannot be trusted.</p>
 <p>we take the mean of values at the throat section i.e where the area is equal to 1</p>
 <p>16th node for 31 grid points and 31st node for 61 grid points.</p>
-<p><img src=images/contable.png alt></p>
+<p><img src=https://satyasasank.github.io/CodeBlue/images/contable.png alt></p>
 <p>The above values are precise to two digits after the decimal we can say that the solution is grid independent. If all the four digits after the decimal are not precise then the solution becomes grid dependent.</p>
 <p>CONCLUSION:</p>
 <p>From the above data we can conclude that the Conservative form is much more accurate and reliable than non conservative form. In order for us to achieve more accurate results with the non conservative the timesteps must be increased.</p>
@@ -757,6 +735,7 @@ uitable(<span style=color:#e6db74>&#39;columnname&#39;</span>,col,<span style=co
 <i class="fa fa-tags"></i>
 <div class=links>
 <a href=https://satyasasank.github.io/CodeBlue/tags/cfd/>CFD</a>
+<a href=https://satyasasank.github.io/CodeBlue/tags/maccormac-method/>MacCormac Method</a>
 </div>
 </div>
 </div>
