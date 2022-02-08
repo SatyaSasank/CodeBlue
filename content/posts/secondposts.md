@@ -63,7 +63,7 @@ There are three main equations for
 
 Continuity  : `${∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}$`
 
-Momentum : \(ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x}\)
+Momentum : `ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x}`
 
 Energy       : `ρ {∂ e} / {∂ t} + ρ v {∂ e} / {∂ x} = − p {∂ v} / {∂ x} − pv {ln A} / {∂ x}`
 
@@ -784,37 +784,5 @@ CONCLUSION:
 From the above data we can conclude that the Conservative form is much more accurate and reliable than non conservative form. In order for us to achieve more accurate results with the non conservative the timesteps must be increased.
 
 
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    // Fix <code> tags after MathJax finishes running. This is a
-    // hack to overcome a shortcoming of Markdown. Discussion at
-    // https://github.com/mojombo/jekyll/issues/199
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-code.has-jax {font: inherit;
-              font-size: 100%;
-              background: inherit;
-              border: inherit;
-              color: #515151;}
 
