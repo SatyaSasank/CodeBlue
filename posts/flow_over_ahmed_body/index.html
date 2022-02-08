@@ -82,8 +82,8 @@ Flow over ahmed body
 <p>OBJECTIVES OF THE PROJECT:</p>
 <p>*Generate Velocity and pressure contours.</p>
 <p>*Calculate the drag coefficient plot for a refined case.</p>
-<p>*Generate the vector plot clearly showing the wake region. </p>
-<p>*Perform the grid independency test and evaluate the values of drag and lift with each case. </p>
+<p>*Generate the vector plot clearly showing the wake region.  </p>
+<p>*Perform the grid independency test and evaluate the values of drag and lift with each case.  </p>
 <p>THEORY</p>
 <p>What is an Ahmed body?</p>
 <p>The Ahmed body is a geometric shape first proposed by S. R. Ahmed and Ramm in 1984. The shape provides a model to study geometric effects on the wakes of ground vehicles (like cars). It is used to validate the CFD solvers. The results of airflow over this body were captured using the wind tunnel experiments and the CFD solver results are compared with these experimental results to find out the accuracy of the solver.</p>
@@ -103,13 +103,13 @@ Flow over ahmed body
 <p>Now we use the enclosure option to create an enclosure on the ahmed body. We then uncheck the original imported geometry, suppress it for physics. This is to be done to prevent overlapping of bodies.</p>
 <p>Now we create another box around the ahmed body, This box will be used for mesh refinement. We use the interference tool to remove the mesh interference. Once this is done we exit the Spaceclaim. This model will be updated to Ansys workbench.</p>
 <p>Once created the geometry should like this</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot(257)_1623415152.png alt></p>
+<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(257)_1623415152.png alt></p>
 <p>Meshing</p>
 <p>Now we open the Ansys mesher. Here we first start by naming the boundaries as.</p>
 <p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Boundary_name1_1623415495.png alt>
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Boundary_name2_1623415534.png alt>        </p>
 <p>The second box created is for refining the mesh hence we select the mutizone mesh. If we inspect the geometry we can see that the legs of the ahmed body lost their cylindrical shape. This is due to coarse size of the mesh. To regain the shape we use face sizing at the legs. In order to give the refinement we use the edge sizing option to refine the mesh inside the refinement zone. To capture the effects at the car wall we give inflation layers at the car wall. Upon meshing the geometry will look like this.</p>
-<p>![](<a href=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot>https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot</a> (260)_1623478493.png)</p>
+<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(260)_1623478493.png alt></p>
 <p>Case setup</p>
 <p>For this project we use a steady state solver. And since the velocity is less to be worried about mach number we use a pressure based solver. This is an external flow hence we use a K Omega SST model to solve for turbulence. The fluid is taken as air and the properties are default. The boundaries are set as follows.</p>
 <p><img src=images/ahmedbodyTable.png alt></p>
@@ -150,7 +150,7 @@ This air eventually passes over the geometry and when ever there is a sharp chan
 <p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(273)_1623566405.png alt>
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(279)_1623568424.png alt></p>
 <p>CONCLUSION:</p>
-<p>*From the Velocity contour, it is observed that after passing through the geometry there is a region where recirculation happens this region is called as wake region. Due to this low pressure, the air at the front tries to come back which causes the Pressure drag.
+<p>*From the Velocity contour, it is observed that after passing through the geometry there is a region where recirculation happens this region is called as wake region. Due to this low pressure, the air at the front tries to come back which causes the Pressure drag.<br>
 *On reducing the grid size the Cd and Cl values increases by some extent implying the solution is grid dependent. But the minor increase indicates that by the next lower size the solution may stabilise and become grid dependent.</p>
 <p>REFERENCES:</p>
 <p><a href=https://curiosityfluids.com/2016/09/07/the-ahmed-body/>The Ahmed Body</a></p>
