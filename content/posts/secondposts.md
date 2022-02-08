@@ -60,15 +60,18 @@ Non Conservative form:-
 
 There are three main equations for
 
-Continuity   : ${∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}$
+Continuity   : $${∂ ρ} / {∂ t} + v . {∂ ρ A} / {∂ x} = − ρ A {∂ v} / {∂ x}$$
 
 Momentum : `ρ {∂ v} / {∂ t} + pv {∂ v} / {∂ x} = {− ∂ p} / {∂ x}`
 
 Energy       : `ρ {∂ e} / {∂ t} + ρ v {∂ e} / {∂ x} = − p {∂ v} / {∂ x} − pv {ln A} / {∂ x}`
 
 We non dimensionalise the given equations to ease our matlab programming. So new terms are
+```math
 
 `x ' = {x} / {L}`;`v ' = {v} / (underset0a)`;`T' = {T} / {{L} / underset0a}`; `A ' = {A} / A ^ {0}`
+
+```
 
 Non dimensionalised equations are
 
