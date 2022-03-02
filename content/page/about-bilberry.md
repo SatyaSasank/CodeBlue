@@ -7,4 +7,4 @@ showDate: false
 
 Hi there! Welcome to my blog. Im a mechanical engineer and a CFD enthusiast and this is where i post my projects, findings and all other interesting facts about engineering particularly related to Computational Fluid Dynamics.
 
-You can download my resume [here](/Resume_sasank.pdf)
+You can download my resume [here](https://drive.google.com/file/d/1hiFBAJ9CDbnZxrj7H2pedSLDxd9jZgcf/view?usp=sharing)
