@@ -6,11 +6,10 @@
 <meta name=author content="Satya Sasank">
 <meta name=description content="Satya Sasank's Blog">
 <meta name=keywords content="Computational Fluid Dynamics,linux,OpenFOAM,ANSYS,ANSA,Converge,python programming,Matlab/Octave">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <title>
 Flow over ahmed body | CodeBlue
-</title>
-<meta name=description content="Flow over ahmed body - Satya Sasank's Blog">
+</title><meta name=description content="Flow over ahmed body - Satya Sasank's Blog">
 <meta itemprop=name content="Flow over ahmed body">
 <meta itemprop=description content="Flow over ahmed body - Satya Sasank's Blog">
 <meta property="og:title" content="Flow over ahmed body">
@@ -24,39 +23,26 @@ Flow over ahmed body | CodeBlue
 <link href=https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/ rel=feed type=application/rss+xml title=CodeBlue>
 <link rel=canonical href=https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/>
 <link rel=stylesheet href=https://satyasasank.github.io/CodeBlue/theme.css>
-</head>
-<body class=bilberry-hugo-theme>
+</head><body class=bilberry-hugo-theme>
 <nav>
 <div class=container>
 <ul class=topnav>
-<li><a href=https://satyasasank.github.io/CodeBlue/page/about-bilberry/>About</a></li>
-<li><a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Github</a></li>
-</ul>
-</div>
-</nav>
-<header>
+<li><a href=https://satyasasank.github.io/CodeBlue/page/about-bilberry/>About</a></li><li><a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Github</a></li></ul></div></nav><header>
 <div class=container>
 <div class=logo>
 <a href=https://satyasasank.github.io/CodeBlue/ class=logo>
 <img src=https://satyasasank.github.io/CodeBlue/images/profile.jpg alt>
 <span class=overlay><i class="fa fa-home"></i></span>
 </a>
-</div>
-<div class=titles>
+</div><div class=titles>
 <h3 class=title>
 <a href=https://satyasasank.github.io/CodeBlue/>
 CodeBlue
 </a>
-</h3>
-<span class=subtitle>Welcome to my blog!</span>
-</div>
-<div class=toggler>
+</h3><span class=subtitle>Welcome to my blog!</span>
+</div><div class=toggler>
 <i class="fa fa-bars" aria-hidden=true></i>
-</div>
-</div>
-</div>
-</header>
-<div class="main container">
+</div></div></div></header><div class="main container">
 <div class="article-wrapper u-cf single">
 <a class=bubble href=https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/>
 <i class="fas fa-fw fa-pencil-alt"></i>
@@ -67,8 +53,7 @@ CodeBlue
 <a href=https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/>
 Flow over ahmed body
 </a>
-</h1>
-<div class=meta>
+</h1><div class=meta>
 <span class="date moment">2022-02-08</span>
 <span class=categories>
 <a href=https://satyasasank.github.io/CodeBlue/categories/ansys/>Ansys</a>
@@ -76,168 +61,74 @@ Flow over ahmed body
 <span class=author>
 <a href=https://satyasasank.github.io/CodeBlue/author/satya-sasank/>Satya Sasank</a>
 </span>
-</div>
-<p>AIM:</p>
-<p>This project aims to simulate the flow over Ahmed body in Ansys Fluent.</p>
-<p>OBJECTIVES OF THE PROJECT:</p>
-<p>*Generate Velocity and pressure contours.</p>
-<p>*Calculate the drag coefficient plot for a refined case.</p>
-<p>*Generate the vector plot clearly showing the wake region.  </p>
-<p>*Perform the grid independency test and evaluate the values of drag and lift with each case.  </p>
-<p>THEORY</p>
-<p>What is an Ahmed body?</p>
-<p>The Ahmed body is a geometric shape first proposed by S. R. Ahmed and Ramm in 1984. The shape provides a model to study geometric effects on the wakes of ground vehicles (like cars). It is used to validate the CFD solvers. The results of airflow over this body were captured using the wind tunnel experiments and the CFD solver results are compared with these experimental results to find out the accuracy of the solver.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/AhmedBody_1623386070.png alt></p>
-<p>Picture credits : <a href=https://www.researchgate.net/publication/266883948_Flow_and_Turbulence_Structures_in_the_Wake_of_a_Simplified_Car_Model_Ahmed_Model>Flow and Turbulence Structures in the Wake of a Simplified Car Model</a></p>
-<p>The above picture represents the ahmed body dimensions. Its virtual version can be found <a href="https://drive.google.com/open?id=1gfeLjCjeeVqio38CGdhDEsfRUotrU5l_">here</a></p>
-<p>PROCEDURE:</p>
-<p>Importing the CAD model</p>
-<p>The geometry can be created using any standard CAD package. In this case the geometry is already created.</p>
-<p>We import the STEP file into Ansys Spaceclaim. Once the geometry appears, we need to check the geometry units. We can do this by selecting any one side of the geometry. Upon selecting the dimensions are displayed at the bottom. If the dimensions are in mm.</p>
-<p>We can change the dimensions using File> Spaceclaim Options > Units. And convert them to meters.</p>
-<p>To observe the flow over an Ahmed body we create a virtual wind tunnel. We do this by creating another geometry on this. This can be created by using enclosure.</p>
-<p>But before we create the wind tunnel, we need to know the dimensions of the wind tunnel.</p>
-<p>The distance after the Ahmed body should be 5 - 10 times the characteristic length but 10 times the characteristic length requires more computational time and power hence we reduce it to 5 times to accurately capture the wake produced.</p>
-<p>In the z-direction, the total length should be at least 5 times but due to computational restraint we reduce it to 0.5 m</p>
-<p>we keep the same length for y as well, Y direction length (from above the Ahmed body) is 1 m</p>
-<p>Now we use the enclosure option to create an enclosure on the ahmed body. We then uncheck the original imported geometry, suppress it for physics. This is to be done to prevent overlapping of bodies.</p>
-<p>Now we create another box around the ahmed body, This box will be used for mesh refinement. We use the interference tool to remove the mesh interference. Once this is done we exit the Spaceclaim. This model will be updated to Ansys workbench.</p>
-<p>Once created the geometry should like this</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(257)_1623415152.png alt></p>
-<p>Meshing</p>
-<p>Now we open the Ansys mesher. Here we first start by naming the boundaries as.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Boundary_name1_1623415495.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Boundary_name2_1623415534.png alt>        </p>
-<p>The second box created is for refining the mesh hence we select the mutizone mesh. If we inspect the geometry we can see that the legs of the ahmed body lost their cylindrical shape. This is due to coarse size of the mesh. To regain the shape we use face sizing at the legs. In order to give the refinement we use the edge sizing option to refine the mesh inside the refinement zone. To capture the effects at the car wall we give inflation layers at the car wall. Upon meshing the geometry will look like this.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(260)_1623478493.png alt></p>
-<p>Case setup</p>
-<p>For this project we use a steady state solver. And since the velocity is less to be worried about mach number we use a pressure based solver. This is an external flow hence we use a K Omega SST model to solve for turbulence. The fluid is taken as air and the properties are default. The boundaries are set as follows.</p>
-<p><img src=https://satyasasank.github.io/CodeBlue/images/ahmedbodyTable.png alt></p>
-<p>Before we proceed to initialisation we need to take care of the reference values. This is important and incorrect reference values will lead to improper drag and lift values.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/ReferenceValues_1623480486.png alt></p>
-<p>Once these values are set we can proceed to initialisation (Hybrid/Standard). Once initialisation is done we get initial velocity contours. We create a plane and observe the velocity contour on that plane. Also we save this animation for future references.</p>
-<p>We now run the simulation for 350 iterations and the end results are as follows</p>
-<p>Velocity contour
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Velocity_contour_1623484042.png alt></p>
-<p>Residual plots
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Residuals_1623484066.png alt></p>
-<p>Cd plot
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Cdplot_1623484109.png alt></p>
-<p>Cl plot
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Clplot_1623568874.png alt></p>
-<p>POST PROCESSING:</p>
-<p>We can post process the above results to get some important results such as line probes, graphs and vector plots. These are important to identify the point of seperation, recirculation zone etc.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/VectorPlot_1623498785.jpg alt></p>
-<p>The above vectors are plotted on a plane XY at Z = 163.5 mm.</p>
-<p>Recirculation Zone</p>
-<p>When an object moves in a fluid, the first layer of the fluid sticks on the surface of the body. When there is a sharp change in the geometry,
+</div><p>AIM:</p><p>This project aims to simulate the flow over Ahmed body in Ansys Fluent.</p><p>OBJECTIVES OF THE PROJECT:</p><p>*Generate Velocity and pressure contours.</p><p>*Calculate the drag coefficient plot for a refined case.</p><p>*Generate the vector plot clearly showing the wake region.  </p><p>*Perform the grid independency test and evaluate the values of drag and lift with each case.  </p><p>THEORY</p><p>What is an Ahmed body?</p><p>The Ahmed body is a geometric shape first proposed by S. R. Ahmed and Ramm in 1984. The shape provides a model to study geometric effects on the wakes of ground vehicles (like cars). It is used to validate the CFD solvers. The results of airflow over this body were captured using the wind tunnel experiments and the CFD solver results are compared with these experimental results to find out the accuracy of the solver.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/AhmedBody_1623386070.png alt></p><p>Picture credits : <a href=https://www.researchgate.net/publication/266883948_Flow_and_Turbulence_Structures_in_the_Wake_of_a_Simplified_Car_Model_Ahmed_Model>Flow and Turbulence Structures in the Wake of a Simplified Car Model</a></p><p>The above picture represents the ahmed body dimensions. Its virtual version can be found <a href="https://drive.google.com/open?id=1gfeLjCjeeVqio38CGdhDEsfRUotrU5l_">here</a></p><p>PROCEDURE:</p><p>Importing the CAD model</p><p>The geometry can be created using any standard CAD package. In this case the geometry is already created.</p><p>We import the STEP file into Ansys Spaceclaim. Once the geometry appears, we need to check the geometry units. We can do this by selecting any one side of the geometry. Upon selecting the dimensions are displayed at the bottom. If the dimensions are in mm.</p><p>We can change the dimensions using File> Spaceclaim Options > Units. And convert them to meters.</p><p>To observe the flow over an Ahmed body we create a virtual wind tunnel. We do this by creating another geometry on this. This can be created by using enclosure.</p><p>But before we create the wind tunnel, we need to know the dimensions of the wind tunnel.</p><p>The distance after the Ahmed body should be 5 - 10 times the characteristic length but 10 times the characteristic length requires more computational time and power hence we reduce it to 5 times to accurately capture the wake produced.</p><p>In the z-direction, the total length should be at least 5 times but due to computational restraint we reduce it to 0.5 m</p><p>we keep the same length for y as well, Y direction length (from above the Ahmed body) is 1 m</p><p>Now we use the enclosure option to create an enclosure on the ahmed body. We then uncheck the original imported geometry, suppress it for physics. This is to be done to prevent overlapping of bodies.</p><p>Now we create another box around the ahmed body, This box will be used for mesh refinement. We use the interference tool to remove the mesh interference. Once this is done we exit the Spaceclaim. This model will be updated to Ansys workbench.</p><p>Once created the geometry should like this</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(257)_1623415152.png alt></p><p>Meshing</p><p>Now we open the Ansys mesher. Here we first start by naming the boundaries as.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Boundary_name1_1623415495.png alt>
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Boundary_name2_1623415534.png alt>        </p><p>The second box created is for refining the mesh hence we select the mutizone mesh. If we inspect the geometry we can see that the legs of the ahmed body lost their cylindrical shape. This is due to coarse size of the mesh. To regain the shape we use face sizing at the legs. In order to give the refinement we use the edge sizing option to refine the mesh inside the refinement zone. To capture the effects at the car wall we give inflation layers at the car wall. Upon meshing the geometry will look like this.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(260)_1623478493.png alt></p><p>Case setup</p><p>For this project we use a steady state solver. And since the velocity is less to be worried about mach number we use a pressure based solver. This is an external flow hence we use a K Omega SST model to solve for turbulence. The fluid is taken as air and the properties are default. The boundaries are set as follows.</p><p><img src=https://satyasasank.github.io/CodeBlue/images/ahmedbodyTable.png alt></p><p>Before we proceed to initialisation we need to take care of the reference values. This is important and incorrect reference values will lead to improper drag and lift values.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/ReferenceValues_1623480486.png alt></p><p>Once these values are set we can proceed to initialisation (Hybrid/Standard). Once initialisation is done we get initial velocity contours. We create a plane and observe the velocity contour on that plane. Also we save this animation for future references.</p><p>We now run the simulation for 350 iterations and the end results are as follows</p><p>Velocity contour
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Velocity_contour_1623484042.png alt></p><p>Residual plots
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Residuals_1623484066.png alt></p><p>Cd plot
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Cdplot_1623484109.png alt></p><p>Cl plot
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Clplot_1623568874.png alt></p><p>POST PROCESSING:</p><p>We can post process the above results to get some important results such as line probes, graphs and vector plots. These are important to identify the point of seperation, recirculation zone etc.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/VectorPlot_1623498785.jpg alt></p><p>The above vectors are plotted on a plane XY at Z = 163.5 mm.</p><p>Recirculation Zone</p><p>When an object moves in a fluid, the first layer of the fluid sticks on the surface of the body. When there is a sharp change in the geometry,
 there comes a point on the body where the fluid detaches from the surface, thus breaking the boundary layer, this point at which the fluid
 detaches from the surface is called the point of separation. Due to this flow seperation happens and a low pressure zone is created at the
 end of the ahmed body.This low pressure is again occupied by air from the high pressure. This process is called as recirculation of air and this
 zone is called as ReCircualtion Zone
-If we are to take a look at the pressure contour it would look like this. </p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(269)_1623495759.png alt></p>
-<p>Negative Pressure ?</p>
-<p>In the above contour, the range of pressure is adjusted so that the negative pressure range can be clearly seen. The explanation as to why there is a negative pressure in the domain goes as follows:</p>
-<p>When the air hits the ahmed body the air gets stagnated at the front causing a stagnation of air due to which the pressure rises, This can be observed at the front portion of ahmedbody. The area in red indicates the increased pressure.
-This air eventually passes over the geometry and when ever there is a sharp change in geometry this air tends to expand increasing velocity and losing pressure. This pressure drop causes the negative pressure zones.</p>
-<p>Grid Dependency Test</p>
-<p>The above case we looked at is the most refined case. We change the mesh size and see if it affects the solution. In the earlier case the size of the grid in the refinement zone is 0.02m. We change the size of the refinement zone to 0.03 and 0.04 m</p>
-<p>GRID SIZE 0.03 m
+If we are to take a look at the pressure contour it would look like this. </p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(269)_1623495759.png alt></p><p>Negative Pressure ?</p><p>In the above contour, the range of pressure is adjusted so that the negative pressure range can be clearly seen. The explanation as to why there is a negative pressure in the domain goes as follows:</p><p>When the air hits the ahmed body the air gets stagnated at the front causing a stagnation of air due to which the pressure rises, This can be observed at the front portion of ahmedbody. The area in red indicates the increased pressure.
+This air eventually passes over the geometry and when ever there is a sharp change in geometry this air tends to expand increasing velocity and losing pressure. This pressure drop causes the negative pressure zones.</p><p>Grid Dependency Test</p><p>The above case we looked at is the most refined case. We change the mesh size and see if it affects the solution. In the earlier case the size of the grid in the refinement zone is 0.02m. We change the size of the refinement zone to 0.03 and 0.04 m</p><p>GRID SIZE 0.03 m
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(277)_1623567293.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(278)_1623567304.png alt></p>
-<p>GRID SIZE 0.04 m</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(273)_1623566405.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(279)_1623568424.png alt></p>
-<p>CONCLUSION:</p>
-<p>*From the Velocity contour, it is observed that after passing through the geometry there is a region where recirculation happens this region is called as wake region. Due to this low pressure, the air at the front tries to come back which causes the Pressure drag.<br>
-*On reducing the grid size the Cd and Cl values increases by some extent implying the solution is grid dependent. But the minor increase indicates that by the next lower size the solution may stabilise and become grid dependent.</p>
-<p>REFERENCES:</p>
-<p><a href=https://curiosityfluids.com/2016/09/07/the-ahmed-body/>The Ahmed Body</a></p>
-<p><a href="https://www.engineersedge.com/physics/viscosity_of_air_dynamic_and_kinematic_14483.htm#:~:text=The%20viscosity%20of%20air%20depends,10%2D5%20Pa%C2%B7s%20.&text=At%2025%20%C2%B0C%2C%20the,the%20kinematic%20viscosity%2015.7%20cSt.">The viscosity of Air, Dynamic and Kinematic</a></p>
-<p><a href=https://www.researchgate.net/publication/330383775_Experiments_and_numerical_simulations_on_the_aerodynamics_of_the_Ahmed_body>Experiments and numerical simulations on the aerodynamics of the Ahmed body</a></p>
-</div>
-<div class=footer>
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(278)_1623567304.png alt></p><p>GRID SIZE 0.04 m</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(273)_1623566405.png alt>
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/06/Screenshot%20(279)_1623568424.png alt></p><p>CONCLUSION:</p><p>*From the Velocity contour, it is observed that after passing through the geometry there is a region where recirculation happens this region is called as wake region. Due to this low pressure, the air at the front tries to come back which causes the Pressure drag.<br>
+*On reducing the grid size the Cd and Cl values increases by some extent implying the solution is grid dependent. But the minor increase indicates that by the next lower size the solution may stabilise and become grid dependent.</p><p>REFERENCES:</p><p><a href=https://curiosityfluids.com/2016/09/07/the-ahmed-body/>The Ahmed Body</a></p><p><a href="https://www.engineersedge.com/physics/viscosity_of_air_dynamic_and_kinematic_14483.htm#:~:text=The%20viscosity%20of%20air%20depends,10%2D5%20Pa%C2%B7s%20.&text=At%2025%20%C2%B0C%2C%20the,the%20kinematic%20viscosity%2015.7%20cSt.">The viscosity of Air, Dynamic and Kinematic</a></p><p><a href=https://www.researchgate.net/publication/330383775_Experiments_and_numerical_simulations_on_the_aerodynamics_of_the_Ahmed_body>Experiments and numerical simulations on the aerodynamics of the Ahmed body</a></p></div><div class=footer>
 <div class=tags>
 <i class="fa fa-tags"></i>
 <div class=links>
 <a href=https://satyasasank.github.io/CodeBlue/tags/cfd/>CFD</a>
 <a href=https://satyasasank.github.io/CodeBlue/tags/aerodynamics/>Aerodynamics</a>
-</div>
-</div>
-</div>
-</article>
-</div>
-<div id=comments-container>
-</div>
-</div>
-<footer>
+</div></div></div></article></div><div id=comments-container>
+</div></div><footer>
 <div class=container>
 <div class=recent-posts>
 <strong>Latest posts</strong>
 <ul>
 <li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/optimization/>Optimization of a function through genetic algorithm</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/>Creating your own OpenFOAM solver</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/cfd_meshing_of_a_tesla_cyber_truck/>CFD meshing of a Tesla Cyber truck</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/>Flow over ahmed body</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/fsae_car/>FSAE Car Project</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/secondposts/>1D Supersonic Nozzle flow simulation using MacCormac Method</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/first_post/>Parsing NASA thermodynamic data using MATLAB </a>
-</li>
-</ul>
-</div>
-<div class=categories>
+</li></ul></div><div class=categories>
 <a href=https://satyasasank.github.io/CodeBlue/categories/><strong>Categories</strong></a>
 <ul>
 <li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/matlab>Matlab
 (3)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/ansa>Ansa
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/ansys>Ansys
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/converge-3.0>Converge 3.0
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/openfoam>Openfoam
 (1)</a>
-</li>
-</ul>
-</div>
-<div class=right>
+</li></ul></div><div class=right>
 <div class=external-profiles>
 <strong>Social media</strong>
 <a href=https://www.linkedin.com/in/satya-s-b52717178/ target=_blank><i class="fab fa-linkedin"></i></a>
 <a href=https://github.com/SatyaSasank target=_blank><i class="fab fa-github"></i></a>
 <a href=mailto:kssasank43@gmail.com target=_blank><i class="fas fa-envelope"></i></a>
-</div>
-<div class=archive>
+</div><div class=archive>
 <a href=https://satyasasank.github.io/CodeBlue/archive/><strong>Archive</strong></a>
-</div>
-</div>
-</div>
-</footer>
-<div class=credits>
+</div></div></div></footer><div class=credits>
 <div class=container>
 <div class=copyright>
 <a href=https://github.com/satyasasank target=_blank>
@@ -245,12 +136,7 @@ This air eventually passes over the geometry and when ever there is a sharp chan
 2022
 Satya Sasank
 </a>
-</div>
-<div class=author>
+</div><div class=author>
 <a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Powered by Bilberry Hugo Theme</a>
-</div>
-</div>
-</div>
-<script type=text/javascript src=https://satyasasank.github.io/CodeBlue/theme.js></script>
-</body>
-</html>
+</div></div></div><script type=text/javascript src=https://satyasasank.github.io/CodeBlue/theme.js></script>
+</body></html>

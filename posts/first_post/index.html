@@ -6,11 +6,10 @@
 <meta name=author content="Satya Sasank">
 <meta name=description content="Satya Sasank's Blog">
 <meta name=keywords content="Computational Fluid Dynamics,linux,OpenFOAM,ANSYS,ANSA,Converge,python programming,Matlab/Octave">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <title>
 Parsing NASA thermodynamic data using MATLAB | CodeBlue
-</title>
-<meta name=description content="Parsing NASA thermodynamic data using MATLAB  - Satya Sasank's Blog">
+</title><meta name=description content="Parsing NASA thermodynamic data using MATLAB  - Satya Sasank's Blog">
 <meta itemprop=name content="Parsing NASA thermodynamic data using MATLAB ">
 <meta itemprop=description content="Parsing NASA thermodynamic data using MATLAB  - Satya Sasank's Blog">
 <meta property="og:title" content="Parsing NASA thermodynamic data using MATLAB ">
@@ -24,39 +23,26 @@ Parsing NASA thermodynamic data using MATLAB | CodeBlue
 <link href=https://satyasasank.github.io/CodeBlue/posts/first_post/ rel=feed type=application/rss+xml title=CodeBlue>
 <link rel=canonical href=https://satyasasank.github.io/CodeBlue/posts/first_post/>
 <link rel=stylesheet href=https://satyasasank.github.io/CodeBlue/theme.css>
-</head>
-<body class=bilberry-hugo-theme>
+</head><body class=bilberry-hugo-theme>
 <nav>
 <div class=container>
 <ul class=topnav>
-<li><a href=https://satyasasank.github.io/CodeBlue/page/about-bilberry/>About</a></li>
-<li><a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Github</a></li>
-</ul>
-</div>
-</nav>
-<header>
+<li><a href=https://satyasasank.github.io/CodeBlue/page/about-bilberry/>About</a></li><li><a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Github</a></li></ul></div></nav><header>
 <div class=container>
 <div class=logo>
 <a href=https://satyasasank.github.io/CodeBlue/ class=logo>
 <img src=https://satyasasank.github.io/CodeBlue/images/profile.jpg alt>
 <span class=overlay><i class="fa fa-home"></i></span>
 </a>
-</div>
-<div class=titles>
+</div><div class=titles>
 <h3 class=title>
 <a href=https://satyasasank.github.io/CodeBlue/>
 CodeBlue
 </a>
-</h3>
-<span class=subtitle>Welcome to my blog!</span>
-</div>
-<div class=toggler>
+</h3><span class=subtitle>Welcome to my blog!</span>
+</div><div class=toggler>
 <i class="fa fa-bars" aria-hidden=true></i>
-</div>
-</div>
-</div>
-</header>
-<div class="main container">
+</div></div></div></header><div class="main container">
 <div class="article-wrapper u-cf single">
 <a class=bubble href=https://satyasasank.github.io/CodeBlue/posts/first_post/>
 <i class="fas fa-fw fa-pencil-alt"></i>
@@ -67,8 +53,7 @@ CodeBlue
 <a href=https://satyasasank.github.io/CodeBlue/posts/first_post/>
 Parsing NASA thermodynamic data using MATLAB
 </a>
-</h1>
-<div class=meta>
+</h1><div class=meta>
 <span class="date moment">2022-01-26</span>
 <span class=categories>
 <a href=https://satyasasank.github.io/CodeBlue/categories/matlab/>Matlab</a>
@@ -76,19 +61,10 @@ Parsing NASA thermodynamic data using MATLAB
 <span class=author>
 <a href=https://satyasasank.github.io/CodeBlue/author/satya-sasank/>Satya Sasank</a>
 </span>
-</div>
-<p>AIM:</p>
-<p>The aim of this project is to write a MATLAB program that can read a file that contains thermodynamic data in a polynomial format (eg. files from CHEMKIN II).</p>
-<p><a href="https://drive.google.com/file/d/1AikCHDlz9s_fu8whE81qee_GD4AyYpCP/view?usp=sharing">NASA thermodynamic data</a></p>
-<p>OBJECTIVES OF THE PROJECT:</p>
-<p>The above file contains a set of compounds for which a set of coefficients are given. These coefficients are used in the above equation to get the values for Cp, enthalpy, and entropy. Each compound or gas contains 14 coefficient and the first 7 coefficients are to be used if the temperature are high and the next 7 coefficients are to be used if the temperatures are low.</p>
-<p>Also, the high, low mid temperatures for each compound are mentioned. Using this data, the coefficients and the thermodynamic values are to be extracted.
+</div><p>AIM:</p><p>The aim of this project is to write a MATLAB program that can read a file that contains thermodynamic data in a polynomial format (eg. files from CHEMKIN II).</p><p><a href="https://drive.google.com/file/d/1AikCHDlz9s_fu8whE81qee_GD4AyYpCP/view?usp=sharing">NASA thermodynamic data</a></p><p>OBJECTIVES OF THE PROJECT:</p><p>The above file contains a set of compounds for which a set of coefficients are given. These coefficients are used in the above equation to get the values for Cp, enthalpy, and entropy. Each compound or gas contains 14 coefficient and the first 7 coefficients are to be used if the temperature are high and the next 7 coefficients are to be used if the temperatures are low.</p><p>Also, the high, low mid temperatures for each compound are mentioned. Using this data, the coefficients and the thermodynamic values are to be extracted.
 The molecular mass of a particular species is also to be calculated.
 After getting the required thermodynamic values each individual value is to be plotted against the local temperature
-These files are to be saved as images with appropriate names and these images are to be stored in a folder specific to a particular species.</p>
-<p>PROCEDURE:</p>
-<p>Parsing is the process of splitting data into chunks of information that are easier to manipulate and store. We parse the thermodynamic data to extract useful information from it. To do that I’ve followed this procedure.</p>
-<p>The given file is taken as an input and fed into a string array line by line.
+These files are to be saved as images with appropriate names and these images are to be stored in a folder specific to a particular species.</p><p>PROCEDURE:</p><p>Parsing is the process of splitting data into chunks of information that are easier to manipulate and store. We parse the thermodynamic data to extract useful information from it. To do that I’ve followed this procedure.</p><p>The given file is taken as an input and fed into a string array line by line.
 The first line is the heading so no changes required with that.
 The second line is the global temperature values so I extracted the temperatures from the second line by splitting them exactly at the spaces used between the words
 These string temperature values are then converted into numerical values.
@@ -106,364 +82,317 @@ For our ease of understanding the program, a separate function is written to fin
 Also, another condition is implemented in the function that for a range of temperatures ranging from mid local temperature to high local temperature the first 7 coefficients are to be used, and for temperatures ranging from low local temperature to mid local temperature, the second 7 coefficients are to be used.
 This forms an array of values for the three thermodynamic parameters. The array depends on the range of temperature provided.
 Another function is written to calculate the molecular mass of species. This function takes the species name, compares it with the data set provided, and if the name matches then the program will add the mass. It also takes the polyatomic gases into consideration and adds the mass accordingly. The generated mass for each species is then displayed in the command window using a printf command.
-Now for the program to generate plots and store them in a separate folder, we need to create a folder first and change the MATLAB operating directory into that folder and then store the plots and come back to the original directory where all the programs are stored. This procedure can be used for all species. The code employs the same. To save the plots we use a command called save as where it saves the file into the format specified in the current operating directory. The format used here is JPG format. After the file saving is complete the current directory is changed back to the program directory and the end of the loop.</p>
-<p>If everything is in place the program should look like this</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab>
-clear all 
-close all
-clc
-
-<span style=color:#75715e>%opening the thermo.dat with read only permissions</span>
-f1 = fopen(<span style=color:#e6db74>&#39;THERMO.dat&#39;</span>,<span style=color:#e6db74>&#39;r&#39;</span>);
-
-<span style=color:#75715e>%reading the file line by line</span>
-tline = fgetl(f1);
-i = <span style=color:#ae81ff>1</span>;
-L = string(<span style=color:#ae81ff>100</span>);
-<span style=color:#66d9ef>while</span> ischar(tline)
-     L(i) = tline;
-     i=i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
-     tline = fgetl(f1); 
-<span style=color:#66d9ef>end</span>
-
-<span style=color:#75715e>%Header</span>
-disp(L(<span style=color:#ae81ff>1</span>));
-
-<span style=color:#75715e>%2nd line global temperature values</span>
-L_2_split = strsplit(L(<span style=color:#ae81ff>2</span>),<span style=color:#e6db74>&#39; &#39;</span>);
-<span style=color:#75715e>%splitting the second line using the delimiter</span>
-<span style=color:#75715e>%converting them to number</span>
-g_l_t = str2double(L_2_split{<span style=color:#ae81ff>2</span>});
-g_m_t = str2double(L_2_split{<span style=color:#ae81ff>3</span>});
-g_h_t = str2double(L_2_split{<span style=color:#ae81ff>4</span>});
-
-disp(<span style=color:#e6db74>&#39;global temperature values&#39;</span>)
-fprintf(<span style=color:#e6db74>&#39;Low temp:%dn&#39;</span>,g_l_t)
-fprintf(<span style=color:#e6db74>&#39;Mid temp: %dn&#39;</span>,g_m_t)
-fprintf(<span style=color:#e6db74>&#39;High temP: %dn&#39;</span>,g_h_t);
-
-<span style=color:#75715e>%3,4,5 lines are comments so I leave them be.</span>
-disp(L(<span style=color:#ae81ff>3</span>));
-disp(L(<span style=color:#ae81ff>4</span>));
-disp(L(<span style=color:#ae81ff>5</span>));
-
-<span style=color:#75715e>%Parsing the species block</span>
-<span style=color:#66d9ef>for</span> j = <span style=color:#ae81ff>6</span>:<span style=color:#ae81ff>4</span>:<span style=color:#ae81ff>214</span>
-<span style=color:#75715e>%Starting fro 6th line is the name of the species and the same repeats</span>
-<span style=color:#75715e>%after every 4 lines so the above logic is used to identify the species</span>
-<span style=color:#75715e>%name</span>
-spe_head = strsplit(L(j),<span style=color:#e6db74>&#39; &#39;</span>);
-<span style=color:#75715e>%identifying different parameters by splitting them using the strsplit</span>
-<span style=color:#75715e>%command</span>
-q = numel(spe_head);
-<span style=color:#75715e>%identifying no of useful terms in the first line</span>
-species_name = char(spe_head(<span style=color:#ae81ff>1</span>));
-<span style=color:#75715e>%making sure that the species name is a string</span>
-
-<span style=color:#75715e>%the species ID and the atoms were inseperable so i clubbed them to from a</span>
-<span style=color:#75715e>%new term and the G represents the physical state of the species at NTP so</span>
-<span style=color:#75715e>%gathered it along with the row number</span>
-<span style=color:#66d9ef>for</span> h = <span style=color:#ae81ff>2</span>:q<span style=color:#f92672>-</span><span style=color:#ae81ff>5</span>
-    id_atoms = spe_head(h)<span style=color:#f92672>+</span>spe_head(h<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>); 
-    physical_state = spe_head(q<span style=color:#f92672>-</span><span style=color:#ae81ff>4</span>);
-    spe_row_number = spe_head(q);
-<span style=color:#66d9ef>end</span>
-<span style=color:#75715e>%starting from right towards left we have the row number and the</span>
-<span style=color:#75715e>%temperatures so i came from right to left to get the local temp values for</span>
-<span style=color:#75715e>%that particular species</span>
-l_l_t = str2double(spe_head{q<span style=color:#f92672>-</span><span style=color:#ae81ff>3</span>});
-l_h_t = str2double(spe_head{q<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>});
-l_m_t = str2double(spe_head{q<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>});
-<span style=color:#75715e>%An array of local temp values is constructed</span>
-temp = [l_l_t,l_h_t,l_m_t];
-<span style=color:#75715e>%to extract the coefficients i used the following procedure. So the</span>
-<span style=color:#75715e>%coefficients are there in the next line to the line containing the</span>
-<span style=color:#75715e>%species name so i added +1 to go to the next line</span>
-f_e = strfind(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>),<span style=color:#e6db74>&#39;E&#39;</span>);
-<span style=color:#75715e>%i identified the terms by seperating them at E</span>
-a = char(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>));
-<span style=color:#75715e>%i made sure the entire line is in string format</span>
-<span style=color:#75715e>%since the e power has three digits in it i added 3 strings next of e to</span>
-<span style=color:#75715e>%the terms and gathered them</span>
-a_num1 = a(<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>15</span>);
-a_num2 = a(<span style=color:#ae81ff>16</span>:<span style=color:#ae81ff>30</span>);
-a_num3 = a(<span style=color:#ae81ff>31</span>:<span style=color:#ae81ff>45</span>);
-a_num4 = a(<span style=color:#ae81ff>46</span>:<span style=color:#ae81ff>60</span>);
-a_num5 = a(<span style=color:#ae81ff>61</span>:<span style=color:#ae81ff>75</span>);
-<span style=color:#75715e>%Converting the string terms into numbers using the str2double command</span>
-a1 = str2double(a_num1);
-a2 = str2double(a_num2);
-a3 = str2double(a_num3);
-a4 = str2double(a_num4);
-a5 = str2double(a_num5);
-<span style=color:#75715e>%the same process is done for other two lines as well</span>
-<span style=color:#75715e>%NOTE the below steps can be reduced by writing another for loop but to</span>
-<span style=color:#75715e>%reduce the complexity i kept the procedure this way</span>
-f_e1 = strfind(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>),<span style=color:#e6db74>&#39;E&#39;</span>);
-b = char(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>));
-a_num6 = b(<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>15</span>);
-a_num7 = b(<span style=color:#ae81ff>16</span>:<span style=color:#ae81ff>30</span>);
-b_num1 = b(<span style=color:#ae81ff>31</span>:<span style=color:#ae81ff>45</span>);
-b_num2 = b(<span style=color:#ae81ff>46</span>:<span style=color:#ae81ff>60</span>);
-b_num3 = b(<span style=color:#ae81ff>61</span>:<span style=color:#ae81ff>75</span>);
-a6 = str2double(a_num6);
-a7 = str2double(a_num7);
-b1 = str2double(b_num1);
-b2 = str2double(b_num2);
-b3 = str2double(b_num3);
-
-f_e2 = strfind(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>3</span>),<span style=color:#e6db74>&#39;E&#39;</span>);
-c = char(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>3</span>));
-b_num4 = c(<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>15</span>);
-b_num5 = c(<span style=color:#ae81ff>16</span>:<span style=color:#ae81ff>30</span>);
-b_num6 = c(<span style=color:#ae81ff>31</span>:<span style=color:#ae81ff>45</span>);
-b_num7 = c(<span style=color:#ae81ff>46</span>:<span style=color:#ae81ff>60</span>);
-b4 = str2double(b_num4);
-b5 = str2double(b_num5);
-b6 = str2double(b_num6);
-b7 = str2double(b_num7);
-
-<span style=color:#75715e>%Generating a range of local temperature values</span>
-T = linspace(temp(<span style=color:#ae81ff>1</span>),temp(<span style=color:#ae81ff>2</span>),<span style=color:#ae81ff>100</span>);
-<span style=color:#75715e>%Generating an array of the coefficients These arrays are generated for the</span>
-<span style=color:#75715e>%ease of feeding them into subfunctions</span>
-coeff = [a1,a2,a3,a4,a5,a6,a7,b1,b2,b3,b4,b5,b6,b7];
-
-M = molecular_weight(species_name);
-<span style=color:#75715e>%printing the molecular mass of obtained from the molecular_weight function</span>
-<span style=color:#75715e>%It is actually supposed to be mass not weight</span>
-fprintf(<span style=color:#e6db74>&#39;molecular mass of %s is %fn&#39;</span>,species_name,M)
-
-<span style=color:#75715e>%thermo_prop function to obtain the values of enthalpy,entropy and specific</span>
-<span style=color:#75715e>%heat constant</span>
-<span style=color:#75715e>%Notice the specific heat tends to increase as the temperature increases</span>
-[Cp,H,S] = thermo_prop(temp,coeff);
-
-<span style=color:#75715e>%creating a directory </span>
-mkdir(species_name)
-<span style=color:#75715e>%changing the current PWD to the created file</span>
-cd(species_name)
-<span style=color:#75715e>%plotting</span>
-f = figure(<span style=color:#e6db74>&#39;name&#39;</span>,species_name);
-plot(T,Cp)
-xlabel(<span style=color:#e6db74>&#39;Temperature&#39;</span>)
-ylabel(<span style=color:#e6db74>&#39;Specific  Heat&#39;</span>)
-grid on
-<span style=color:#75715e>%saving using the saveas command the format to be saved is specified as jpg</span>
-saveas(f,species_name,<span style=color:#e6db74>&#39;jpg&#39;</span>)
-<span style=color:#75715e>%closing the graphs would be a better option compared to our PC getting</span>
-<span style=color:#75715e>%fried up</span>
-close(f)
-<span style=color:#75715e>%same set of commands are used for the next two graphs as well </span>
-<span style=color:#75715e>%NOTE the below graphs can also be looped into a for loop but for the sake</span>
-<span style=color:#75715e>%of experimentation using different commands i chose to keep them seperate</span>
-g = figure(<span style=color:#e6db74>&#39;name&#39;</span>,species_name);
-plot(T,H)
-xlabel(<span style=color:#e6db74>&#39;Temperature&#39;</span>)
-ylabel(<span style=color:#e6db74>&#39;Enthalpy&#39;</span>)
-grid on
-name = strcat(species_name,<span style=color:#e6db74>&#39;H&#39;</span>);
-saveas(g,name,<span style=color:#e6db74>&#39;jpg&#39;</span>)
-close(g)
-
-y = figure(<span style=color:#e6db74>&#39;name&#39;</span>,species_name);
-plot(T,S)
-xlabel(<span style=color:#e6db74>&#39;Temperature&#39;</span>)
-ylabel(<span style=color:#e6db74>&#39;Entropy&#39;</span>)
-grid on
-filename = strcat(species_name,<span style=color:#e6db74>&#39;S&#39;</span>);
-saveas(y,filename,<span style=color:#e6db74>&#39;jpg&#39;</span>)
-close(y)
-
-<span style=color:#75715e>%getting back into our original directory. This is important as the</span>
-<span style=color:#75715e>%directory of matlab changes we have to change it back to where the</span>
-<span style=color:#75715e>%programs are going to be saved.</span>
-cd ..
-
-<span style=color:#66d9ef>end</span>
-
-
-<span style=color:#75715e>%Footer</span>
-disp(L(<span style=color:#ae81ff>218</span>));
-</code></pre></div><p>The program for molecular mass function</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab><span style=color:#66d9ef>function</span> M = <span style=color:#a6e22e>molecular_weight</span>(species_name)
-
-<span style=color:#75715e>%The given NASA file elements have been taken into consideration if the</span>
-<span style=color:#75715e>%NASA file has more elements they can be added using loops</span>
-element = [<span style=color:#e6db74>&#39;H&#39;</span>,<span style=color:#e6db74>&#39;C&#39;</span>,<span style=color:#e6db74>&#39;O&#39;</span>,<span style=color:#e6db74>&#39;N&#39;</span>,<span style=color:#e6db74>&#39;A&#39;</span>,<span style=color:#e6db74>&#39;S&#39;</span>];
-<span style=color:#75715e>%NOTE that the notation for argon gas has been given as A instead of AR</span>
-<span style=color:#75715e>%this is because matlab takes a, r as two seperate inputs instead of one so</span>
-<span style=color:#75715e>%if we have to know the properties of argon gas the input must be A</span>
-
-<span style=color:#75715e>%The atomic weight of the above elements are fed into an array </span>
-<span style=color:#75715e>%NOTE the atomic weights are added in the same order as above</span>
-atomic_weight = [<span style=color:#ae81ff>1.0079</span> <span style=color:#ae81ff>12.0107</span> <span style=color:#ae81ff>15.999</span> <span style=color:#ae81ff>14.0067</span> <span style=color:#ae81ff>39.948</span> <span style=color:#ae81ff>32.065</span>];
-
-atom_num = [<span style=color:#e6db74>&#39;2&#39;</span>,<span style=color:#e6db74>&#39;3&#39;</span>,<span style=color:#e6db74>&#39;4&#39;</span>,<span style=color:#e6db74>&#39;5&#39;</span>,<span style=color:#e6db74>&#39;6&#39;</span>,<span style=color:#e6db74>&#39;7&#39;</span>,<span style=color:#e6db74>&#39;8&#39;</span>,<span style=color:#e6db74>&#39;9&#39;</span>,<span style=color:#e6db74>&#39;10&#39;</span>];
-<span style=color:#75715e>%the no of atoms in the compound is fed this can also be done in a more</span>
-<span style=color:#75715e>%efficeint way </span>
-
-<span style=color:#75715e>%STRCMP string compare command is used for comparing the user input and the</span>
-<span style=color:#75715e>%data base i.e the element array</span>
-M = <span style=color:#ae81ff>0</span>;
-<span style=color:#66d9ef>for</span> n = <span style=color:#ae81ff>1</span>:length(species_name)
-    <span style=color:#66d9ef>for</span> u = <span style=color:#ae81ff>1</span>:length(element)
-        <span style=color:#66d9ef>if</span> strcmp(species_name(n),element(u))
-           <span style=color:#75715e>%the above command compares the strings of the mentioned and if</span>
-           <span style=color:#75715e>%they match then the below step is executed if not the below</span>
-           <span style=color:#75715e>%loop is executed</span>
-            M = M <span style=color:#f92672>+</span> atomic_weight(u); 
-        
-        <span style=color:#66d9ef>else</span>
-            <span style=color:#66d9ef>for</span> v= <span style=color:#ae81ff>1</span>:length(atom_num)
-                <span style=color:#66d9ef>if</span> strcmp(species_name(n),atom_num(v)) <span style=color:#f92672>&amp;&amp;</span>  n<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>1</span> <span style=color:#f92672>&amp;&amp;</span> strcmp(species_name(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>),element(u))            
-                    <span style=color:#75715e>%The above 3 conditions are required to identify</span>
-                    <span style=color:#75715e>%polyatomic gases </span>
-                 
-                    k = str2double(atom_num(v));
-                    M = M <span style=color:#f92672>+</span> ((atomic_weight(u))<span style=color:#f92672>*</span>(k<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>));
-                <span style=color:#66d9ef>end</span>
-            <span style=color:#66d9ef>end</span>
-        <span style=color:#66d9ef>end</span>
-    <span style=color:#66d9ef>end</span>
-<span style=color:#66d9ef>end</span>
-<span style=color:#66d9ef>end</span>
-               
-</code></pre></div><p>The program for thermodynamic properties function</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab><span style=color:#66d9ef>function</span> [Cp,H,S] = <span style=color:#a6e22e>thermo_prop</span>(temp,coeff)
-<span style=color:#75715e>%Defining universal gas constant</span>
-R = <span style=color:#ae81ff>8.315</span>; <span style=color:#75715e>%unit: m2 kg s-2 K-1 mol-1</span>
-<span style=color:#75715e>%creating a temperature range</span>
-T = linspace(temp(<span style=color:#ae81ff>1</span>),temp(<span style=color:#ae81ff>2</span>),<span style=color:#ae81ff>100</span>);
-<span style=color:#75715e>%for both low temperature and high temperature the Cp values are taken and</span>
-<span style=color:#75715e>%are plugged in to obtain specific heat , entropy and enthalpy at different temperatures.</span>
-<span style=color:#66d9ef>for</span> i = <span style=color:#ae81ff>1</span>:length(T)
-<span style=color:#66d9ef>if</span> T(i)<span style=color:#f92672>&gt;</span>= temp(<span style=color:#ae81ff>3</span>)
-    <span style=color:#75715e>%since the first 7 coefficients are High temperature coefficients</span>
-    a = coeff(<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>7</span>);
-    <span style=color:#75715e>%For our conveinience we manipulated the given formula such that LHS</span>
-    <span style=color:#75715e>%contains only the values required.</span>
-    Cp(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>T(i)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R);
-    H(i)= (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>*</span>T(i)) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>5</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>6</span>)<span style=color:#f92672>*</span>R);
-    S(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>*</span>(log(T(i))) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>T(i)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>)<span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>7</span>)<span style=color:#f92672>*</span>R));  
-<span style=color:#66d9ef>else</span>
-<span style=color:#66d9ef>if</span> T(i) <span style=color:#f92672>&lt;</span> temp(<span style=color:#ae81ff>3</span>)
-    a = coeff(<span style=color:#ae81ff>8</span>:<span style=color:#ae81ff>14</span>);
-    <span style=color:#75715e>%The next seven coefficients are for low temperature </span>
-    Cp(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>T(i)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R);
-    H(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>*</span>T(i)) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>5</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>6</span>)<span style=color:#f92672>*</span>R);
-    S(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>*</span>log(T(i))) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>T(i)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>)<span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>7</span>)<span style=color:#f92672>*</span>R);  
-
-<span style=color:#66d9ef>end</span>    
-<span style=color:#66d9ef>end</span>
-  
-<span style=color:#66d9ef>end</span>
-
-</code></pre></div><p>RESULTS:</p>
-<p>The plots for different species will be generated</p>
-<p>plots for O2 species
+Now for the program to generate plots and store them in a separate folder, we need to create a folder first and change the MATLAB operating directory into that folder and then store the plots and come back to the original directory where all the programs are stored. This procedure can be used for all species. The code employs the same. To save the plots we use a command called save as where it saves the file into the format specified in the current operating directory. The format used here is JPG format. After the file saving is complete the current directory is changed back to the program directory and the end of the loop.</p><p>If everything is in place the program should look like this</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab><span style=display:flex><span>
+</span></span><span style=display:flex><span>clear all 
+</span></span><span style=display:flex><span>close all
+</span></span><span style=display:flex><span>clc
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%opening the thermo.dat with read only permissions</span>
+</span></span><span style=display:flex><span>f1 = fopen(<span style=color:#e6db74>&#39;THERMO.dat&#39;</span>,<span style=color:#e6db74>&#39;r&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%reading the file line by line</span>
+</span></span><span style=display:flex><span>tline = fgetl(f1);
+</span></span><span style=display:flex><span>i = <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>L = string(<span style=color:#ae81ff>100</span>);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> ischar(tline)
+</span></span><span style=display:flex><span>     L(i) = tline;
+</span></span><span style=display:flex><span>     i=i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>     tline = fgetl(f1); 
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%Header</span>
+</span></span><span style=display:flex><span>disp(L(<span style=color:#ae81ff>1</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%2nd line global temperature values</span>
+</span></span><span style=display:flex><span>L_2_split = strsplit(L(<span style=color:#ae81ff>2</span>),<span style=color:#e6db74>&#39; &#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>%splitting the second line using the delimiter</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%converting them to number</span>
+</span></span><span style=display:flex><span>g_l_t = str2double(L_2_split{<span style=color:#ae81ff>2</span>});
+</span></span><span style=display:flex><span>g_m_t = str2double(L_2_split{<span style=color:#ae81ff>3</span>});
+</span></span><span style=display:flex><span>g_h_t = str2double(L_2_split{<span style=color:#ae81ff>4</span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>disp(<span style=color:#e6db74>&#39;global temperature values&#39;</span>)
+</span></span><span style=display:flex><span>fprintf(<span style=color:#e6db74>&#39;Low temp:%dn&#39;</span>,g_l_t)
+</span></span><span style=display:flex><span>fprintf(<span style=color:#e6db74>&#39;Mid temp: %dn&#39;</span>,g_m_t)
+</span></span><span style=display:flex><span>fprintf(<span style=color:#e6db74>&#39;High temP: %dn&#39;</span>,g_h_t);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%3,4,5 lines are comments so I leave them be.</span>
+</span></span><span style=display:flex><span>disp(L(<span style=color:#ae81ff>3</span>));
+</span></span><span style=display:flex><span>disp(L(<span style=color:#ae81ff>4</span>));
+</span></span><span style=display:flex><span>disp(L(<span style=color:#ae81ff>5</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%Parsing the species block</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> j = <span style=color:#ae81ff>6</span>:<span style=color:#ae81ff>4</span>:<span style=color:#ae81ff>214</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%Starting fro 6th line is the name of the species and the same repeats</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%after every 4 lines so the above logic is used to identify the species</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%name</span>
+</span></span><span style=display:flex><span>spe_head = strsplit(L(j),<span style=color:#e6db74>&#39; &#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>%identifying different parameters by splitting them using the strsplit</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%command</span>
+</span></span><span style=display:flex><span>q = numel(spe_head);
+</span></span><span style=display:flex><span><span style=color:#75715e>%identifying no of useful terms in the first line</span>
+</span></span><span style=display:flex><span>species_name = char(spe_head(<span style=color:#ae81ff>1</span>));
+</span></span><span style=display:flex><span><span style=color:#75715e>%making sure that the species name is a string</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%the species ID and the atoms were inseperable so i clubbed them to from a</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%new term and the G represents the physical state of the species at NTP so</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%gathered it along with the row number</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> h = <span style=color:#ae81ff>2</span>:q<span style=color:#f92672>-</span><span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span>    id_atoms = spe_head(h)<span style=color:#f92672>+</span>spe_head(h<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>); 
+</span></span><span style=display:flex><span>    physical_state = spe_head(q<span style=color:#f92672>-</span><span style=color:#ae81ff>4</span>);
+</span></span><span style=display:flex><span>    spe_row_number = spe_head(q);
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%starting from right towards left we have the row number and the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%temperatures so i came from right to left to get the local temp values for</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%that particular species</span>
+</span></span><span style=display:flex><span>l_l_t = str2double(spe_head{q<span style=color:#f92672>-</span><span style=color:#ae81ff>3</span>});
+</span></span><span style=display:flex><span>l_h_t = str2double(spe_head{q<span style=color:#f92672>-</span><span style=color:#ae81ff>2</span>});
+</span></span><span style=display:flex><span>l_m_t = str2double(spe_head{q<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>});
+</span></span><span style=display:flex><span><span style=color:#75715e>%An array of local temp values is constructed</span>
+</span></span><span style=display:flex><span>temp = [l_l_t,l_h_t,l_m_t];
+</span></span><span style=display:flex><span><span style=color:#75715e>%to extract the coefficients i used the following procedure. So the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%coefficients are there in the next line to the line containing the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%species name so i added +1 to go to the next line</span>
+</span></span><span style=display:flex><span>f_e = strfind(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>),<span style=color:#e6db74>&#39;E&#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>%i identified the terms by seperating them at E</span>
+</span></span><span style=display:flex><span>a = char(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>));
+</span></span><span style=display:flex><span><span style=color:#75715e>%i made sure the entire line is in string format</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%since the e power has three digits in it i added 3 strings next of e to</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%the terms and gathered them</span>
+</span></span><span style=display:flex><span>a_num1 = a(<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>15</span>);
+</span></span><span style=display:flex><span>a_num2 = a(<span style=color:#ae81ff>16</span>:<span style=color:#ae81ff>30</span>);
+</span></span><span style=display:flex><span>a_num3 = a(<span style=color:#ae81ff>31</span>:<span style=color:#ae81ff>45</span>);
+</span></span><span style=display:flex><span>a_num4 = a(<span style=color:#ae81ff>46</span>:<span style=color:#ae81ff>60</span>);
+</span></span><span style=display:flex><span>a_num5 = a(<span style=color:#ae81ff>61</span>:<span style=color:#ae81ff>75</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>%Converting the string terms into numbers using the str2double command</span>
+</span></span><span style=display:flex><span>a1 = str2double(a_num1);
+</span></span><span style=display:flex><span>a2 = str2double(a_num2);
+</span></span><span style=display:flex><span>a3 = str2double(a_num3);
+</span></span><span style=display:flex><span>a4 = str2double(a_num4);
+</span></span><span style=display:flex><span>a5 = str2double(a_num5);
+</span></span><span style=display:flex><span><span style=color:#75715e>%the same process is done for other two lines as well</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%NOTE the below steps can be reduced by writing another for loop but to</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%reduce the complexity i kept the procedure this way</span>
+</span></span><span style=display:flex><span>f_e1 = strfind(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>),<span style=color:#e6db74>&#39;E&#39;</span>);
+</span></span><span style=display:flex><span>b = char(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>));
+</span></span><span style=display:flex><span>a_num6 = b(<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>15</span>);
+</span></span><span style=display:flex><span>a_num7 = b(<span style=color:#ae81ff>16</span>:<span style=color:#ae81ff>30</span>);
+</span></span><span style=display:flex><span>b_num1 = b(<span style=color:#ae81ff>31</span>:<span style=color:#ae81ff>45</span>);
+</span></span><span style=display:flex><span>b_num2 = b(<span style=color:#ae81ff>46</span>:<span style=color:#ae81ff>60</span>);
+</span></span><span style=display:flex><span>b_num3 = b(<span style=color:#ae81ff>61</span>:<span style=color:#ae81ff>75</span>);
+</span></span><span style=display:flex><span>a6 = str2double(a_num6);
+</span></span><span style=display:flex><span>a7 = str2double(a_num7);
+</span></span><span style=display:flex><span>b1 = str2double(b_num1);
+</span></span><span style=display:flex><span>b2 = str2double(b_num2);
+</span></span><span style=display:flex><span>b3 = str2double(b_num3);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>f_e2 = strfind(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>3</span>),<span style=color:#e6db74>&#39;E&#39;</span>);
+</span></span><span style=display:flex><span>c = char(L(j<span style=color:#f92672>+</span><span style=color:#ae81ff>3</span>));
+</span></span><span style=display:flex><span>b_num4 = c(<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>15</span>);
+</span></span><span style=display:flex><span>b_num5 = c(<span style=color:#ae81ff>16</span>:<span style=color:#ae81ff>30</span>);
+</span></span><span style=display:flex><span>b_num6 = c(<span style=color:#ae81ff>31</span>:<span style=color:#ae81ff>45</span>);
+</span></span><span style=display:flex><span>b_num7 = c(<span style=color:#ae81ff>46</span>:<span style=color:#ae81ff>60</span>);
+</span></span><span style=display:flex><span>b4 = str2double(b_num4);
+</span></span><span style=display:flex><span>b5 = str2double(b_num5);
+</span></span><span style=display:flex><span>b6 = str2double(b_num6);
+</span></span><span style=display:flex><span>b7 = str2double(b_num7);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%Generating a range of local temperature values</span>
+</span></span><span style=display:flex><span>T = linspace(temp(<span style=color:#ae81ff>1</span>),temp(<span style=color:#ae81ff>2</span>),<span style=color:#ae81ff>100</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>%Generating an array of the coefficients These arrays are generated for the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%ease of feeding them into subfunctions</span>
+</span></span><span style=display:flex><span>coeff = [a1,a2,a3,a4,a5,a6,a7,b1,b2,b3,b4,b5,b6,b7];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>M = molecular_weight(species_name);
+</span></span><span style=display:flex><span><span style=color:#75715e>%printing the molecular mass of obtained from the molecular_weight function</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%It is actually supposed to be mass not weight</span>
+</span></span><span style=display:flex><span>fprintf(<span style=color:#e6db74>&#39;molecular mass of %s is %fn&#39;</span>,species_name,M)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%thermo_prop function to obtain the values of enthalpy,entropy and specific</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%heat constant</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%Notice the specific heat tends to increase as the temperature increases</span>
+</span></span><span style=display:flex><span>[Cp,H,S] = thermo_prop(temp,coeff);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%creating a directory </span>
+</span></span><span style=display:flex><span>mkdir(species_name)
+</span></span><span style=display:flex><span><span style=color:#75715e>%changing the current PWD to the created file</span>
+</span></span><span style=display:flex><span>cd(species_name)
+</span></span><span style=display:flex><span><span style=color:#75715e>%plotting</span>
+</span></span><span style=display:flex><span>f = figure(<span style=color:#e6db74>&#39;name&#39;</span>,species_name);
+</span></span><span style=display:flex><span>plot(T,Cp)
+</span></span><span style=display:flex><span>xlabel(<span style=color:#e6db74>&#39;Temperature&#39;</span>)
+</span></span><span style=display:flex><span>ylabel(<span style=color:#e6db74>&#39;Specific  Heat&#39;</span>)
+</span></span><span style=display:flex><span>grid on
+</span></span><span style=display:flex><span><span style=color:#75715e>%saving using the saveas command the format to be saved is specified as jpg</span>
+</span></span><span style=display:flex><span>saveas(f,species_name,<span style=color:#e6db74>&#39;jpg&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#75715e>%closing the graphs would be a better option compared to our PC getting</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%fried up</span>
+</span></span><span style=display:flex><span>close(f)
+</span></span><span style=display:flex><span><span style=color:#75715e>%same set of commands are used for the next two graphs as well </span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%NOTE the below graphs can also be looped into a for loop but for the sake</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%of experimentation using different commands i chose to keep them seperate</span>
+</span></span><span style=display:flex><span>g = figure(<span style=color:#e6db74>&#39;name&#39;</span>,species_name);
+</span></span><span style=display:flex><span>plot(T,H)
+</span></span><span style=display:flex><span>xlabel(<span style=color:#e6db74>&#39;Temperature&#39;</span>)
+</span></span><span style=display:flex><span>ylabel(<span style=color:#e6db74>&#39;Enthalpy&#39;</span>)
+</span></span><span style=display:flex><span>grid on
+</span></span><span style=display:flex><span>name = strcat(species_name,<span style=color:#e6db74>&#39;H&#39;</span>);
+</span></span><span style=display:flex><span>saveas(g,name,<span style=color:#e6db74>&#39;jpg&#39;</span>)
+</span></span><span style=display:flex><span>close(g)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>y = figure(<span style=color:#e6db74>&#39;name&#39;</span>,species_name);
+</span></span><span style=display:flex><span>plot(T,S)
+</span></span><span style=display:flex><span>xlabel(<span style=color:#e6db74>&#39;Temperature&#39;</span>)
+</span></span><span style=display:flex><span>ylabel(<span style=color:#e6db74>&#39;Entropy&#39;</span>)
+</span></span><span style=display:flex><span>grid on
+</span></span><span style=display:flex><span>filename = strcat(species_name,<span style=color:#e6db74>&#39;S&#39;</span>);
+</span></span><span style=display:flex><span>saveas(y,filename,<span style=color:#e6db74>&#39;jpg&#39;</span>)
+</span></span><span style=display:flex><span>close(y)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%getting back into our original directory. This is important as the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%directory of matlab changes we have to change it back to where the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%programs are going to be saved.</span>
+</span></span><span style=display:flex><span>cd ..
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%Footer</span>
+</span></span><span style=display:flex><span>disp(L(<span style=color:#ae81ff>218</span>));
+</span></span></code></pre></div><p>The program for molecular mass function</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab><span style=display:flex><span><span style=color:#66d9ef>function</span> M = <span style=color:#a6e22e>molecular_weight</span>(species_name)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%The given NASA file elements have been taken into consideration if the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%NASA file has more elements they can be added using loops</span>
+</span></span><span style=display:flex><span>element = [<span style=color:#e6db74>&#39;H&#39;</span>,<span style=color:#e6db74>&#39;C&#39;</span>,<span style=color:#e6db74>&#39;O&#39;</span>,<span style=color:#e6db74>&#39;N&#39;</span>,<span style=color:#e6db74>&#39;A&#39;</span>,<span style=color:#e6db74>&#39;S&#39;</span>];
+</span></span><span style=display:flex><span><span style=color:#75715e>%NOTE that the notation for argon gas has been given as A instead of AR</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%this is because matlab takes a, r as two seperate inputs instead of one so</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%if we have to know the properties of argon gas the input must be A</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%The atomic weight of the above elements are fed into an array </span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%NOTE the atomic weights are added in the same order as above</span>
+</span></span><span style=display:flex><span>atomic_weight = [<span style=color:#ae81ff>1.0079</span> <span style=color:#ae81ff>12.0107</span> <span style=color:#ae81ff>15.999</span> <span style=color:#ae81ff>14.0067</span> <span style=color:#ae81ff>39.948</span> <span style=color:#ae81ff>32.065</span>];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>atom_num = [<span style=color:#e6db74>&#39;2&#39;</span>,<span style=color:#e6db74>&#39;3&#39;</span>,<span style=color:#e6db74>&#39;4&#39;</span>,<span style=color:#e6db74>&#39;5&#39;</span>,<span style=color:#e6db74>&#39;6&#39;</span>,<span style=color:#e6db74>&#39;7&#39;</span>,<span style=color:#e6db74>&#39;8&#39;</span>,<span style=color:#e6db74>&#39;9&#39;</span>,<span style=color:#e6db74>&#39;10&#39;</span>];
+</span></span><span style=display:flex><span><span style=color:#75715e>%the no of atoms in the compound is fed this can also be done in a more</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%efficeint way </span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%STRCMP string compare command is used for comparing the user input and the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%data base i.e the element array</span>
+</span></span><span style=display:flex><span>M = <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> n = <span style=color:#ae81ff>1</span>:length(species_name)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> u = <span style=color:#ae81ff>1</span>:length(element)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> strcmp(species_name(n),element(u))
+</span></span><span style=display:flex><span>           <span style=color:#75715e>%the above command compares the strings of the mentioned and if</span>
+</span></span><span style=display:flex><span>           <span style=color:#75715e>%they match then the below step is executed if not the below</span>
+</span></span><span style=display:flex><span>           <span style=color:#75715e>%loop is executed</span>
+</span></span><span style=display:flex><span>            M = M <span style=color:#f92672>+</span> atomic_weight(u); 
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> v= <span style=color:#ae81ff>1</span>:length(atom_num)
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> strcmp(species_name(n),atom_num(v)) <span style=color:#f92672>&amp;&amp;</span>  n<span style=color:#f92672>&gt;</span><span style=color:#ae81ff>1</span> <span style=color:#f92672>&amp;&amp;</span> strcmp(species_name(n<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>),element(u))            
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>%The above 3 conditions are required to identify</span>
+</span></span><span style=display:flex><span>                    <span style=color:#75715e>%polyatomic gases </span>
+</span></span><span style=display:flex><span>                 
+</span></span><span style=display:flex><span>                    k = str2double(atom_num(v));
+</span></span><span style=display:flex><span>                    M = M <span style=color:#f92672>+</span> ((atomic_weight(u))<span style=color:#f92672>*</span>(k<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>));
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>               
+</span></span></code></pre></div><p>The program for thermodynamic properties function</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-matlab data-lang=matlab><span style=display:flex><span><span style=color:#66d9ef>function</span> [Cp,H,S] = <span style=color:#a6e22e>thermo_prop</span>(temp,coeff)
+</span></span><span style=display:flex><span><span style=color:#75715e>%Defining universal gas constant</span>
+</span></span><span style=display:flex><span>R = <span style=color:#ae81ff>8.315</span>; <span style=color:#75715e>%unit: m2 kg s-2 K-1 mol-1</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%creating a temperature range</span>
+</span></span><span style=display:flex><span>T = linspace(temp(<span style=color:#ae81ff>1</span>),temp(<span style=color:#ae81ff>2</span>),<span style=color:#ae81ff>100</span>);
+</span></span><span style=display:flex><span><span style=color:#75715e>%for both low temperature and high temperature the Cp values are taken and</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%are plugged in to obtain specific heat , entropy and enthalpy at different temperatures.</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i = <span style=color:#ae81ff>1</span>:length(T)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> T(i)<span style=color:#f92672>&gt;</span>= temp(<span style=color:#ae81ff>3</span>)
+</span></span><span style=display:flex><span>    <span style=color:#75715e>%since the first 7 coefficients are High temperature coefficients</span>
+</span></span><span style=display:flex><span>    a = coeff(<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>7</span>);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>%For our conveinience we manipulated the given formula such that LHS</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>%contains only the values required.</span>
+</span></span><span style=display:flex><span>    Cp(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>T(i)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R);
+</span></span><span style=display:flex><span>    H(i)= (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>*</span>T(i)) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>5</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>6</span>)<span style=color:#f92672>*</span>R);
+</span></span><span style=display:flex><span>    S(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>*</span>(log(T(i))) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>T(i)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>)<span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>7</span>)<span style=color:#f92672>*</span>R));  
+</span></span><span style=display:flex><span><span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> T(i) <span style=color:#f92672>&lt;</span> temp(<span style=color:#ae81ff>3</span>)
+</span></span><span style=display:flex><span>    a = coeff(<span style=color:#ae81ff>8</span>:<span style=color:#ae81ff>14</span>);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>%The next seven coefficients are for low temperature </span>
+</span></span><span style=display:flex><span>    Cp(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>T(i)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R);
+</span></span><span style=display:flex><span>    H(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>*</span>T(i)) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>5</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>6</span>)<span style=color:#f92672>*</span>R);
+</span></span><span style=display:flex><span>    S(i) = (a(<span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>*</span>log(T(i))) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>T(i)<span style=color:#f92672>*</span>R) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>2</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>3</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>3</span>) <span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>5</span>)<span style=color:#f92672>*</span>(T(i)^<span style=color:#ae81ff>4</span>)<span style=color:#f92672>*</span>R<span style=color:#f92672>/</span><span style=color:#ae81ff>4</span>)<span style=color:#f92672>+</span> (a(<span style=color:#ae81ff>7</span>)<span style=color:#f92672>*</span>R);  
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>    
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span><span style=color:#66d9ef>end</span>
+</span></span></code></pre></div><p>RESULTS:</p><p>The plots for different species will be generated</p><p>plots for O2 species
 <img src=https://satyasasank.github.io/CodeBlue/images/o2.png alt>
 <img src=https://satyasasank.github.io/CodeBlue/images/o21.png alt>
-<img src=https://satyasasank.github.io/CodeBlue/images/o22.png alt></p>
-<p>folders will be created for each species
-<img src=https://satyasasank.github.io/CodeBlue/images/folder.png alt></p>
-<p>Each folder will have 3 images 1) plot of cpVst 2)plot of sVst 3) plot of hVst
+<img src=https://satyasasank.github.io/CodeBlue/images/o22.png alt></p><p>folders will be created for each species
+<img src=https://satyasasank.github.io/CodeBlue/images/folder.png alt></p><p>Each folder will have 3 images 1) plot of cpVst 2)plot of sVst 3) plot of hVst
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/2020/10/mceclip2_1603263876.png alt>
-<img src=https://satyasasank.github.io/CodeBlue/images/plots2.png alt title></p>
-<p>The command window showing the molecular mass of each species
+<img src=https://satyasasank.github.io/CodeBlue/images/plots2.png alt title></p><p>The command window showing the molecular mass of each species
 <img src=https://satyasasank.github.io/CodeBlue/images/mm1.png alt>
-<img src=https://satyasasank.github.io/CodeBlue/images/mm2.png alt></p>
-<p>CONCLUSION:</p>
-<p>The graphs for different thermodynamic properties are plotted and are saved in different directories automatically.
+<img src=https://satyasasank.github.io/CodeBlue/images/mm2.png alt></p><p>CONCLUSION:</p><p>The graphs for different thermodynamic properties are plotted and are saved in different directories automatically.
 During the programming, the for loops might encounter indexing problems if the variables used are taken care of
 This project doesn’t store the values of 14 coefficients of all the species it only stores them until the loop is completed and then new 14 values of the next species are stored. This can be improved if the storage is necessary
-Some of the activities can be simplified more by looping them this might increase the complexity of the code while reducing the length of the code. But for the sake of simplicity, those activities were written in the lengthy method.</p>
-<p>REFERENCES:</p>
-<p><a href=https://in.mathworks.com/help/matlab/ref/sprintf.html>Format data into string or character vector - MATLAB sprintf - MathWorks India</a></p>
-<p><a href=https://in.mathworks.com/matlabcentral/answers/403782-how-can-i-save-multiple-plots-in-a-specified-folder>How can I save multiple plots in a specified folder? - MATLAB Answers - MATLAB Central</a></p>
-<p><a href=https://www.mathworks.com/help/matlab/ref/mkdir.html>Make new folder - MATLAB mkdir</a></p>
-<p><a href=https://in.mathworks.com/matlabcentral/answers/401188-saving-an-image-in-a-specific-folder>saving an image in a specific folder - MATLAB Answers - MATLAB Central</a></p>
-</div>
-<div class=footer>
+Some of the activities can be simplified more by looping them this might increase the complexity of the code while reducing the length of the code. But for the sake of simplicity, those activities were written in the lengthy method.</p><p>REFERENCES:</p><p><a href=https://in.mathworks.com/help/matlab/ref/sprintf.html>Format data into string or character vector - MATLAB sprintf - MathWorks India</a></p><p><a href=https://in.mathworks.com/matlabcentral/answers/403782-how-can-i-save-multiple-plots-in-a-specified-folder>How can I save multiple plots in a specified folder? - MATLAB Answers - MATLAB Central</a></p><p><a href=https://www.mathworks.com/help/matlab/ref/mkdir.html>Make new folder - MATLAB mkdir</a></p><p><a href=https://in.mathworks.com/matlabcentral/answers/401188-saving-an-image-in-a-specific-folder>saving an image in a specific folder - MATLAB Answers - MATLAB Central</a></p></div><div class=footer>
 <div class=tags>
 <i class="fa fa-tags"></i>
 <div class=links>
 <a href=https://satyasasank.github.io/CodeBlue/tags/file-parsing/>File Parsing</a>
-</div>
-</div>
-</div>
-</article>
-</div>
-<div id=comments-container>
-</div>
-</div>
-<footer>
+</div></div></div></article></div><div id=comments-container>
+</div></div><footer>
 <div class=container>
 <div class=recent-posts>
 <strong>Latest posts</strong>
 <ul>
 <li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/optimization/>Optimization of a function through genetic algorithm</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/>Creating your own OpenFOAM solver</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/cfd_meshing_of_a_tesla_cyber_truck/>CFD meshing of a Tesla Cyber truck</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/>Flow over ahmed body</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/fsae_car/>FSAE Car Project</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/secondposts/>1D Supersonic Nozzle flow simulation using MacCormac Method</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/first_post/>Parsing NASA thermodynamic data using MATLAB </a>
-</li>
-</ul>
-</div>
-<div class=categories>
+</li></ul></div><div class=categories>
 <a href=https://satyasasank.github.io/CodeBlue/categories/><strong>Categories</strong></a>
 <ul>
 <li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/matlab>Matlab
 (3)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/ansa>Ansa
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/ansys>Ansys
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/converge-3.0>Converge 3.0
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/openfoam>Openfoam
 (1)</a>
-</li>
-</ul>
-</div>
-<div class=right>
+</li></ul></div><div class=right>
 <div class=external-profiles>
 <strong>Social media</strong>
 <a href=https://www.linkedin.com/in/satya-s-b52717178/ target=_blank><i class="fab fa-linkedin"></i></a>
 <a href=https://github.com/SatyaSasank target=_blank><i class="fab fa-github"></i></a>
 <a href=mailto:kssasank43@gmail.com target=_blank><i class="fas fa-envelope"></i></a>
-</div>
-<div class=archive>
+</div><div class=archive>
 <a href=https://satyasasank.github.io/CodeBlue/archive/><strong>Archive</strong></a>
-</div>
-</div>
-</div>
-</footer>
-<div class=credits>
+</div></div></div></footer><div class=credits>
 <div class=container>
 <div class=copyright>
 <a href=https://github.com/satyasasank target=_blank>
@@ -471,12 +400,7 @@ Some of the activities can be simplified more by looping them this might increas
 2022
 Satya Sasank
 </a>
-</div>
-<div class=author>
+</div><div class=author>
 <a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Powered by Bilberry Hugo Theme</a>
-</div>
-</div>
-</div>
-<script type=text/javascript src=https://satyasasank.github.io/CodeBlue/theme.js></script>
-</body>
-</html>
+</div></div></div><script type=text/javascript src=https://satyasasank.github.io/CodeBlue/theme.js></script>
+</body></html>

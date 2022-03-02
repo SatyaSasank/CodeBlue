@@ -6,11 +6,10 @@
 <meta name=author content="Satya Sasank">
 <meta name=description content="Satya Sasank's Blog">
 <meta name=keywords content="Computational Fluid Dynamics,linux,OpenFOAM,ANSYS,ANSA,Converge,python programming,Matlab/Octave">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <title>
 FSAE Car Project | CodeBlue
-</title>
-<meta name=description content="FSAE Car Project - Satya Sasank's Blog">
+</title><meta name=description content="FSAE Car Project - Satya Sasank's Blog">
 <meta itemprop=name content="FSAE Car Project">
 <meta itemprop=description content="FSAE Car Project - Satya Sasank's Blog">
 <meta property="og:title" content="FSAE Car Project">
@@ -24,39 +23,26 @@ FSAE Car Project | CodeBlue
 <link href=https://satyasasank.github.io/CodeBlue/posts/fsae_car/ rel=feed type=application/rss+xml title=CodeBlue>
 <link rel=canonical href=https://satyasasank.github.io/CodeBlue/posts/fsae_car/>
 <link rel=stylesheet href=https://satyasasank.github.io/CodeBlue/theme.css>
-</head>
-<body class=bilberry-hugo-theme>
+</head><body class=bilberry-hugo-theme>
 <nav>
 <div class=container>
 <ul class=topnav>
-<li><a href=https://satyasasank.github.io/CodeBlue/page/about-bilberry/>About</a></li>
-<li><a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Github</a></li>
-</ul>
-</div>
-</nav>
-<header>
+<li><a href=https://satyasasank.github.io/CodeBlue/page/about-bilberry/>About</a></li><li><a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Github</a></li></ul></div></nav><header>
 <div class=container>
 <div class=logo>
 <a href=https://satyasasank.github.io/CodeBlue/ class=logo>
 <img src=https://satyasasank.github.io/CodeBlue/images/profile.jpg alt>
 <span class=overlay><i class="fa fa-home"></i></span>
 </a>
-</div>
-<div class=titles>
+</div><div class=titles>
 <h3 class=title>
 <a href=https://satyasasank.github.io/CodeBlue/>
 CodeBlue
 </a>
-</h3>
-<span class=subtitle>Welcome to my blog!</span>
-</div>
-<div class=toggler>
+</h3><span class=subtitle>Welcome to my blog!</span>
+</div><div class=toggler>
 <i class="fa fa-bars" aria-hidden=true></i>
-</div>
-</div>
-</div>
-</header>
-<div class="main container">
+</div></div></div></header><div class="main container">
 <div class="article-wrapper u-cf single">
 <a class=bubble href=https://satyasasank.github.io/CodeBlue/posts/fsae_car/>
 <i class="fas fa-fw fa-pencil-alt"></i>
@@ -67,8 +53,7 @@ CodeBlue
 <a href=https://satyasasank.github.io/CodeBlue/posts/fsae_car/>
 FSAE Car Project
 </a>
-</h1>
-<div class=meta>
+</h1><div class=meta>
 <span class="date moment">2022-02-08</span>
 <span class=categories>
 <a href=https://satyasasank.github.io/CodeBlue/categories/converge-3.0/>Converge 3.0</a>
@@ -76,278 +61,158 @@ FSAE Car Project
 <span class=author>
 <a href=https://satyasasank.github.io/CodeBlue/author/satya-sasank/>Satya Sasank</a>
 </span>
-</div>
-<p>AIM:</p>
-<p>The aim of this project is to simulate the flow around an FSAE car in converge.</p>
-<p>OBJECTIVES OF THE PROJECT:</p>
-<p>*Clean up the geometry.      
+</div><p>AIM:</p><p>The aim of this project is to simulate the flow around an FSAE car in converge.</p><p>OBJECTIVES OF THE PROJECT:</p><p>*Clean up the geometry.      
 *Flag the parts as separate boundaries.<br>
 *Create a virtual wind tunnel.<br>
-*Run the simulation for two different types of Races.</p>
-<p>Race-1 </p>
-<p>Racing track conditions - Lot of turns<br>
+*Run the simulation for two different types of Races.</p><p>Race-1 </p><p>Racing track conditions - Lot of turns<br>
 Average lap speeds - 45kmph <br>
 70% turns at 45 degrees<br>
 20% turns at 80 degrees<br>
-10% turns at 20 degrees</p>
-<p>Race-2</p>
-<p>Racing track conditions – Straights<br>
-Average lap speed - 75kmph</p>
-<p>PROCEDURE:</p>
-<p>The Formula SAE is a student design competition organized by SAE international. Where students conceive, design, fabricate, and compete with small formula-style racing cars.</p>
-<p>The car for our project is this <a href="https://drive.google.com/drive/folders/1RHH6qC3BRMcH_rkYizZMvQxWGwteg06b?usp=sharing">one</a>.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(176)_1620966605.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(177)-Copy_1620968213.png alt> </p>
-<p>We import the STL file into Converge.</p>
-<p>Once the geometry appears, we need to check the geometry units. We can do this by going to the Left-side geometry panel > Options > check the boundary box.</p>
-<p>Converge uses the MKS system, while the geometry is created in IPS, so we need to transform the body to an appropriate scale to get meaningful results.</p>
-<p>We can scale it by geometry panel > Transform > Scale > give a scaling factor of 0.0254. Before we create the wind tunnel, we need to know the dimensions of the wind tunnel and also we need to flag the boundaries of the car.</p>
-<p>We use the boundary fence to construct boundary fences around parts that are to be flagged as separate boundaries.</p>
-<p>And we flag the boundaries as</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(181)_1620976282.png alt></p>
-<p>Now to create the wind tunnel. We know that the wind tunnel must have at least 5 times the characteristic length in front of the body and at least 10 times the length behind the body. A height of at least twice the characteristic length above and beside the body.</p>
-<p>With this information, we can figure out the wind tunnel dimensions based on the characteristic length which is 2.5 m (approx)</p>
-<p>The calculated wind tunnel dimensions are as follows</p>
-<p>X = 32.5 m</p>
-<p>Y = 5 m</p>
-<p>z = 2.5 m</p>
-<p>To create the wind tunnel, We first create the vertices. For the vertices, we take the bottom of the tires so that the bottom of the tires should align with the bottom of the wind tunnel.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/InkedScreenshot%20(182)_LI_1620982074.jpg alt></p>
-<p>In the above picture, we deleted the bottom portion of the tires using the angle method.</p>
-<p>All the points on the red circle are lying on the same plane. This plane which is parallel to the Z plane needs to be aligned with the bottom of the wind tunnel.</p>
-<p>We first create the vertices for the wind tunnel using the wind tunnel dimensions and the location of the tire bottom and then patch these vertices using the ordered vertex method to form a wind tunnel.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(183)_1620983200.png alt></p>
-<p>Once the wind tunnel is created we flag the inlet and outlet boundaries. Now once we check for errors we should see all green in the diagnosis toolbar.</p>
-<p>For different race conditions, we need to tilt the model in different angles as follows</p>
-<p>20 deg
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(193)_1620999424.png alt></p>
-<p>45 deg
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(194)_1620999441.png alt></p>
-<p>80 deg
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(195)_1620999456.png alt></p>
-<p>We have to be careful while rotating the models because the triangles below the models tend to overlap. When this happens we need to delete the triangles that are overlapped and reconstruct those triangles. After reconstructing we need to check the diagnosis toolbar again for errors. Once all the checks are green we can follow the below procedure for different race tracks.</p>
-<p>We then move onto case setup and then give the inputs as follows</p>
-<p>Application: Time based</p>
-<p>Gas simulations, Global transport properties remain the default values. N2 and O2 are the species to be added.</p>
-<p>In the Run parameters, we select a transient solver. This is because the converge&rsquo;s steady-state solver gives inaccurate and gives results that are physically not possible.</p>
-<p>the settings will be as follows
+10% turns at 20 degrees</p><p>Race-2</p><p>Racing track conditions – Straights<br>
+Average lap speed - 75kmph</p><p>PROCEDURE:</p><p>The Formula SAE is a student design competition organized by SAE international. Where students conceive, design, fabricate, and compete with small formula-style racing cars.</p><p>The car for our project is this <a href="https://drive.google.com/drive/folders/1RHH6qC3BRMcH_rkYizZMvQxWGwteg06b?usp=sharing">one</a>.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(176)_1620966605.png alt>
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(177)-Copy_1620968213.png alt> </p><p>We import the STL file into Converge.</p><p>Once the geometry appears, we need to check the geometry units. We can do this by going to the Left-side geometry panel > Options > check the boundary box.</p><p>Converge uses the MKS system, while the geometry is created in IPS, so we need to transform the body to an appropriate scale to get meaningful results.</p><p>We can scale it by geometry panel > Transform > Scale > give a scaling factor of 0.0254. Before we create the wind tunnel, we need to know the dimensions of the wind tunnel and also we need to flag the boundaries of the car.</p><p>We use the boundary fence to construct boundary fences around parts that are to be flagged as separate boundaries.</p><p>And we flag the boundaries as</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(181)_1620976282.png alt></p><p>Now to create the wind tunnel. We know that the wind tunnel must have at least 5 times the characteristic length in front of the body and at least 10 times the length behind the body. A height of at least twice the characteristic length above and beside the body.</p><p>With this information, we can figure out the wind tunnel dimensions based on the characteristic length which is 2.5 m (approx)</p><p>The calculated wind tunnel dimensions are as follows</p><p>X = 32.5 m</p><p>Y = 5 m</p><p>z = 2.5 m</p><p>To create the wind tunnel, We first create the vertices. For the vertices, we take the bottom of the tires so that the bottom of the tires should align with the bottom of the wind tunnel.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/InkedScreenshot%20(182)_LI_1620982074.jpg alt></p><p>In the above picture, we deleted the bottom portion of the tires using the angle method.</p><p>All the points on the red circle are lying on the same plane. This plane which is parallel to the Z plane needs to be aligned with the bottom of the wind tunnel.</p><p>We first create the vertices for the wind tunnel using the wind tunnel dimensions and the location of the tire bottom and then patch these vertices using the ordered vertex method to form a wind tunnel.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(183)_1620983200.png alt></p><p>Once the wind tunnel is created we flag the inlet and outlet boundaries. Now once we check for errors we should see all green in the diagnosis toolbar.</p><p>For different race conditions, we need to tilt the model in different angles as follows</p><p>20 deg
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(193)_1620999424.png alt></p><p>45 deg
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(194)_1620999441.png alt></p><p>80 deg
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(195)_1620999456.png alt></p><p>We have to be careful while rotating the models because the triangles below the models tend to overlap. When this happens we need to delete the triangles that are overlapped and reconstruct those triangles. After reconstructing we need to check the diagnosis toolbar again for errors. Once all the checks are green we can follow the below procedure for different race tracks.</p><p>We then move onto case setup and then give the inputs as follows</p><p>Application: Time based</p><p>Gas simulations, Global transport properties remain the default values. N2 and O2 are the species to be added.</p><p>In the Run parameters, we select a transient solver. This is because the converge&rsquo;s steady-state solver gives inaccurate and gives results that are physically not possible.</p><p>the settings will be as follows
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(184)_1620991121.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(185)_1620991178.png alt></p>
-<p>All the boundaries will be given the Law of wall condition.</p>
-<p>except for the wind tunnel. The wind tunnel inlet will have the same velocity as the region
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(185)_1620991178.png alt></p><p>All the boundaries will be given the Law of wall condition.</p><p>except for the wind tunnel. The wind tunnel inlet will have the same velocity as the region
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(186)_1620991394.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(187)_1620991473.png alt></p>
-<p>The above conditions are for race 2 for race 1 the velocity will be changed to 12.5m/s in both inlet and region 0.</p>
-<p>The bottom will have the Law of the wall Boundary condition. All the boundaries are assigned to the same region 0</p>
-<p>The turbulence model is STANDARD K Omega 2006. And since we cant achieve a cell size suitable for a y+ of 30-100 we use automatic wall function for wall treatment to obtain reasonable results at the walls.</p>
-<p>In the Grid, control select Fixed embedding, Grid scaling options, and press ok. Two options appear in grid control.</p>
-<p>In the Grid Control > Base Grid > set the x, y, z sizes to 0.3m in all the directions and click ok. with the fixed embedding enabled this is the closest we can get without crossing the 500000 cell limit.</p>
-<p>For the fixed embedding we insert two types of embeddings one for the boundaries and another box type
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(187)_1620991473.png alt></p><p>The above conditions are for race 2 for race 1 the velocity will be changed to 12.5m/s in both inlet and region 0.</p><p>The bottom will have the Law of the wall Boundary condition. All the boundaries are assigned to the same region 0</p><p>The turbulence model is STANDARD K Omega 2006. And since we cant achieve a cell size suitable for a y+ of 30-100 we use automatic wall function for wall treatment to obtain reasonable results at the walls.</p><p>In the Grid, control select Fixed embedding, Grid scaling options, and press ok. Two options appear in grid control.</p><p>In the Grid Control > Base Grid > set the x, y, z sizes to 0.3m in all the directions and click ok. with the fixed embedding enabled this is the closest we can get without crossing the 500000 cell limit.</p><p>For the fixed embedding we insert two types of embeddings one for the boundaries and another box type
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(188)_1620993371.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(189)_1620993388.png alt></p>
-<p>We give the same embedding for all the boundaries.</p>
-<p>The grid scaling will be given based on a file and the inputs are as follows
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(190)_1620993816.png alt></p>
-<p>We then set the output file settings as follows. we can choose to select any additional variable that we need in post variable selection such as vorticity and set the output files as follows
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(189)_1620993388.png alt></p><p>We give the same embedding for all the boundaries.</p><p>The grid scaling will be given based on a file and the inputs are as follows
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(190)_1620993816.png alt></p><p>We then set the output file settings as follows. we can choose to select any additional variable that we need in post variable selection such as vorticity and set the output files as follows
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(192)_1620994083.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(191)_1620994067.png alt></p>
-<p>Once all the setup is done we do the final validation. Once every tab is green we export the files using the export input files option.  </p>
-<p>We then run the simulation using the CYGWIN terminal. In the terminal, we navigate to the folder that contains the input files enter the following command.</p>
-<p>&ldquo;mpiexec.exe -n 4 converge.exe restricted &lt;/dev/null> logfile.txt &&rdquo;</p>
-<p>mpiexec.exe is the message passing interface executive file.
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(191)_1620994067.png alt></p><p>Once all the setup is done we do the final validation. Once every tab is green we export the files using the export input files option.  </p><p>We then run the simulation using the CYGWIN terminal. In the terminal, we navigate to the folder that contains the input files enter the following command.</p><p>&ldquo;mpiexec.exe -n 4 converge.exe restricted &lt;/dev/null> logfile.txt &&rdquo;</p><p>mpiexec.exe is the message passing interface executive file.
 -n 6 represents the number of cores to be used for running the simulation.
 converge.exe is the converge file that runs the simulation.
 restricted limits the total number of cells to 5,00,000
 &lt;/dev/null> logfile.txt is to create a log file that can be used to track the simulation.
-& To keep the Cygwin terminal active for other commands</p>
-<p>&ldquo;tail -f logfile.txt&rdquo;</p>
-<p>This command tracks the log file and displays the content of the log file in the terminal.</p>
-<p>The simulation might take several hours based on parameters like Hardware, grid size, time for which the simulation needs to be run. Once the calculations are finished exit the Cygwin terminal.</p>
-<p>RESULTS AND POST-PROCESSING:</p>
-<p>In the input file directory, a new folder will be created with the name &ldquo;output&rdquo;. The post output files are stored here. We navigate to the post-processing module in Converge Studio and select this output and convert them into &ldquo;Paraview-inline binary format&rdquo; or &ldquo;Ensight&rdquo; format. </p>
-<p>Once this is done we open the results in paraview. We reduce the opacity of the side walls to see FSAE car inside the wind tunnel.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(207)_1621017302.png alt></p>
-<p>We can see that each boundary has been assigned with different colors. We then take a slice of this with Y-axis as the normal. This would cut the FSAE car in symmetric and we can observe the mesh using the surface-with-edges option. The below pictures are captured using the clip option since paraview was crashing upon slicing the geometry.</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(204)_1621017323.png alt>
+& To keep the Cygwin terminal active for other commands</p><p>&ldquo;tail -f logfile.txt&rdquo;</p><p>This command tracks the log file and displays the content of the log file in the terminal.</p><p>The simulation might take several hours based on parameters like Hardware, grid size, time for which the simulation needs to be run. Once the calculations are finished exit the Cygwin terminal.</p><p>RESULTS AND POST-PROCESSING:</p><p>In the input file directory, a new folder will be created with the name &ldquo;output&rdquo;. The post output files are stored here. We navigate to the post-processing module in Converge Studio and select this output and convert them into &ldquo;Paraview-inline binary format&rdquo; or &ldquo;Ensight&rdquo; format. </p><p>Once this is done we open the results in paraview. We reduce the opacity of the side walls to see FSAE car inside the wind tunnel.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(207)_1621017302.png alt></p><p>We can see that each boundary has been assigned with different colors. We then take a slice of this with Y-axis as the normal. This would cut the FSAE car in symmetric and we can observe the mesh using the surface-with-edges option. The below pictures are captured using the clip option since paraview was crashing upon slicing the geometry.</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(204)_1621017323.png alt>
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(205)_1621017336.png alt>
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(206)_1621017358.png alt>
- </p>
-<p>Instead of solid color, we can set it to velocity and pressure to see contours like these</p>
-<p>Velocity
+ </p><p>Instead of solid color, we can set it to velocity and pressure to see contours like these</p><p>Velocity
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(197)_1621017426.png alt>
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(198)_1621017441.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(199)_1621017460.png alt></p>
-<p>Pressure
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(199)_1621017460.png alt></p><p>Pressure
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(200)_1621017493.png alt>
 <img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(201)_1621017513.png alt>
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(202)_1621017534.png alt></p>
-<p>Y plus
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(203)_1621017560.png alt></p>
-<p>If we use the converge&rsquo;s line plotting module to plot the lift and drag for all the parts it would show up like this</p>
-<p>Lift Force
-<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/LiftForce_1621014906.png alt></p>
-<p>Drag Force
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(202)_1621017534.png alt></p><p>Y plus
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Screenshot%20(203)_1621017560.png alt></p><p>If we use the converge&rsquo;s line plotting module to plot the lift and drag for all the parts it would show up like this</p><p>Lift Force
+<img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/LiftForce_1621014906.png alt></p><p>Drag Force
 ![]https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Dragforce_1621014942.png)
-         </p>
-<p>If we export the same data into excel and look at it using python</p>
-<p>(Code requires NumPy, pandas, and matplotlib libraries)               </p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
-<span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
-<span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
-<span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
-<span style=color:#f92672>from</span> matplotlib <span style=color:#f92672>import</span> style
-
-<span style=color:#75715e>#Loading the workbook and reading the column headings excluding the first column</span>
-df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_excel(<span style=color:#e6db74>&#39;Lift.xlsx&#39;</span>, index_col<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
-df_1 <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_excel(<span style=color:#e6db74>&#39;Drag.xlsx&#39;</span>, index_col<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
-
-
-<span style=color:#75715e>#storing the column headings in a variable</span>
-components <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>columns
-drag_components <span style=color:#f92672>=</span> df_1<span style=color:#f92672>.</span>columns
-
-
-<span style=color:#75715e>#declaring empty array for all the means</span>
-means <span style=color:#f92672>=</span> []
-means_1 <span style=color:#f92672>=</span> []
-
-<span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range (len(components)):
-    <span style=color:#75715e>#declaring empty array x  </span>
-    x <span style=color:#f92672>=</span> [] 
-    
-    <span style=color:#75715e>#for i = 1; length (components) take the values of all rows in components this appends till length(components)</span>
-    x<span style=color:#f92672>.</span>append(df[components[i]])
-    <span style=color:#75715e>#Averaging the values of all rows of each component</span>
-    means<span style=color:#f92672>.</span>append(np<span style=color:#f92672>.</span>mean(x))
-
-<span style=color:#75715e>#Drag force</span>
-<span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range (len(drag_components)):
-    <span style=color:#75715e>#declaring empty array x  </span>
-    y <span style=color:#f92672>=</span> [] 
-    
-    <span style=color:#75715e>#for i = 1; length (components) take the values of all rows in components this appends till length(components)</span>
-    y<span style=color:#f92672>.</span>append(df_1[drag_components[j]])
-    <span style=color:#75715e>#Averaging the values of all rows of each component</span>
-    means_1<span style=color:#f92672>.</span>append(np<span style=color:#f92672>.</span>mean(y))
-
-
-<span style=color:#75715e>#plotting </span>
-plt<span style=color:#f92672>.</span>figure(<span style=color:#ae81ff>1</span>)
-style<span style=color:#f92672>.</span>use(<span style=color:#e6db74>&#39;default&#39;</span>)
-plt<span style=color:#f92672>.</span>barh(components,means)
-plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Lift Force&#39;</span>)
-plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#39;Forces(N)&#39;</span>)
-plt<span style=color:#f92672>.</span>grid(<span style=color:#66d9ef>True</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
-
-plt<span style=color:#f92672>.</span>figure(<span style=color:#ae81ff>2</span>)
-style<span style=color:#f92672>.</span>use(<span style=color:#e6db74>&#39;default&#39;</span>)
-plt<span style=color:#f92672>.</span>barh(drag_components,means_1)
-plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Drag Force&#39;</span>)
-plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#39;Forces(N)&#39;</span>)
-plt<span style=color:#f92672>.</span>grid(<span style=color:#66d9ef>True</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
-plt<span style=color:#f92672>.</span>show()
-
-</code></pre></div><p>We would get the following plots</p>
-<p>Lift</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Lift_1621015134.jpg alt>             </p>
-<p>Drag</p>
-<p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Drag_1621015150.jpg alt>   </p>
-<p>With this information, For different Race conditions, the case setup files can be found <a href="https://drive.google.com/drive/folders/1xb23ChfFNtcugdVjQ_lzY2MayNwfFco2?usp=sharing">here</a> and the conditions at which the races will be run are</p>
-<p>Race-1</p>
-<p>For each angle (20,45,80) the simulations will be run with a speed of 12.5m/s at the inlet and the regions will be defined with the same speed. The BC will be the law of wall for all the components of the car. The turbulence model used will be the Standard k omega 2006 model with automatic wall function. grid size will be the same as the above condition</p>
-<p>Race-2</p>
-<p>The simulation will be run with a speed of 20.833m/s at the inlet and the regions will be defined with the same speed. The BC will be the law of wall for all the components of the car. The turbulence model used will be the Standard k omega 2006 model with automatic wall function. grid size will be the same as the above condition                                                       </p>
-<p>CONCLUSION:</p>
-<p>From the above results, the following conclusions have been made.</p>
-<p>*The underbody was offering an additional push force to the car. This result is impractical and could be the cause of poor grid size.<br>
+         </p><p>If we export the same data into excel and look at it using python</p><p>(Code requires NumPy, pandas, and matplotlib libraries)               </p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#f92672>from</span> matplotlib <span style=color:#f92672>import</span> style
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#Loading the workbook and reading the column headings excluding the first column</span>
+</span></span><span style=display:flex><span>df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_excel(<span style=color:#e6db74>&#39;Lift.xlsx&#39;</span>, index_col<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>df_1 <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>read_excel(<span style=color:#e6db74>&#39;Drag.xlsx&#39;</span>, index_col<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#storing the column headings in a variable</span>
+</span></span><span style=display:flex><span>components <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>columns
+</span></span><span style=display:flex><span>drag_components <span style=color:#f92672>=</span> df_1<span style=color:#f92672>.</span>columns
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#declaring empty array for all the means</span>
+</span></span><span style=display:flex><span>means <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>means_1 <span style=color:#f92672>=</span> []
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range (len(components)):
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#declaring empty array x  </span>
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>=</span> [] 
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#for i = 1; length (components) take the values of all rows in components this appends till length(components)</span>
+</span></span><span style=display:flex><span>    x<span style=color:#f92672>.</span>append(df[components[i]])
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#Averaging the values of all rows of each component</span>
+</span></span><span style=display:flex><span>    means<span style=color:#f92672>.</span>append(np<span style=color:#f92672>.</span>mean(x))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#Drag force</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range (len(drag_components)):
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#declaring empty array x  </span>
+</span></span><span style=display:flex><span>    y <span style=color:#f92672>=</span> [] 
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#for i = 1; length (components) take the values of all rows in components this appends till length(components)</span>
+</span></span><span style=display:flex><span>    y<span style=color:#f92672>.</span>append(df_1[drag_components[j]])
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#Averaging the values of all rows of each component</span>
+</span></span><span style=display:flex><span>    means_1<span style=color:#f92672>.</span>append(np<span style=color:#f92672>.</span>mean(y))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#plotting </span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>style<span style=color:#f92672>.</span>use(<span style=color:#e6db74>&#39;default&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>barh(components,means)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Lift Force&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#39;Forces(N)&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>grid(<span style=color:#66d9ef>True</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>figure(<span style=color:#ae81ff>2</span>)
+</span></span><span style=display:flex><span>style<span style=color:#f92672>.</span>use(<span style=color:#e6db74>&#39;default&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>barh(drag_components,means_1)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Drag Force&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>xlabel(<span style=color:#e6db74>&#39;Forces(N)&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>grid(<span style=color:#66d9ef>True</span>, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span></code></pre></div><p>We would get the following plots</p><p>Lift</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Lift_1621015134.jpg alt>             </p><p>Drag</p><p><img src=https://sklc-tinymce-2021.s3.amazonaws.com/comp/2021/05/Drag_1621015150.jpg alt>   </p><p>With this information, For different Race conditions, the case setup files can be found <a href="https://drive.google.com/drive/folders/1xb23ChfFNtcugdVjQ_lzY2MayNwfFco2?usp=sharing">here</a> and the conditions at which the races will be run are</p><p>Race-1</p><p>For each angle (20,45,80) the simulations will be run with a speed of 12.5m/s at the inlet and the regions will be defined with the same speed. The BC will be the law of wall for all the components of the car. The turbulence model used will be the Standard k omega 2006 model with automatic wall function. grid size will be the same as the above condition</p><p>Race-2</p><p>The simulation will be run with a speed of 20.833m/s at the inlet and the regions will be defined with the same speed. The BC will be the law of wall for all the components of the car. The turbulence model used will be the Standard k omega 2006 model with automatic wall function. grid size will be the same as the above condition                                                       </p><p>CONCLUSION:</p><p>From the above results, the following conclusions have been made.</p><p>*The underbody was offering an additional push force to the car. This result is impractical and could be the cause of poor grid size.<br>
 *The body was offering a downforce which is good. But the underbody again offers heavy lift this should practically make the car fly which is not desirable. This result could also be an error because of the change in mesh size.<br>
 *From the converge drag force plot, it is observed that at 2s and 3s there is a spike in the values of forces. This is the place where the grid changes because of grid scaling. This could indicate that the solution is grid-dependent.  
 *The Pressure contour suggests that the wings are providing some downforce but the bar graph shows that this downforce is not sufficient.  
 *The Y-plus on the body is greater than 600 which means the grid size taken is not sufficient to keep it under 100.<br>
-*Because of the less computational power and restricted cell count. It will be hard to conclude anything based on this grid size. But this project demonstrates the various steps involved in an aerodynamic analysis  </p>
-<p> </p>
-</div>
-<div class=footer>
+*Because of the less computational power and restricted cell count. It will be hard to conclude anything based on this grid size. But this project demonstrates the various steps involved in an aerodynamic analysis  </p><p> </p></div><div class=footer>
 <div class=tags>
 <i class="fa fa-tags"></i>
 <div class=links>
 <a href=https://satyasasank.github.io/CodeBlue/tags/cfd/>CFD</a>
 <a href=https://satyasasank.github.io/CodeBlue/tags/aerodynamics/>Aerodynamics</a>
-</div>
-</div>
-</div>
-</article>
-</div>
-<div id=comments-container>
-</div>
-</div>
-<footer>
+</div></div></div></article></div><div id=comments-container>
+</div></div><footer>
 <div class=container>
 <div class=recent-posts>
 <strong>Latest posts</strong>
 <ul>
 <li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/optimization/>Optimization of a function through genetic algorithm</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/creating_your_own_openfoam_solver/>Creating your own OpenFOAM solver</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/cfd_meshing_of_a_tesla_cyber_truck/>CFD meshing of a Tesla Cyber truck</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/flow_over_ahmed_body/>Flow over ahmed body</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/fsae_car/>FSAE Car Project</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/secondposts/>1D Supersonic Nozzle flow simulation using MacCormac Method</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/posts/first_post/>Parsing NASA thermodynamic data using MATLAB </a>
-</li>
-</ul>
-</div>
-<div class=categories>
+</li></ul></div><div class=categories>
 <a href=https://satyasasank.github.io/CodeBlue/categories/><strong>Categories</strong></a>
 <ul>
 <li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/matlab>Matlab
 (3)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/ansa>Ansa
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/ansys>Ansys
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/converge-3.0>Converge 3.0
 (1)</a>
-</li>
-<li>
+</li><li>
 <a href=https://satyasasank.github.io/CodeBlue/categories/openfoam>Openfoam
 (1)</a>
-</li>
-</ul>
-</div>
-<div class=right>
+</li></ul></div><div class=right>
 <div class=external-profiles>
 <strong>Social media</strong>
 <a href=https://www.linkedin.com/in/satya-s-b52717178/ target=_blank><i class="fab fa-linkedin"></i></a>
 <a href=https://github.com/SatyaSasank target=_blank><i class="fab fa-github"></i></a>
 <a href=mailto:kssasank43@gmail.com target=_blank><i class="fas fa-envelope"></i></a>
-</div>
-<div class=archive>
+</div><div class=archive>
 <a href=https://satyasasank.github.io/CodeBlue/archive/><strong>Archive</strong></a>
-</div>
-</div>
-</div>
-</footer>
-<div class=credits>
+</div></div></div></footer><div class=credits>
 <div class=container>
 <div class=copyright>
 <a href=https://github.com/satyasasank target=_blank>
@@ -355,12 +220,7 @@ plt<span style=color:#f92672>.</span>show()
 2022
 Satya Sasank
 </a>
-</div>
-<div class=author>
+</div><div class=author>
 <a href=https://github.com/Lednerb/bilberry-hugo-theme target=_blank>Powered by Bilberry Hugo Theme</a>
-</div>
-</div>
-</div>
-<script type=text/javascript src=https://satyasasank.github.io/CodeBlue/theme.js></script>
-</body>
-</html>
+</div></div></div><script type=text/javascript src=https://satyasasank.github.io/CodeBlue/theme.js></script>
+</body></html>
